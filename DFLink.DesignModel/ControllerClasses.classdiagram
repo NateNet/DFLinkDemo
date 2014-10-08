@@ -1,0 +1,732 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="5148eb8b-1d12-408d-aa8f-653ffa39e4ab" name="ControllerClasses" linkedPackageId="46b06ce5-66d4-4716-86cf-2e0f23d695af" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <ownedCommentsInternal>
+    <comment Id="b486a973-117c-4e82-9e82-cd9a52b283e7">
+      <elementDefinition Id="0f1c14a8-96ce-45f1-a6eb-2ea88bbecb06" />
+      <body>&lt;Tasks&gt;
+  &lt;Task&gt;
+     &lt;Id&gt;1&lt;/Id&gt;
+     &lt;Action&gt;Create&lt;/Action&gt;
+     &lt;Name&gt;Update&lt;/Name&gt;
+     &lt;Description&gt; Update Update.xml&lt;/Description&gt;
+     &lt;Parameters&gt;
+       &lt;Parameter1&gt;1&lt;/Parameter1&gt;
+       &lt;Parameter2&gt;2&lt;/Parameter2&gt; 
+    &lt;/Parameters&gt;
+    &lt;Schedule&gt; 
+      &lt;Type&gt;RealTimeSchedule&lt;/Type&gt;
+      &lt;Parameters&gt;
+     &lt;/Parameters&gt;
+    &lt;/Schedule&gt;
+ &lt;/Task&gt;
+ &lt;Task&gt;
+      &lt;Id&gt;0&lt;/Id&gt;
+      &lt;Name&gt;Request&lt;/Name&gt;
+      &lt;Action&gt;Update&lt;/Action&gt;
+      &lt;Description&gt;Update request frequency&lt;/Description&gt;
+      &lt;Schedule&gt; 
+         &lt;Type&gt;SimpleIntervalSchedule&lt;/Type&gt;
+      &lt;Parameters&gt;
+        &lt;StartTime&gt;2014-08-20&lt;/StartTime&gt;
+        &lt;EndTime&gt;2014-10-01&lt;/EndTime&gt;
+        &lt;Interval&gt;2&lt;/Interval&gt;
+        &lt;Count&gt;0&lt;/Count&gt;
+     &lt;/Parameters&gt;
+      &lt;/Schedule&gt;
+ &lt;/Task&gt;
+ &lt;Task&gt;</body>
+      <annotatedElements>
+        <classMoniker Id="cd3bb0da-054f-429d-b5cb-7d040dba901b" LastKnownName="TaskManager" />
+      </annotatedElements>
+    </comment>
+  </ownedCommentsInternal>
+  <packagedElements>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="0a3f852c-9a14-47e7-af78-c9665ae7fdb5" name="ISchedule" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="c8558c89-5f5a-4f92-a53a-954cdddfa61a" />
+        <ownedOperations>
+          <operation Id="60693221-772f-45d9-98be-5f4dfcde53b2" name="GetRunTimes" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="d9124d2d-3526-437d-9caa-f98248c4567a" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="1bdac8f5-bb1f-4b30-a629-19e64c2fe685" name="startTime" direction="In">
+                  <elementDefinition Id="52b90251-0905-4458-9ba2-8103f9271817" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="a9001d52-43b0-4a47-a75a-4474fe7bfff0" LastKnownName="DateTime" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="075b933f-38d9-4770-978b-9c9d862c652d" name="includeStartTime" direction="In">
+                  <elementDefinition Id="4bde114e-71eb-478f-990d-b7b4a51a7536" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="4c373440-be73-49f1-83cf-621782918766" LastKnownName="boolean" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="4b078ba9-7431-4dc7-be13-94a7ff94eb96" direction="Return">
+                  <elementDefinition Id="5e6f6c56-d23a-4688-a73d-579054c16a4c" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="07ec7284-0bd2-4547-82e6-97fe51e6193a" LastKnownName="List&lt;DateTime&gt;" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="5f730d7f-749e-4fc9-82c3-7fa2c1c77874" name="GetNextRunTime" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="99dd5a55-e56d-4e8f-97b0-103b205f624f" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="1ad242bf-7eb2-40ef-b1b4-f36744362811" name="startTime" direction="In">
+                  <elementDefinition Id="6c4671eb-a5a6-46c8-8a7d-486221d667e0" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="a9001d52-43b0-4a47-a75a-4474fe7bfff0" LastKnownName="DateTime" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="8d84f5ac-6391-40ae-ba5f-4dd0c707e99a" name="endTime" direction="In">
+                  <elementDefinition Id="024a3bc4-e6a7-40ba-b20f-a1930cb2f873" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="a9001d52-43b0-4a47-a75a-4474fe7bfff0" LastKnownName="DateTime" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="bb8a3670-b95a-4047-8fa3-3ed6caba800c" name="SetSchedule" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="3c8ad7b3-7aa0-475a-ba62-c70b8c98b3f2" />
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="a9001d52-43b0-4a47-a75a-4474fe7bfff0" name="DateTime" isAbstract="false" isLeaf="false" cachedFullName="DateTime">
+        <elementDefinition Id="f0ce3ce9-a69a-418a-9213-eb867a4cd4f6" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="07ec7284-0bd2-4547-82e6-97fe51e6193a" name="List&lt;DateTime&gt;" isAbstract="false" isLeaf="false" cachedFullName="List&lt;DateTime&gt;">
+        <elementDefinition Id="a174e36a-d145-4d16-8e75-28160fb62d20" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="651d15a7-f439-4ef7-8096-de283998dd2c" name="SimpleIntervalSchedule" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="a092903c-ad01-41c8-8705-f18d745876be" />
+        <suppliersInternal>
+          <interfaceRealization Id="60b45d82-75e8-40e8-9a9c-8b4dab5ea570">
+            <interfaceMoniker Id="0a3f852c-9a14-47e7-af78-c9665ae7fdb5" LastKnownName="ISchedule" />
+            <elementDefinition Id="d5acab3d-b007-468f-b24b-1d2376b3f8d5" />
+          </interfaceRealization>
+        </suppliersInternal>
+        <ownedAttributesInternal>
+          <property Id="6863ba99-bb21-414e-a348-088b455b634b" name="Interval" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="8723a161-5a09-4ef4-ab79-17c389568edf" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="bf2abdf4-ecdc-48f6-924b-4a58dccfe12b" LastKnownName="TimeSpan" />
+            </type_NamedElement>
+          </property>
+          <property Id="618871c8-1fa5-40f0-8bc9-89cf7f43dd9a" name="StartTime" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="66c59deb-9680-4321-8977-bd5d2b9ed74b" />
+          </property>
+          <property Id="bbbdda7c-4965-4d7e-9321-3945f1870eb9" name="EndTime" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="7e0c3aed-0086-4cc2-8335-cc8032ccbd6c" />
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation Id="d6742b9f-f52d-403b-adb3-fa1746a1a03a" name="GetRunTimes" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="22d89436-8019-412d-a04b-6ba159ed236d" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="5f3f3af8-5af7-426d-963d-a8625d80bdc4" name="startTime" direction="In">
+                  <elementDefinition Id="632c0d59-3eb8-4898-b1b7-c33393c777b5" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="a9001d52-43b0-4a47-a75a-4474fe7bfff0" LastKnownName="DateTime" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="347cd248-4831-452d-a23c-1f416471e332" name="endTime" direction="In">
+                  <elementDefinition Id="13fb5f7b-5625-40f5-975e-2c276c8e592e" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="4c373440-be73-49f1-83cf-621782918766" LastKnownName="boolean" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="ef5012ec-f020-4a84-b3b8-d08b6b4bb9ec" direction="Return">
+                  <elementDefinition Id="21d43a35-0b95-4be7-a879-8e72bdf7d0a3" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="07ec7284-0bd2-4547-82e6-97fe51e6193a" LastKnownName="List&lt;DateTime&gt;" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="de61ebe5-3d88-4a74-a17f-8dc9b43b24e2" name="GetNextRunTime" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="146f0c8d-1a70-4e9e-be57-f3fbd7973785" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="5203d81e-41cd-4a8a-8cee-02b8171b3ef2" name="startTime" direction="In">
+                  <elementDefinition Id="b4456efc-923a-49e4-bfaf-c031d1383eff" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="a9001d52-43b0-4a47-a75a-4474fe7bfff0" LastKnownName="DateTime" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="a5feb932-3096-4b5b-9e7b-e16c558e1804" name="endTime" direction="In">
+                  <elementDefinition Id="365480f1-6771-440d-82a9-56e5521ffdcc" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="a9001d52-43b0-4a47-a75a-4474fe7bfff0" LastKnownName="DateTime" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="6038a04c-0a8c-4466-a670-a9fd0725a91f" name="SetSchedule" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="3474b50d-6fda-4412-a171-f395845284d8" />
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="37095c26-6f9a-4456-86dc-9e767c89ceff" name="TimeSchedule" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="07c2ae81-d3bd-4b0a-990c-c5c16a0cbed6" />
+        <suppliersInternal>
+          <interfaceRealization Id="e5e49b84-e8ba-493b-a5c3-d5d844bad4ed">
+            <interfaceMoniker Id="0a3f852c-9a14-47e7-af78-c9665ae7fdb5" LastKnownName="ISchedule" />
+            <elementDefinition Id="93bddd46-26a0-49f4-87ad-b3ae90a9a05e" />
+          </interfaceRealization>
+        </suppliersInternal>
+        <targetEnds>
+          <association Id="db75074b-35c0-4fa8-9923-5eecb61d5b43" isDerived="false" sourceEndRoleName="TimeSchedule" targetEndRoleName="TimeBaseType" isLeaf="false" isAbstract="false">
+            <enumerationMoniker Id="1def3dd7-ec2d-4bae-baef-448b949dadd1" LastKnownName="TimeBaseType" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="7dde3d91-4dc9-4eba-aa29-13f6f0ce580a" name="TimeSchedule" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="c801c818-6c85-4650-85f4-2b400ba5f84b" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="144efdde-9877-45a5-824d-777717973f0c" name="TimeBaseType" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="03dfa660-370b-43d9-827e-cd1e153b4fef" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="84389f24-287a-44c3-b994-5213855009ba" />
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property Id="5521b98e-c5b7-4d7b-a24e-d5eafebc9282" name="BaseType" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="a4e93595-53ef-46b6-b37a-a3891ae157bd" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="224126a6-de38-4b8a-97c0-92c79b208707" LastKnownName="TimeBaseType" />
+            </type_NamedElement>
+          </property>
+          <property Id="e5c4d09b-5d92-4519-884e-ca7493ae34ef" name="TimeOffset" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="dd521a57-7239-421c-9089-3248594b6980" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="71b462e6-dfa7-4509-b095-f5b009296a30" LastKnownName="TimeSpan" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation Id="3f661ba9-c6a9-49d0-8e9b-343a1ffd00cc" name="GetRunTimes" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="7984be83-c9f9-4e57-ae2b-9a1cc0c1b8d8" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="d47d8c0e-6e42-4c0a-9134-8a34e1aadd90" name="startTime" direction="In">
+                  <elementDefinition Id="97305c82-3738-4366-8cb1-93c8ab039e94" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="a9001d52-43b0-4a47-a75a-4474fe7bfff0" LastKnownName="DateTime" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="a7ac5127-8f05-40f2-b666-57fa329cdbad" name="endTime" direction="In">
+                  <elementDefinition Id="18313f1f-5788-4274-b539-a29fff34fcb0" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="4c373440-be73-49f1-83cf-621782918766" LastKnownName="boolean" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="0cee99b8-e6b1-4170-8ed0-c8552c1b716a" direction="Return">
+                  <elementDefinition Id="a45eb3e1-2aa4-49e6-97be-73bc9ec86b9e" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="07ec7284-0bd2-4547-82e6-97fe51e6193a" LastKnownName="List&lt;DateTime&gt;" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="c85882c5-0ef8-4f90-9c76-4c9562ec8097" name="GetNextRunTime" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="35140460-01e7-415e-8260-856a5f6932f4" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="3a7188a8-99ea-41fa-9324-65e8d54362db" name="startTime" direction="In">
+                  <elementDefinition Id="1c963743-eb90-4381-8621-66f49290089c" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="a9001d52-43b0-4a47-a75a-4474fe7bfff0" LastKnownName="DateTime" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="92b45c43-b808-47a6-acb2-ec4a22787d49" name="endTime" direction="In">
+                  <elementDefinition Id="d39155dc-303e-4a29-ba50-4d5a4e961922" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="a9001d52-43b0-4a47-a75a-4474fe7bfff0" LastKnownName="DateTime" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="8024d4d2-06ce-47dd-aedf-9ea8889f0958" name="SetSchedule" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="98edac99-f06d-43f0-b4bd-918c7a1cfcff" />
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <enumeration Id="1def3dd7-ec2d-4bae-baef-448b949dadd1" name="TimeBaseType" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="5ef09801-8899-422e-9599-3f2855238ea4" />
+        <ownedLiterals>
+          <enumerationLiteral Id="1feecf2f-8a29-47f8-9663-5e535d50fc4a" name="BySecond">
+            <elementDefinition Id="f607e84d-76e2-49bc-a8ba-6be3386bd52c" />
+          </enumerationLiteral>
+          <enumerationLiteral Id="f73006a6-81d0-4a1e-b019-2d497258806f" name="ByMinute">
+            <elementDefinition Id="d67b84ae-5ee9-4011-bde5-753c7ea5b3bd" />
+          </enumerationLiteral>
+          <enumerationLiteral Id="c132f6ac-5dad-4ddc-baf0-cb3f6b8b7061" name="Hourly">
+            <elementDefinition Id="14de2414-ece2-4c56-85bd-5878aa5f192d" />
+          </enumerationLiteral>
+          <enumerationLiteral Id="5a027517-ebf3-4c23-b607-8c01be6579b9" name="Daily">
+            <elementDefinition Id="8b4be3e6-3ec3-46b7-ae2f-7abc31280660" />
+          </enumerationLiteral>
+          <enumerationLiteral Id="e9735f74-d8ea-4f02-acff-4840d0c366fe" name="Weekly">
+            <elementDefinition Id="b7d83207-051e-45ff-a172-0e2533baed8a" />
+          </enumerationLiteral>
+        </ownedLiterals>
+      </enumeration>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="224126a6-de38-4b8a-97c0-92c79b208707" name="TimeBaseType" isAbstract="false" isLeaf="false" cachedFullName="DFLink.DesignModel::TimeBaseType">
+        <elementDefinition Id="5ef09801-8899-422e-9599-3f2855238ea4" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="71b462e6-dfa7-4509-b095-f5b009296a30" name="TimeSpan" isAbstract="false" isLeaf="false" cachedFullName="TimeSpan">
+        <elementDefinition Id="ed5aa9a3-fc69-47a7-824a-a74041acaf72" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="4c373440-be73-49f1-83cf-621782918766" name="boolean" isAbstract="false" isLeaf="false" cachedFullName="boolean">
+        <elementDefinition Id="0b7c4254-eabf-4006-9866-14a1d7355166" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="bf2abdf4-ecdc-48f6-924b-4a58dccfe12b" name="TimeSpan" isAbstract="false" isLeaf="false" cachedFullName="TimeSpan">
+        <elementDefinition Id="ed5aa9a3-fc69-47a7-824a-a74041acaf72" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="bb282433-247a-420e-8af3-1112a4a2591b" name="ITask" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="7b063a56-dc1a-4214-bbee-b757a18441ae" />
+        <targetEnds>
+          <association Id="d7d7c4d8-a620-449b-81b1-1186051fea45" isDerived="false" sourceEndRoleName="ITask" targetEndRoleName="ISchedule" isLeaf="false" isAbstract="false">
+            <interfaceMoniker Id="0a3f852c-9a14-47e7-af78-c9665ae7fdb5" LastKnownName="ISchedule" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="8d6ecc5f-6294-4696-a2d4-8a6e8d41790f" name="ITask" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="e7468d57-17fe-497d-9cb5-13678995362b" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="2190ac65-ddaf-4e56-8643-4bb683f1b576" name="ISchedule" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="a63bb4c3-39ac-41e9-8130-5fca200d5f5e" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="c5395e2d-8511-48ed-9d67-8fc8166e74ca" />
+          </association>
+        </targetEnds>
+        <ownedAttributes>
+          <property Id="fa2fda96-67ed-47e4-8028-e8570346b6cf" name="Id" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="cef9dde8-62a4-4226-9e07-7caeab04b4dc" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="e9132d54-55f6-4d62-983d-ea283fd6aa14" LastKnownName="Integer" />
+            </type_NamedElement>
+          </property>
+          <property Id="55ac8441-08cb-40d8-b881-4af323ddb27d" name="Name" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="c7434e3b-2595-498b-8f7f-ae25ff430ddc" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="3a25dcbb-17f5-4c56-bc58-f3ca244a5fa5" LastKnownName="String" />
+            </type_NamedElement>
+          </property>
+          <property Id="61e01c81-c15e-4ac4-9d7b-f9b0164ca15d" name="Description" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="33049208-e74e-4a7d-9e0f-f45a40ee7c11" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="9226c01a-4c45-4539-9716-b8da667c942e" LastKnownName="String" />
+            </type_NamedElement>
+          </property>
+          <property Id="46a70d3d-98a4-41be-935b-1cde42b23429" name="Schedule" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="aefd2b3d-16bc-4912-a5b6-b3b65ddb655b" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="d7c43ac5-f8b5-434a-8623-d2948b21cec6" LastKnownName="ISchedule" />
+            </type_NamedElement>
+          </property>
+          <property Id="ea969e62-a409-4152-94ed-83b6a02240ec" name="Status" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="117989f2-fdfa-49aa-8d16-48a7a00c56e6" />
+          </property>
+        </ownedAttributes>
+        <ownedOperations>
+          <operation Id="7a2fc566-bbe2-46b8-bc29-c5120d4b6694" name="Execute" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="3a1703e8-8cdb-46cf-b307-b146f224bb0b" />
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="cd3bb0da-054f-429d-b5cb-7d040dba901b" name="TaskManager" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="65a993ed-d117-4b18-b60a-2d832a724781" />
+        <suppliersInternal>
+          <dependency Id="cfffd814-3af0-4ed2-b642-adc019d9c149">
+            <classMoniker Id="3587747c-c873-43cf-8e86-cc13250d904f" LastKnownName="TaskFactory" />
+            <elementDefinition Id="30f65131-dad0-4df3-a98f-6801d93b44b7" />
+          </dependency>
+          <dependency Id="54a77428-47a6-4031-a6d1-08e6a695e005">
+            <classMoniker Id="229721d5-cbc3-4463-941c-a25b65f429ae" LastKnownName="ScheduleFactory" />
+            <elementDefinition Id="633d5f56-91b5-483e-a5c6-b732d90e567a" />
+          </dependency>
+        </suppliersInternal>
+        <targetEnds>
+          <association Id="0459bff9-b29d-4750-aecc-8cf3568ec6e3" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
+            <classMoniker Id="3d969fc7-0f0e-45cd-b8bb-30bcb0de68b0" LastKnownName="RequestTask" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="9317904b-e91e-4390-8e06-2bfb8c77af81" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="7616c71f-f59b-45b8-b5ac-ed75f5db5cb4" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="3f004e0d-f49d-468c-a951-c4353444857a" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="7d5d118e-bb81-4ae7-a37e-0d8ab42ebf8b" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="8ff32748-ba05-471f-ab3a-cced3b3caeb2" />
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property Id="3666c1a7-82d1-44cb-9466-d5b33a7d9473" name="TaskList" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="e68fe2eb-63d2-4253-ab39-9e9e2e128845" />
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation Id="3c8c2174-2c97-4559-a531-ed05f86f9b64" name="AddTask" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="efcf39dc-aad5-4eef-af32-5be9d5764ff5" />
+          </operation>
+          <operation Id="bcd948d0-1bf5-498a-b9fa-dabce6593c44" name="RemoveTask" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="9eaa568c-c9dd-46dd-a876-53dfdbc30aed" />
+          </operation>
+          <operation Id="4ebc59e3-cfcf-4f8c-b159-116981ac2bd7" name="ParseTask" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="10c420ad-eb32-487e-85f7-694748bce9ac" />
+          </operation>
+          <operation Id="9ddbb6e2-d1c3-4639-b2fc-fd7370e4400a" name="UpdateTask" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="c7c4744b-af9a-4669-bf6c-b25b1c822fc2" />
+          </operation>
+          <operation Id="9229e716-039b-4c18-87de-bed34bc93f58" name="RequestTask" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="9a71b82e-5dc8-4c6d-9537-15c0297bb2cc" />
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="3d969fc7-0f0e-45cd-b8bb-30bcb0de68b0" name="RequestTask" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="81b8679a-1614-4d91-b4ab-ae1110fb8efc" />
+        <suppliersInternal>
+          <interfaceRealization Id="bfac8260-4272-4dd7-b62e-e5767c78a5f4">
+            <interfaceMoniker Id="2d038c86-4161-4721-9e30-1ee6347db20a" LastKnownName="ITaskMaker" />
+            <elementDefinition Id="74014c8f-a4ab-4291-bd2a-a979d99af086" />
+          </interfaceRealization>
+          <interfaceRealization Id="9fe3e604-a338-4c98-baed-900019487544">
+            <interfaceMoniker Id="bb282433-247a-420e-8af3-1112a4a2591b" LastKnownName="ITask" />
+            <elementDefinition Id="eba5eb8a-de60-4006-a1be-cb0010432654" />
+          </interfaceRealization>
+        </suppliersInternal>
+        <ownedOperationsInternal>
+          <operation Id="2d2a0c8d-9932-499c-a34e-fdccab5e1162" name="MakeTask" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="270d14f0-c27b-48af-a4a8-bc796a5a3def" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="a6f9d6bc-c31c-4227-9610-a1c2f7f1b7ea" name="argments" direction="In" isUnique="false">
+                  <elementDefinition Id="62a455b4-1b62-43d0-a3ab-97ecdd1ec37d" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="ed344b79-b15f-4f24-a329-7fa3c5aa328c" LastKnownName="List&lt;string&gt;" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="45964a97-466c-4180-a753-228141f9edb7" name="Execute" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="0fedaa5d-c02a-478b-9601-681b67bd96d4" />
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="2d038c86-4161-4721-9e30-1ee6347db20a" name="ITaskMaker" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="ab80ec4f-ca94-4b52-a9e3-5bf4cc61138c" />
+        <ownedOperations>
+          <operation Id="a4d7e9fe-2ba8-4ac5-bc8e-c50c05b9457d" name="MakeTask" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="109cd793-b6f8-4b87-87b2-79f63a255a59" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="bb587c19-9392-42bd-bd2d-253d943dfa3f" name="argments" direction="In" isUnique="false">
+                  <elementDefinition Id="7c9dc470-6183-4b9a-8ab8-09f26a4acece" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="ed344b79-b15f-4f24-a329-7fa3c5aa328c" LastKnownName="List&lt;string&gt;" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="ed344b79-b15f-4f24-a329-7fa3c5aa328c" name="List&lt;string&gt;" isAbstract="false" isLeaf="false" cachedFullName="List&lt;string&gt;">
+        <elementDefinition Id="0c3039ae-69b9-414a-b2e0-d5464d1211e8" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="d72a984d-f22b-437f-8401-c7380244e480" name="Invoker" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="884d5550-f8ab-4804-9175-e9003439f7bd" />
+        <targetEnds>
+          <association Id="585381cb-e1ab-4788-8add-2f23222dba68" isDerived="false" sourceEndRoleName="Invoker" targetEndRoleName="ITask" isLeaf="false" isAbstract="false">
+            <interfaceMoniker Id="bb282433-247a-420e-8af3-1112a4a2591b" LastKnownName="ITask" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="250a78e0-4a85-42fe-b433-d5de1e5404b8" name="Invoker" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="4790b5ed-0ff5-4ef8-9ff3-201551227343" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="3292f40b-0ec3-4e7a-915f-6df7ccb8fafe" name="ITask" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="77e1c6cc-6f60-4b9a-a04a-1a3a32feb8fc" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="dc7f308b-6fff-428b-b1ce-5e9a22db2672" />
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property Id="0421cb6b-f6fd-45be-a224-e3c46988707b" name="TaskManager" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="75f07cde-374b-4449-a9b5-8362dc85560e" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="750f5cf8-ea6c-4536-a9d7-2575d6fb6eb3" LastKnownName="TaskManager" />
+            </type_NamedElement>
+          </property>
+          <property Id="9b23664b-7807-4523-b885-7c7bc7f864b1" name="Timer" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="bf7fa749-a762-4dcc-8138-175bafe20dae" />
+          </property>
+          <property Id="ea956034-9ac1-4d28-8dda-8c5366aaa3c3" name="stopFlag" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="a14701ae-9af8-4821-b3a5-f862a5dbc294" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="db740de0-2d5b-4759-ba44-5c9631f6f7d5" LastKnownName="Boolean" />
+            </type_NamedElement>
+          </property>
+          <property Id="59212a07-ffc7-4700-ab82-4c6df4a13788" name="lastTime" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="ebd2ae79-1e3f-4d07-aafc-be4f596e1e67" />
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation Id="6d8ca3df-7fc0-408a-8dba-af23f32f02f8" name="Start" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="f65813e7-0ba8-4abd-98e2-36734b199694" />
+          </operation>
+          <operation Id="a7e95324-4962-45d2-9cec-be52e1142a81" name="Stop" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="3ebac1ce-6cfb-43d3-8c59-81aeec0afe15" />
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="3587747c-c873-43cf-8e86-cc13250d904f" name="TaskFactory" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="2c2b2854-ff2d-408f-a6b4-4a2b9f4747a3" />
+        <ownedOperationsInternal>
+          <operation Id="7737cccf-d981-4464-9acd-319619a2ddd6" name="CreateTasks" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="91b159fa-b031-4cbc-a561-7d1ef0dbe58b" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="0e82802a-cd52-441a-816b-90df24c9a80a" direction="Return">
+                  <elementDefinition Id="b61254ec-a72e-47ad-a821-019cb5be5e20" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="9964e9f8-e02f-4f12-952a-069ab019668b" LastKnownName="List&lt;ITask&gt;" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="9964e9f8-e02f-4f12-952a-069ab019668b" name="List&lt;ITask&gt;" isAbstract="false" isLeaf="false" cachedFullName="List&lt;ITask&gt;">
+        <elementDefinition Id="bb223294-8f55-4b40-a44f-a02b1e1b9ed3" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="750f5cf8-ea6c-4536-a9d7-2575d6fb6eb3" name="TaskManager" isAbstract="false" isLeaf="false" cachedFullName="DFLink.DesignModel::TaskManager">
+        <elementDefinition Id="65a993ed-d117-4b18-b60a-2d832a724781" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="db740de0-2d5b-4759-ba44-5c9631f6f7d5" name="Boolean" isAbstract="false" isLeaf="false" cachedFullName="Boolean">
+        <elementDefinition Id="8943dc84-709e-4f62-b15a-a3273aa6f165" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="d7c43ac5-f8b5-434a-8623-d2948b21cec6" name="ISchedule" isAbstract="false" isLeaf="false" cachedFullName="DFLink.DesignModel::ISchedule">
+        <elementDefinition Id="c8558c89-5f5a-4f92-a53a-954cdddfa61a" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="e9132d54-55f6-4d62-983d-ea283fd6aa14" name="Integer" isAbstract="false" isLeaf="false" cachedFullName="Integer">
+        <elementDefinition Id="220a3521-e091-4221-bae9-3ef9018e845c" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="3a25dcbb-17f5-4c56-bc58-f3ca244a5fa5" name="String" isAbstract="false" isLeaf="false" cachedFullName="String">
+        <elementDefinition Id="59259974-6d55-42c6-b7bd-763d77ac8ef9" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="9226c01a-4c45-4539-9716-b8da667c942e" name="String" isAbstract="false" isLeaf="false" cachedFullName="String">
+        <elementDefinition Id="59259974-6d55-42c6-b7bd-763d77ac8ef9" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="2b8936d9-763f-4c3c-a0a0-e760f200998d" name="RealTimeSchedule" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="c0ccd078-2f90-4ff7-8271-9c8e43971bab" />
+        <suppliersInternal>
+          <interfaceRealization Id="ff73ef1c-5d2a-4ef1-bc67-611074e0fb07">
+            <interfaceMoniker Id="0a3f852c-9a14-47e7-af78-c9665ae7fdb5" LastKnownName="ISchedule" />
+            <elementDefinition Id="419facf0-bcc1-453c-a8be-fbd06d99de51" />
+          </interfaceRealization>
+        </suppliersInternal>
+        <ownedAttributesInternal>
+          <property Id="011929ee-20d5-48b3-b4d2-fee2a1a79cf7" name="executeTime" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="850b6a34-3382-4a19-b93d-5c1a8dd76d1f" />
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation Id="97940740-9f38-42ec-9ec8-90aeb63d9f1f" name="GetRunTimes" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="1faf4c4d-eaef-4368-8eb4-95a90bdb9fd4" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="b226a16e-a7cb-461d-9dfa-8b906a744490" name="startTime" direction="In">
+                  <elementDefinition Id="a27bd907-a71d-41cc-8bae-68e9e137b811" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="a9001d52-43b0-4a47-a75a-4474fe7bfff0" LastKnownName="DateTime" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="5091a87d-0109-4a72-8418-851d4f501a7b" name="includeStartTime" direction="In">
+                  <elementDefinition Id="901013ed-98a4-4796-a2ad-bee8a2e26a37" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="4c373440-be73-49f1-83cf-621782918766" LastKnownName="boolean" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="ad9fb037-65c3-48aa-94de-55e8eb06eb17" direction="Return">
+                  <elementDefinition Id="b338831c-ae7e-4c24-b550-56b32df15841" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="07ec7284-0bd2-4547-82e6-97fe51e6193a" LastKnownName="List&lt;DateTime&gt;" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="c1176066-05e9-4d1d-9873-16813a3c1077" name="GetNextRunTime" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="17a06653-33c1-4c37-8ab2-90d89ddf98c3" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="384c2b3c-d172-49f9-a487-07123356812e" name="startTime" direction="In">
+                  <elementDefinition Id="005b5d1b-4b90-47b8-86b8-29666180b284" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="a9001d52-43b0-4a47-a75a-4474fe7bfff0" LastKnownName="DateTime" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="b521805f-e498-446d-9690-e04e78d52de0" name="endTime" direction="In">
+                  <elementDefinition Id="7a857e41-07a2-4171-a587-dcf310ff897f" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="a9001d52-43b0-4a47-a75a-4474fe7bfff0" LastKnownName="DateTime" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="1aa70b6e-8237-48c5-a0d7-96159b56d95c" name="SetSchedule" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="ad9f6e98-c434-475c-954d-d3a803d45c81" />
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <enumeration Id="61e64c3a-540c-425c-aed2-faff9db09042" name="TaskAction" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="8a61965d-22b2-4102-b3ba-6ee25c9143ab" />
+        <ownedLiterals>
+          <enumerationLiteral Id="6ad1e77b-e635-4c2f-80c3-619d15d42f19" name="Create">
+            <elementDefinition Id="0baa1d22-5670-4ce5-bc5c-769529ded919" />
+          </enumerationLiteral>
+          <enumerationLiteral Id="9b907bb2-c64b-478f-b028-d6d8ee0d468a" name="Update">
+            <elementDefinition Id="714f9bce-2715-4b51-9f05-1dacd14cdbd1" />
+          </enumerationLiteral>
+          <enumerationLiteral Id="080728f5-ca84-4d30-8eaf-98bff5cf1f21" name="Delete">
+            <elementDefinition Id="0f0add92-ef40-4542-8224-1f8fdd373446" />
+          </enumerationLiteral>
+        </ownedLiterals>
+      </enumeration>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="229721d5-cbc3-4463-941c-a25b65f429ae" name="ScheduleFactory" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="151020c4-e6d0-497e-b751-b2f1a08f6a6f" />
+        <ownedOperationsInternal>
+          <operation Id="91ccb4a6-d649-433e-934d-1caa66c9054b" name="CreateSchedule" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="f71d71f0-5db6-49dc-9b89-d2fc184bf31e" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="ad489bdc-c472-465b-9fb9-7cba099c9758" name="string scheduleType" direction="In" isUnique="false">
+                  <elementDefinition Id="6777c0f4-cfff-4b5c-9033-6c25eeee0d73" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+  </packagedElements>
+  <package Id="46b06ce5-66d4-4716-86cf-2e0f23d695af" name="DFLink.DesignModel">
+    <elementDefinition Id="cf2caf21-add9-4e75-808f-9d4dd13e2a7a" />
+    <profileInstances>
+      <packageHasProfileInstances Id="e8c2d81d-e8f5-4eee-903c-97c5a37cf251">
+        <profileInstance Id="1be254ff-0f2e-4b66-bdcf-434030082ab5" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="5bd6bd3f-3b6c-4eda-8ef5-a52aabae221b">
+        <profileInstance Id="58f46340-b4ed-4704-8ce4-3863fa8d1870" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
+  </package>
+</logicalClassDesignerModel>

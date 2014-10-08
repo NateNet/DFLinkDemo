@@ -1,0 +1,28 @@
+<Tasks>
+  <Task>
+     <Id>1</Id>
+     <Action>Create</Action>
+     <Name>Update</Name>
+     <Description> Update Update.xml</Description>
+     <Parameters>
+       <Parameter1>1</Parameter1>
+       <Parameter2>2</Parameter2> 
+       <Schedule>
+          <Type>SimepleIntervalSchedule</Type>
+          <Parameters>Start,End,Interval</Parameters>
+       </Schedule>
+    </Parameters>
+ </Task>
+ <Task>
+      <Id>2</Id>
+      <Name>RequestTask</Name>
+      <Action>Update</Action>
+      <Description>Update request frequency</Description>
+      <Parameters>
+        <Schedule> 
+          <Type>SimpleIntervalSchedule</Type>
+          <Parameters>2014-08-30,2014-09-05,10</Parameters>
+        </Schedule>
+      <Parameters>
+ </Task>
+</Tasks>
