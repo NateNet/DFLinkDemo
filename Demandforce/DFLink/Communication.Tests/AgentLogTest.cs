@@ -1,19 +1,15 @@
-﻿using Demandforce.DFLink.Communication;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using Moq;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Demandforce.DFLink.Logger;
-using Demandforce.DFLink.Communication.WebAPI;
 
 namespace Demandforce.DFLink.Communication.Tests
 {
-    
-    
     /// <summary>
     ///This is a test class for AgentLogTest and is intended
     ///to contain all AgentLogTest Unit Tests
     ///</summary>
     [TestClass()]
+    [DeploymentItem("log4net.Setting.xml")]
+    [DeploymentItem("ServerSet.xml")]
     public class AgentLogTest
     {
 
@@ -44,12 +40,11 @@ namespace Demandforce.DFLink.Communication.Tests
         [ClassInitialize()]
         public static void MyClassInitialize(TestContext testContext)
         {
-            string logSettingName = @"C:\workspace\dflinkreload\DFLinkPrototype\Dll\log4net.xml";
+            string logSettingName = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            logSettingName = System.IO.Path.GetDirectoryName(logSettingName) + @"\log4net.Setting.xml";
             LogInit.InitLog(logSettingName);
-            AgentSetting.AddressUrl = @"http://172.18.3.100";
-            AgentSetting.LicenseId = @"xxxxx-xxxxxx";
-            AgentSetting.HookLogger();
-            AgentSetting.CallerFactory = new TestCallerFactory();
+            AgentSetting.InitialSetting();
+            //AgentSetting.CallerFactory = new TestCallerFactory();
             
         }
         //
@@ -81,7 +76,7 @@ namespace Demandforce.DFLink.Communication.Tests
         public void GetLogTest()
         {
             AgentLog target = AgentLog.GetStartedInstance(); // TODO: Initialize to an appropriate value
-            int taskId = 0; // TODO: Initialize to an appropriate value
+            int taskId = 1; // TODO: Initialize to an appropriate value
             target.GetLog(taskId);
             Assert.AreEqual(AgentSetting.AddressUrl + AgentSetting.CommandLogDownload, TestCallerFactory.UrlString);
             Assert.AreEqual(@"{""TaskId"":0,""BusinessCredentials"":{""LicenseKey"":""xxxxx-xxxxxx""}}", TestCallerFactory.JsonString);

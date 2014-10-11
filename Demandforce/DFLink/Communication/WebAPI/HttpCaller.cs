@@ -7,12 +7,9 @@
 namespace Demandforce.DFLink.Communication.WebAPI
 {
     using System;
-    using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
     using System.Net;
     using System.Text;
-    using WebAPI;
 
     /// <summary>
     /// TODO: Update summary.

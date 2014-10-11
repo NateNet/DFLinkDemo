@@ -10,18 +10,15 @@ namespace Demandforce.DFLink.Controller
     using System.Collections.Generic;
     using System.Timers;
 
-
     using Demandforce.DFLink.Controller.EventStorage;
     using Demandforce.DFLink.Controller.Task;
-
-
+    using Demandforce.DFLink.Logger;
 
     /// <summary>
     /// This class is to execute different tasks using timer 
     /// </summary>
     public class Invoker : IDisposable
     {
-
         /// <summary>
         ///  The timer is to execute task according to schedule
         /// </summary>
@@ -124,8 +121,15 @@ namespace Demandforce.DFLink.Controller
 
             this.timer.Stop();
 
+            LogHelper.GetLoggerHandle()
+                .Debug(
+                        "Invoker",
+                         -1,
+                        "Last Trigger Time: " + this.lastTime.TimeOfDay + " This Trigger Time: " + e.SignalTime.TimeOfDay);
+
             foreach (ITask task in this.taskManager.Tasks.Values)
             {
+                LogHelper.GetLoggerHandle().Debug("Invoker", task.Id, "Start to handle task:" + task.Name);
                 System.Diagnostics.Debug.WriteLine("The Task is: " + task.Name);
                 System.Diagnostics.Debug.WriteLine("Last Trigger Time: " + this.lastTime.TimeOfDay);
                 System.Diagnostics.Debug.WriteLine("This Trigger Time: " + e.SignalTime.TimeOfDay);
@@ -133,7 +137,10 @@ namespace Demandforce.DFLink.Controller
 
                 foreach (var runTime in runTimes)
                 {
-                    System.Diagnostics.Debug.WriteLine("Start to Execute task:" + runTime.TimeOfDay);
+                    LogHelper.GetLoggerHandle()
+                        .Debug("Invoker", task.Id, "Start to execute task:" + task.Name + " at " + runTime.TimeOfDay);
+                    System.Diagnostics.Debug.WriteLine("Start to execute task:" + runTime.TimeOfDay);
+                    LogHelper.GetLoggerHandle().ReportStatus("Invoker", task.Id, 2, "Start executing");
 
                     // Execute task asynchronously
                     this.executeHandler.BeginInvoke(task, null, null);
@@ -175,7 +182,7 @@ namespace Demandforce.DFLink.Controller
             }
 
             // Handles the case of 0 wait time, the interval property requires a duration > 0.
-            return (interval.TotalMilliseconds == 0) ? 1 : interval.TotalMilliseconds;
+            return (interval.TotalMilliseconds == 0) ? 100 : interval.TotalMilliseconds;
         }
 
         /// <summary>

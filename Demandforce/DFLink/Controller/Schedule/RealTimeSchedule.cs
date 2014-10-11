@@ -54,9 +54,12 @@ namespace Demandforce.DFLink.Controller.Schedule
         public List<DateTime> GetRunTimes(DateTime startTime, DateTime endTime)
         {
             var runTimeList = new List<DateTime>();
-            DateTime nextTime = this.GetNextRunTime(startTime, true);
+
+            // Invoker trigger time is endTime, 
+            // so use endTime as this schedule execution time
+            DateTime nextTime = this.GetNextRunTime(endTime, true);
             System.Diagnostics.Debug.WriteLine("Next Run Time:" + nextTime.TimeOfDay);
-            if (nextTime == startTime)
+            if (nextTime == endTime)
             {
                 runTimeList.Add(nextTime);
             }

@@ -47,7 +47,7 @@ namespace Demandforce.DFLink.Controller.Tests
 
             // this set is not complete, it ignores the content for TaskCreator.
             const string Taskxml =
-                "<Tasks><TaskItem><Action>Create</Action></TaskItem></Tasks>";
+                "<Tasks><Task><Action>Create</Action></Task></Tasks>";
 
             target.ParseTasks(Taskxml);
             mockTaskCreator.Verify(
@@ -73,14 +73,14 @@ namespace Demandforce.DFLink.Controller.Tests
             // this set is not complete, it ignores the content for TaskCreator. execute 
             // create first
             var taskxml = 
-                "<Tasks><TaskItem><Id>2></Id>" 
-                + "<Action>Create</Action></TaskItem></Tasks>";
+                "<Tasks><Task><Id>2></Id>" 
+                + "<Action>Create</Action></Task></Tasks>";
             target.ParseTasks(taskxml);
             Assert.AreEqual(target.Tasks.Count, 1);
 
             // this is for test delete action
-            taskxml = "<Tasks><TaskItem><Id>2</Id>" 
-                + "<Action>Delete</Action></TaskItem></Tasks>";
+            taskxml = "<Tasks><Task><Id>2</Id>" 
+                + "<Action>Delete</Action></Task></Tasks>";
             target.ParseTasks(taskxml);
             mockTaskCreator.Verify(
                 m => m.Creator(It.IsAny<string>()), Times.Exactly(2));
@@ -116,10 +116,10 @@ namespace Demandforce.DFLink.Controller.Tests
 
             // create tasks first
             var taskxml = "<Tasks>" 
-                          + "<TaskItem><Id>1</Id>"
-                          + "<Action>Create</Action></TaskItem>"
-                          + "<TaskItem><Id>2</Id>"
-                          + "<Action>Create</Action></TaskItem></Tasks>";
+                          + "<Task><Id>1</Id>"
+                          + "<Action>Create</Action></Task>"
+                          + "<Task><Id>2</Id>"
+                          + "<Action>Create</Action></Task></Tasks>";
             target.ParseTasks(taskxml);
             Assert.AreEqual(target.Tasks.Count, 2);
 
@@ -131,8 +131,8 @@ namespace Demandforce.DFLink.Controller.Tests
             mockTaskCreator.Setup(
                 ct => ct.Creator(It.IsAny<string>())).Returns(mockUpdate.Object);
             taskxml = "<Tasks>"
-                          + "<TaskItem><Id>1</Id>"
-                          + "<Action>Update</Action></TaskItem></Tasks>";
+                          + "<Task><Id>1</Id>"
+                          + "<Action>Update</Action></Task></Tasks>";
             target.ParseTasks(taskxml);
             mockTaskCreator.Verify(
                 m => m.Creator(It.IsAny<string>()), Times.Exactly(3));

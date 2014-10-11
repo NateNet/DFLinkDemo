@@ -61,15 +61,28 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="RealTimeScheduleTest.cs" />
     <Compile Include="RequestTaskTest.cs" />
     <Compile Include="SimpleIntervalScheduleTest.cs" />
     <Compile Include="TaskFactoryTest.cs" />
     <Compile Include="TaskManagerTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{86EB13D3-AD5E-4922-BF17-1B21B9E79348}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Communication\Communication.csproj">
+      <Project>{79C22FDA-2296-466D-927B-43930B0D4F2E}</Project>
+      <Name>Communication</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Controller\Controller.csproj">
       <Project>{2AD97B95-A201-4AFE-A57F-4A93957E114F}</Project>
       <Name>Controller</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Logger\Logger.csproj">
+      <Project>{4B5E4E55-D4D7-490F-888F-A74223618BEE}</Project>
+      <Name>Logger</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

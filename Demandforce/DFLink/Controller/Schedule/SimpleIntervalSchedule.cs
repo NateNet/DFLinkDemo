@@ -44,6 +44,7 @@ namespace Demandforce.DFLink.Controller.Schedule
         public DateTime EndTime { get; set; }
         #endregion
 
+        #region interface implement
         /// <summary>
         /// Get next run time according a time interval
         /// </summary>
@@ -53,6 +54,7 @@ namespace Demandforce.DFLink.Controller.Schedule
         /// <returns>The next run time</returns>
         public DateTime GetNextRunTime(DateTime time, bool includeCurrentTime)
         {
+            // time = time.Truncate(TimeSpan.FromSeconds(1));
             TimeSpan span = time - this.StartTime;
             //// if the time happens to be the run time
             if (span.TotalMilliseconds % this.Interval.TotalMilliseconds == 0)
@@ -66,11 +68,11 @@ namespace Demandforce.DFLink.Controller.Schedule
                 return this.StartTime + this.Interval;
             }
 
-            ////as timer limit, use uint to calculate next time
-            var gapToNextRunTime = 
-                (uint)(this.Interval.TotalMilliseconds - 
-                ((uint)span.TotalMilliseconds % 
-                (uint)this.Interval.TotalMilliseconds));
+            // calculate the gap
+            var gapToNextRunTime =
+                (long)(this.Interval.TotalMilliseconds -
+                ((long)span.TotalMilliseconds %
+                (long)this.Interval.TotalMilliseconds));
             return time.AddMilliseconds(gapToNextRunTime);
         }
 
@@ -93,8 +95,6 @@ namespace Demandforce.DFLink.Controller.Schedule
             if (startTime < endTime)
             {
                 DateTime nextTime = this.GetNextRunTime(startTime, true);
-                System.Diagnostics.Debug.WriteLine("Next Run Time:" + nextTime.TimeOfDay);
-
                 while (nextTime < endTime)
                 {
                     runTimeList.Add(nextTime);
@@ -111,10 +111,11 @@ namespace Demandforce.DFLink.Controller.Schedule
         /// <param name="arguments">The xml format for arguments</param>
         public void SetSchedule(string arguments)
         {
-            XDocument scheduleDoc = XDocument.Parse(arguments);
+            var scheduleDoc = XDocument.Parse(arguments);
 
             // The schedule defuault value
-            DateTime startTime = DateTime.Now, endTime = DateTime.MaxValue;
+            var startTime = new DateTime(2014, 10, 1, 1, 1, 1);
+            var endTime = DateTime.MaxValue;
             int count = 0, interval = 1;
 
             var scheduleElement = scheduleDoc.Root;
@@ -172,5 +173,7 @@ namespace Demandforce.DFLink.Controller.Schedule
                 }
             }
         }
+
+        #endregion
     }
 }

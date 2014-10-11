@@ -14,6 +14,7 @@ namespace Demandforce.DFLink.Updater
     using Demandforce.DFLink.Common;
     using Demandforce.DFLink.Controller.Schedule;
     using Demandforce.DFLink.Controller.Task;
+    using Demandforce.DFLink.Logger;
 
     /// <summary>
     /// It can upgrade/update file
@@ -35,6 +36,11 @@ namespace Demandforce.DFLink.Updater
         /// Stored some parameters for upload, 2 way.
         /// </summary>
         private const string BusinessFile = "DFLink.xml";
+
+        /// <summary>
+        /// The identification for Updater component and used into Logger.
+        /// </summary>
+        private const string LogTag = "Updater";
 
         /// <summary>
         /// A instance of class XmlDocument associated with DFUpdateInstruction.xml
@@ -109,7 +115,13 @@ namespace Demandforce.DFLink.Updater
         /// <summary>
         /// Gets the task name
         /// </summary>
-        public string Name { get; private set; }
+        public string Name 
+        {
+            get
+            {
+                return "Update File";
+            }
+        }
 
         /// <summary>
         /// Gets or sets the task description
@@ -128,6 +140,7 @@ namespace Demandforce.DFLink.Updater
         public void Execute()
         {
             this.Update();
+            LogHelper.GetLoggerHandle().ReportStatus("Invoker", this.Id, 9, "Update done");
         }
 
         /// <summary>
@@ -146,39 +159,50 @@ namespace Demandforce.DFLink.Updater
             int businessConfigFileLocation;
             string fileName;
             string fileServerPath;
-            string fileLocalPath;            
+            string fileLocalPath;
+            string sapiName;
+            int taskId;
 
             XmlDocument xmlParams = new XmlDocument();
             xmlParams.LoadXml(arguments);
             XmlNode rootNode = xmlParams.DocumentElement;
+            XmlNode tempNode;
             XmlNode paramNode;
 
-            rootNode = rootNode.SelectSingleNode("Parameters");
+            tempNode = rootNode.SelectSingleNode("Id");
+            taskId = int.Parse(tempNode.InnerText);
+            
+            tempNode = rootNode.SelectSingleNode("Parameters");
 
-            paramNode = rootNode.SelectSingleNode("Mode");
+            paramNode = tempNode.SelectSingleNode("Mode");
             mode = int.Parse(paramNode.InnerText);
 
-            paramNode = rootNode.SelectSingleNode("BusinessConfigFileLocation");
+            paramNode = tempNode.SelectSingleNode("BusinessConfigFileLocation");
             businessConfigFileLocation = int.Parse(paramNode.InnerText);
-            
-            paramNode = rootNode.SelectSingleNode("FileName");
+
+            paramNode = tempNode.SelectSingleNode("FileName");
             fileName = paramNode.InnerText;
 
-            paramNode = rootNode.SelectSingleNode("FileServerPath");
+            paramNode = tempNode.SelectSingleNode("FileServerPath");
             fileServerPath = paramNode.InnerText;
 
-            paramNode = rootNode.SelectSingleNode("ApiName");            
+            paramNode = tempNode.SelectSingleNode("ApiName");
+            sapiName = paramNode.InnerText;
 
-            fileLocalPath = AppDomain.CurrentDomain.BaseDirectory;            
-            
+            fileLocalPath = AppDomain.CurrentDomain.BaseDirectory;
+
+            LogHelper.GetLoggerHandle().Debug(LogTag, taskId, "Update arguments from server: " + arguments);
+            // LogHelper.GetLoggerHandle().Debug(LogTag, this.Id, arguments); 
+
             var objDfUpdate = new Updater
             {
+                Id = taskId,
                 Mode = mode,
                 BusinessConfigFileLocation = businessConfigFileLocation,
                 FileName = fileName,
                 FileServerPath = fileServerPath,
                 FileLocalPath = fileLocalPath,
-                apiName = paramNode.InnerText
+                apiName = sapiName
             };
             return objDfUpdate;
         }        
@@ -196,7 +220,8 @@ namespace Demandforce.DFLink.Updater
             else
             {
                 return this.FullUpdate();                
-            }            
+            }
+
         }
 
         /// <summary>
@@ -209,7 +234,7 @@ namespace Demandforce.DFLink.Updater
         {
             StringBuilder objStringBuilder = new StringBuilder();
             objStringBuilder.Append(filePath);
-            objStringBuilder.Append(fileName);
+            objStringBuilder.AppendFormat("/{0}", fileName);
 
             return objStringBuilder.ToString();
         }
@@ -252,6 +277,7 @@ namespace Demandforce.DFLink.Updater
             catch (Exception)
             {
                 apiName = string.Empty;
+                LogHelper.GetLoggerHandle().Error(LogTag, this.Id, "Format error in DFLink.xml");
             }
 
             return apiName;
@@ -269,7 +295,7 @@ namespace Demandforce.DFLink.Updater
 
             if (rootNode.Name != RootInInstructionFile)
             {
-                // TODO, write some log here
+                LogHelper.GetLoggerHandle().Error(LogTag, this.Id, "Format error in DFUpdateInstruction.xml");
             }
             else
             {
@@ -306,7 +332,7 @@ namespace Demandforce.DFLink.Updater
 
             if (rootNode.Name != RootInInstructionFile)
             {
-                // TODO, write some log here
+                LogHelper.GetLoggerHandle().Error(LogTag, this.Id, "Format error in DFUpdateInstruction.xml");
             }
             else
             {
@@ -411,6 +437,7 @@ namespace Demandforce.DFLink.Updater
                 }
                 catch (Exception)
                 {
+                    LogHelper.GetLoggerHandle().Error(LogTag, this.Id, "Format error in DFUpdateInstruction.xml");
                     resultDownload = false;
                 }
             }

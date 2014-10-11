@@ -10,12 +10,9 @@
 namespace Demandforce.DFLink.Controller.Tests
 {
     using System;
-    using System.Collections.Generic;
-    using System.Data.SqlTypes;
     using System.Globalization;
     using System.Linq;
 
-    using Demandforce.DFLink.Controller;
     using Demandforce.DFLink.Controller.Schedule;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -92,6 +89,25 @@ namespace Demandforce.DFLink.Controller.Tests
             Assert.AreEqual(expected, actual);
 
            // Assert.Inconclusive("Verify the correctness of this test method.");
+        }
+
+        /// <summary>
+        /// The get next run time specific value if specific input.
+        /// </summary>
+        [TestMethod]
+        public void GetNextRunTimeSpecificValueIfSpecificInput()
+        {
+            var target = new SimpleIntervalSchedule()
+            {
+                StartTime = new DateTime(2014, 08, 20),
+                Interval =
+                    new TimeSpan(0, 2, 0),
+                EndTime = new DateTime(2014, 10, 15)
+            };
+            var time = new DateTime(2014, 10, 10, 21, 22, 01, 800);
+            var expected = new DateTime(2014, 10, 10, 21, 22, 47, 100);
+            DateTime actual = target.GetNextRunTime(time, true);
+            Assert.AreEqual(expected, actual);
         }
 
         /// <summary>

@@ -70,6 +70,10 @@
       <Project>{2AD97B95-A201-4AFE-A57F-4A93957E114F}</Project>
       <Name>Controller</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Logger\Logger.csproj">
+      <Project>{4B5E4E55-D4D7-490F-888F-A74223618BEE}</Project>
+      <Name>Logger</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

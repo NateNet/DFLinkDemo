@@ -38,6 +38,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Controller\bin\Debug\Controller.dll</HintPath>
     </Reference>
+    <Reference Include="Logger">
+      <HintPath>..\Logger\bin\Debug\Logger.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

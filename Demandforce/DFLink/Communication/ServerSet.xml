@@ -1,0 +1,8 @@
+<config>
+  <AddressUrl>http://172.18.3.100</AddressUrl>
+  <CommandTaskGet>/task/get</CommandTaskGet>
+  <CommandLogUpload>/log/upload</CommandLogUpload>
+  <CommandLogStatusUpdate>/task/updatestatus</CommandLogStatusUpdate>
+  <CommandLogDownload>/log/download</CommandLogDownload>
+  <LicenseId>xxxx-xxxxx</LicenseId>
+</config>

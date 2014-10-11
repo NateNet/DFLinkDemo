@@ -12,8 +12,8 @@ namespace Demandforce.DFLink.Controller
     using System.Xml.Linq;
     using Demandforce.DFLink.Common.Extensions;
     using Demandforce.DFLink.Communication;
-    using Demandforce.DFLink.Controller.Schedule;
     using Demandforce.DFLink.Controller.Task;
+    using Demandforce.DFLink.Logger;
 
     /// <summary>
     /// The class is to manage a task list
@@ -49,9 +49,9 @@ namespace Demandforce.DFLink.Controller
         public void InitializeTask()
         {
             var initialTask =
-                "<TaskItem><Id>0</Id><Name>Request</Name>"
+                "<Task><Id>0</Id><Name>Request</Name>"
                 + "<Schedule><Type>SimpleIntervalSchedule</Type></Schedule>" 
-                + "</TaskItem>";
+                + "</Task>";
             var task = this.taskCreator.Creator(initialTask);
             ((RequestTask)task).TaskManager = this;
             this.AddTask(task);
@@ -65,16 +65,11 @@ namespace Demandforce.DFLink.Controller
         /// </returns>
         public string RequestTasks()
         {
-            // it is for test
-             var taskxml = XDocument.Load(@"F:\DFLinkReload\TaskXML.xml");
-            // AgentSetting.AddressUrl = @"Http://172.18.3.100/";
-            // AgentSetting.LicenseId = "xxxxx-xxxxxx";
-            // var taskxml = AgentTask.GetStartedInstance().GetTask();
-            //System.Diagnostics.Trace.Listeners.Add(
-            //    new TextWriterTraceListener("tasks.xml"));
-            //Trace.WriteLine(taskxml);
-            //Trace.Flush();
-            return taskxml.ToString();
+             // it is for test
+             // var taskxml = XDocument.Load(@"F:\DFLinkReload\TaskXML.xml");
+             AgentSetting.InitialSetting();
+             var taskxml = AgentTask.GetStartedInstance().GetTask();
+             return taskxml;
         }
 
         /// <summary>
@@ -85,7 +80,12 @@ namespace Demandforce.DFLink.Controller
         public void ParseTasks(string taskXml)
         {
             var doc = XDocument.Parse(taskXml);
-            var tasks = from taskItem in doc.Descendants("TaskItem") 
+            LogHelper.GetLoggerHandle().Debug(
+                "TaskManager", 
+                0, 
+                "The current task list:" + doc.Root.GetFormatXml());
+
+            var tasks = from taskItem in doc.Descendants("Task") 
                         select new
                                    {
                                        Argument = taskItem.ToString(),

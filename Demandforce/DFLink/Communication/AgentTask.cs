@@ -6,12 +6,7 @@
 
 namespace Demandforce.DFLink.Communication
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using Command;
-    using Log;
 
     /// <summary>
     /// TODO: It is a singleton class to operate all the task command

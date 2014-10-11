@@ -1,19 +1,16 @@
-﻿using Demandforce.DFLink.Logger;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Threading;
 using Demandforce.DFLink.Logger.Listener;
-using log4net.Core;
 
 namespace Demandforce.DFLink.Logger.Tests
 {
-    
-    
     /// <summary>
     ///This is a test class for LogInitTest and is intended
     ///to contain all LogInitTest Unit Tests
     ///</summary>
     [TestClass()]
+    [DeploymentItem("log4net.Setting.xml")]
     public class LogInitTest
     {
 
@@ -72,7 +69,8 @@ namespace Demandforce.DFLink.Logger.Tests
         [TestMethod()]
         public void InitLogTest()
         {
-            string logSettingName = @"C:\workspace\Remote\POC\DFLinkPrototype\Dll\log4net.xml";
+            string logSettingName = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            logSettingName = System.IO.Path.GetDirectoryName(logSettingName) + @"\log4net.Setting.xml";
             LogInit.InitLog(logSettingName);
             AppenderListener.EventLogListen += new EventHandler<LogEventArgs>(LogListener);
             

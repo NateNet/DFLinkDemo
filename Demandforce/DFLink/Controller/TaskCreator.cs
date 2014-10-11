@@ -7,9 +7,6 @@
 namespace Demandforce.DFLink.Controller
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Xml.Linq;
 
     using Demandforce.DFLink.Common.Extensions;
@@ -58,7 +55,7 @@ namespace Demandforce.DFLink.Controller
         public ITask Creator(string taskItem)
         {
             var taskDoc = XDocument.Parse(taskItem);
-            var taskAttribute = taskDoc.Element("TaskItem");
+            var taskAttribute = taskDoc.Element("Task");
             var scheduleElement = taskAttribute.Element("Schedule");
 
             // create task instance

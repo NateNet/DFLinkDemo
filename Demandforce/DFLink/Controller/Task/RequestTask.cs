@@ -6,10 +6,6 @@
 
 namespace Demandforce.DFLink.Controller.Task
 {
-    using System;
-    using System.Xml.Linq;
-
-    using Demandforce.DFLink.Common.Extensions;
     using Demandforce.DFLink.Controller.Schedule;
 
     /// <summary>
@@ -58,6 +54,7 @@ namespace Demandforce.DFLink.Controller.Task
         public ITaskManager TaskManager { get; set; }
         #endregion
 
+        #region interface implement
         /// <summary>
         /// Execute the request task
         /// </summary>
@@ -87,5 +84,7 @@ namespace Demandforce.DFLink.Controller.Task
         {
             return this;
         }
+
+        #endregion
     }
 }

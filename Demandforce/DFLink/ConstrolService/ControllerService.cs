@@ -6,16 +6,13 @@
 
 namespace Demandforce.DFLink.ConstrolService
 {
-    using System;
     using System.ServiceProcess;
 
-    using Castle.Core.Logging;
     using Castle.Windsor;
     using Castle.Windsor.Installer;
 
     using Demandforce.DFLink.Controller;
-    using Demandforce.DFLink.Controller.Schedule;
-    using Demandforce.DFLink.Controller.Task;
+    using Demandforce.DFLink.Logger;
 
     /// <summary>
     /// The controller service.
@@ -45,6 +42,9 @@ namespace Demandforce.DFLink.ConstrolService
         /// </param>
         protected override void OnStart(string[] args)
         {
+            string logSettingName = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            logSettingName = System.IO.Path.GetDirectoryName(logSettingName) + @"\log4net.Setting.xml";
+            LogInit.InitLog(logSettingName);
             var taskManager = this.container.Resolve<ITaskManager>();
             ((TaskManager)taskManager).InitializeTask();
             var invoker = new Invoker((TaskManager)taskManager);
