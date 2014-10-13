@@ -140,7 +140,7 @@ namespace Demandforce.DFLink.Updater
         public void Execute()
         {
             this.Update();
-            LogHelper.GetLoggerHandle().ReportStatus("Invoker", this.Id, 9, "Update done");
+            LogHelper.GetLoggerHandle().ReportStatus(LogTag, this.Id, 9, "Update done");
         }
 
         /// <summary>
