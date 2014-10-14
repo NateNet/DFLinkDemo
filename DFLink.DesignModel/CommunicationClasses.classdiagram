@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="25a0af06-2b25-4cbd-b646-653fa50ec32c" name="CommunicationClasses" linkedPackageId="6f87c769-bfe9-4dcc-b50c-0dc3eebe4ec3" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="9b6fb311-c4db-4491-807e-0c6cbb860610">
+      <profileInstance Id="b0cd13cb-57b2-4027-959c-1c0544774d08" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="ed4bd1bf-2fda-4224-b390-de56dc13a371">
+      <profileInstance Id="2d7264f8-7abb-4a2e-b522-a5c60c33b458" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="d427e99f-05b3-4251-9434-1a42e8c68d2e" name="AgentTask" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="601731ec-129c-469f-be6d-50a9832c49fb" />
+        <suppliersInternal>
+          <dependency Id="bd1bd2df-2766-4fc3-94e3-ae1e2f02d8ad">
+            <classMoniker Id="20d0d091-d4c7-4762-93f8-6229e5996233" LastKnownName="DownloadTask" />
+            <elementDefinition Id="3c88112b-6249-41ac-93ef-17d226c9c21f" />
+          </dependency>
+        </suppliersInternal>
+        <ownedOperationsInternal>
+          <operation Id="d56b92c9-4b3a-4e9d-ad7a-70b84e843a98" name="string GetTask" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="412f91f9-f1d8-491f-b4da-e3b3bc463f68" />
+          </operation>
+          <operation Id="c152b82b-b73d-4aa1-9008-46308f0c8deb" name="AgentTask GetStartedInstance" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="55f1f2ee-9946-4623-a887-753fbade8645" />
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="264eafd0-d027-4d92-8d6f-58bf9d4bdea0" name="AgentSetting" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="c6adc361-7c5d-4556-ae52-cb7fadef2a62" />
+        <targetEnds>
+          <association Id="a528a1d7-232b-4f24-ba24-51cc721ff1d1" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
+            <interfaceMoniker Id="5baa537d-75f1-4ad9-bb7c-922e6fadc653" LastKnownName="IcallFactory" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="d15a7e57-a3ca-499a-8575-f941e8a877a9" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="f29321b1-bc02-41c2-8735-45adc6f464a0" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="fe4b4233-fd13-4b99-95a1-ed21b951d7ed" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="0325ce59-c2d0-4cff-a939-38cf1d14f1fe" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="3927e833-83d1-4342-843a-953a51178565" />
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property Id="ee2272ad-7f30-4bbc-933e-30356cd9f126" name="ICallerFactory CallerFactory" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="4ee666d3-535c-4408-b09b-65718ed8afb5" />
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation Id="31ceff01-a074-4189-a5e0-4c0fd6bfa2f1" name="InitialSetting" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="3fa31b57-1679-4b92-8033-5409a603e1a4" />
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="69774216-46e5-4bd2-8249-46e921af02be" name="AgentLog" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="c9d2e278-7c25-45d9-97f7-2be958597750" />
+        <suppliersInternal>
+          <dependency Id="9bae4715-2bf8-44a4-8d72-1c2d8b9a86c5">
+            <classMoniker Id="d6b41095-368f-4e36-8197-af075c54ba73" LastKnownName="DownloadLog" />
+            <elementDefinition Id="5a9430bb-b1b5-4953-98c6-b5b669c320ef" />
+          </dependency>
+        </suppliersInternal>
+        <ownedOperationsInternal>
+          <operation Id="7139fec1-45bd-464f-be43-8005c1738e3c" name="string GetLog" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="60c5799c-ee65-4aaa-a3e6-e2b1af01612e" />
+          </operation>
+          <operation Id="8e33e557-e9f7-45b4-bad4-20c534166e62" name="AgentLog GetStartedInstance" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="352ae65f-3a46-455e-a0e5-53e9f3ad5d47" />
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="20d0d091-d4c7-4762-93f8-6229e5996233" name="DownloadTask" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="744a3b5d-af5e-459c-bb8f-bf91cb6e3138" />
+        <suppliersInternal>
+          <dependency Id="bbf2dcbd-ff87-40e2-ad36-1148e3208041">
+            <classMoniker Id="264eafd0-d027-4d92-8d6f-58bf9d4bdea0" LastKnownName="AgentSetting" />
+            <elementDefinition Id="8ca53a5f-357a-4a68-b0af-7e17dd9b8495" />
+          </dependency>
+          <dependency Id="d029923b-0c80-4eb4-96fb-e69d3644e848">
+            <classMoniker Id="7a705e8a-10f9-4129-9bc4-f5541e7a0b96" LastKnownName="JsonPack" />
+            <elementDefinition Id="5e8ac23c-4f6e-4194-b21d-3e231f563c97" />
+          </dependency>
+        </suppliersInternal>
+        <generalsInternal>
+          <generalization Id="62448448-ff71-410d-920a-adb9b61d428e" isSubstitutable="false">
+            <classMoniker Id="78da9e7e-6457-4ea2-afc9-3cdd79e0030f" LastKnownName="BaseCommand" />
+            <elementDefinition Id="618e5fa7-6263-47f0-9478-984aa0a53ad5" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="78da9e7e-6457-4ea2-afc9-3cdd79e0030f" name="BaseCommand" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="c63661ed-b88e-463d-bd4b-d6286396d30b" />
+        <targetEnds>
+          <association Id="25dfb01c-1e7f-468b-b09c-2eab31ee9b5b" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
+            <classMoniker Id="fa9d3c9f-a2d0-4835-845b-2b9557d22493" LastKnownName="BusinessInfo" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="52ec7c94-b994-4b29-925b-23f13a256648" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="01df79df-fdd8-4dfa-bb2b-15f91d1f9448" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="fcf21abf-e61d-4cc9-ab5d-7771f285542e" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="ec916335-7531-45f0-a8e8-4c7e8de8998a" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="6436a3a2-cbf5-43b4-895d-f5ada3473c01" />
+          </association>
+        </targetEnds>
+        <ownedOperationsInternal>
+          <operation Id="4ff9de27-857c-4a3d-b5b6-58692f43cfd5" name="Request" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="e9af0e22-d56b-4244-837e-fce63a1eda05" />
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="d6b41095-368f-4e36-8197-af075c54ba73" name="DownloadLog" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="369700b7-1d99-4423-9aef-674c53aa677e" />
+        <suppliersInternal>
+          <dependency Id="b983e444-eb33-4067-b7bd-243b1151addf">
+            <classMoniker Id="264eafd0-d027-4d92-8d6f-58bf9d4bdea0" LastKnownName="AgentSetting" />
+            <elementDefinition Id="53cb147e-4a33-4c62-a961-6dadb8cc49c8" />
+          </dependency>
+          <dependency Id="085b12e8-7d8b-4301-b7ca-70bace11b0fd">
+            <classMoniker Id="7a705e8a-10f9-4129-9bc4-f5541e7a0b96" LastKnownName="JsonPack" />
+            <elementDefinition Id="b1ab7d85-e186-4108-a319-03ed57221253" />
+          </dependency>
+        </suppliersInternal>
+        <generalsInternal>
+          <generalization Id="e9caa41b-b208-495a-90c2-3a337dc22847" isSubstitutable="false">
+            <classMoniker Id="78da9e7e-6457-4ea2-afc9-3cdd79e0030f" LastKnownName="BaseCommand" />
+            <elementDefinition Id="e68b5cec-848d-41d6-bdc5-156337319e13" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="1277a510-96fb-495d-b32e-b5942dfa59bf" name="UpdateLog" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="37b663f1-f2d7-49b1-8632-ada1511bf19d" />
+        <suppliersInternal>
+          <dependency Id="150bcd2f-e56d-4d9e-bb57-c9c9bfe4e489">
+            <classMoniker Id="264eafd0-d027-4d92-8d6f-58bf9d4bdea0" LastKnownName="AgentSetting" />
+            <elementDefinition Id="cc181e0c-9952-435d-950f-3c82dc16e548" />
+          </dependency>
+          <dependency Id="1e3ae39a-1e1a-4b19-86e2-2b87e51c5c91">
+            <classMoniker Id="7a705e8a-10f9-4129-9bc4-f5541e7a0b96" LastKnownName="JsonPack" />
+            <elementDefinition Id="41a798fd-c514-420f-872f-4f9b7d33ad25" />
+          </dependency>
+        </suppliersInternal>
+        <generalsInternal>
+          <generalization Id="7233804b-def6-4730-af5e-0eeb939cf58a" isSubstitutable="false">
+            <classMoniker Id="78da9e7e-6457-4ea2-afc9-3cdd79e0030f" LastKnownName="BaseCommand" />
+            <elementDefinition Id="695717ff-0a7b-4aaa-9724-56262a305783" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="802d2420-0369-4f5a-8f1b-736f540eedf3" name="UpdateStatus" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="9bd36eaa-d008-4675-9f0a-617c94fe7b57" />
+        <suppliersInternal>
+          <dependency Id="a7f3be1d-ffc6-4ff4-9432-63ddb050aad5">
+            <classMoniker Id="264eafd0-d027-4d92-8d6f-58bf9d4bdea0" LastKnownName="AgentSetting" />
+            <elementDefinition Id="31c94173-378f-4011-8995-e9380f375a7c" />
+          </dependency>
+          <dependency Id="ea75fae6-5c7f-4ae6-ab3a-223068a4a5ce">
+            <classMoniker Id="7a705e8a-10f9-4129-9bc4-f5541e7a0b96" LastKnownName="JsonPack" />
+            <elementDefinition Id="edcffc45-397a-46a8-9049-3a6e905e26f2" />
+          </dependency>
+        </suppliersInternal>
+        <generalsInternal>
+          <generalization Id="d66f4460-5c35-4a8c-b561-c80c0761eeb9" isSubstitutable="false">
+            <classMoniker Id="78da9e7e-6457-4ea2-afc9-3cdd79e0030f" LastKnownName="BaseCommand" />
+            <elementDefinition Id="d9b0c25c-4fab-40db-8da2-4b78f67bdd79" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="fa9d3c9f-a2d0-4835-845b-2b9557d22493" name="BusinessInfo" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="ed068d1e-b5f1-4e7a-8281-e1f0d6c73486" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="5baa537d-75f1-4ad9-bb7c-922e6fadc653" name="IcallFactory" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="29a7ec81-bf94-44ee-b479-c33c0166ddd0" />
+        <suppliersInternal>
+          <dependency Id="48a85e27-41d1-4973-86bc-ff9ef11cc69f">
+            <interfaceMoniker Id="e5f956ff-93bf-4afe-9897-18c85413f4cd" LastKnownName="ICaller" />
+            <elementDefinition Id="22da62f0-e083-446f-80ed-b74b191910ab" />
+          </dependency>
+        </suppliersInternal>
+        <ownedOperations>
+          <operation Id="6ea31fd8-7ce5-4fd6-90ab-e143afc93106" name="ICaller CreateCaller" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="4b9a34bd-d60c-48c3-bb04-2a0cb3ff6021" />
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="8bd003ed-7868-4a97-9829-af2078fc7d83" name="HttpCallerFactory" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="afb41085-423a-4fcb-8c55-e8cbb9a00729" />
+        <suppliersInternal>
+          <interfaceRealization Id="853c3dc5-b7a8-420e-af87-158f3904d303">
+            <interfaceMoniker Id="5baa537d-75f1-4ad9-bb7c-922e6fadc653" LastKnownName="IcallFactory" />
+            <elementDefinition Id="8c5e8abc-db85-4cc4-a422-868490d70923" />
+          </interfaceRealization>
+          <dependency Id="56cd85de-7fb1-4464-baa7-17c4b2b2bc7f">
+            <classMoniker Id="36f5aa53-7f26-492c-abb9-6aa6efeceab1" LastKnownName="HttpCaller" />
+            <elementDefinition Id="b7cfd5bc-8c78-476e-aefe-0683177cd14a" />
+          </dependency>
+        </suppliersInternal>
+        <ownedOperationsInternal>
+          <operation Id="46d62205-046c-40f1-9ab3-f9d02c76f202" name="ICaller CreateCaller" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="10088f4c-4122-4a0f-8aa4-b88a48aebcd0" />
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="e5f956ff-93bf-4afe-9897-18c85413f4cd" name="ICaller" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="e6d85e82-37a6-47aa-bf28-8adaa68a6936" />
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="36f5aa53-7f26-492c-abb9-6aa6efeceab1" name="HttpCaller" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="2e6ff9fd-0904-4200-92db-03d292b0a3d9" />
+        <suppliersInternal>
+          <interfaceRealization Id="256e7b5b-324a-4cb1-90e6-08d72bae36e1">
+            <interfaceMoniker Id="e5f956ff-93bf-4afe-9897-18c85413f4cd" LastKnownName="ICaller" />
+            <elementDefinition Id="697a336f-9269-4cef-a304-187b20fed6bd" />
+          </interfaceRealization>
+        </suppliersInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="56a15364-e4f1-4aed-9ffa-f1db352fdc83" name="Listener" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="bea31438-4421-455b-8ee0-b59b65d1f0dc" />
+        <suppliersInternal>
+          <dependency Id="673e86cc-e83f-45ff-981a-d4815470980c">
+            <classMoniker Id="1277a510-96fb-495d-b32e-b5942dfa59bf" LastKnownName="UpdateLog" />
+            <elementDefinition Id="835842f3-58b7-4823-aebb-6cb5a2a02284" />
+          </dependency>
+          <dependency Id="5edfeaa7-5572-47d0-a554-5be412ee3418">
+            <classMoniker Id="802d2420-0369-4f5a-8f1b-736f540eedf3" LastKnownName="UpdateStatus" />
+            <elementDefinition Id="212384fb-3c26-43f2-aabf-cf0afcf7c026" />
+          </dependency>
+          <dependency Id="d70178c7-9d3d-4d7e-8b87-4e85463cbba8">
+            <classMoniker Id="d0b24c45-f17b-4956-851f-154fcde88310" LastKnownName="AppenderListener" />
+            <elementDefinition Id="5a9190a4-5ee1-4ea0-9f65-e4e401efee77" />
+          </dependency>
+        </suppliersInternal>
+        <ownedOperationsInternal>
+          <operation Id="f7d101e5-09aa-4f83-a8e7-45e8a98c4533" name="LogListener" visibility="Private" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="a317c5f9-a0f3-4bd1-a105-38eff5b4b45a" />
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasPackages>
+      <package Id="fdb1df3c-d4bc-46cb-b6e8-fbd9f832afa3" name="Logger">
+        <elementDefinition Id="4a5a0692-c819-4a87-8898-f6471f8ae053" />
+        <packagedElements>
+          <packageHasNamedElement>
+            <class Id="d0b24c45-f17b-4956-851f-154fcde88310" name="AppenderListener" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="076dce54-6077-4730-a4b2-c2c20f4313d5" />
+            </class>
+          </packageHasNamedElement>
+        </packagedElements>
+      </package>
+    </logicalClassDesignerModelHasPackages>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="7a705e8a-10f9-4129-9bc4-f5541e7a0b96" name="JsonPack" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="fa7d0903-1522-47d5-904c-cf17b57f0c3a" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+  </packagedElements>
+  <package Id="6f87c769-bfe9-4dcc-b50c-0dc3eebe4ec3" name="DFLink.DesignModel">
+    <elementDefinition Id="cf2caf21-add9-4e75-808f-9d4dd13e2a7a" />
+  </package>
+</logicalClassDesignerModel>
