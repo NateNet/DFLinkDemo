@@ -69,6 +69,19 @@
           LastKnownLocation="DFLink.DesignModel.uml" />
       </annotatedElements>
     </comment>
+    <comment
+      Id="8ed5ea98-431e-4f3f-98e7-3c58bdbc7930">
+      <body>a file:
+app.config
+
+Contains all the Task classes implementating ITask</body>
+      <annotatedElements>
+        <classMoniker
+          Id="d65f8362-8ebb-46e7-ae9a-5e7639ce8bee"
+          LastKnownName="TaskFactory"
+          LastKnownLocation="DFLink.DesignModel.uml" />
+      </annotatedElements>
+    </comment>
   </ownedCommentsInternal>
   <profileInstances>
     <packageHasProfileInstances
@@ -1866,6 +1879,13 @@
               LastKnownName="ITaskManager"
               LastKnownLocation="DFLink.DesignModel.uml" />
           </interfaceRealization>
+          <dependency
+            Id="a30c3751-55fc-4c58-bd03-9f6ebdfcdebe">
+            <classMoniker
+              Id="aff9b5ea-90da-447f-b798-489bd9c78489"
+              LastKnownName="RequestTask"
+              LastKnownLocation="DFLink.DesignModel.uml" />
+          </dependency>
         </suppliersInternal>
         <targetEnds>
           <association
@@ -1984,7 +2004,7 @@
             </relationshipOwnedElementsInternal>
           </association>
           <association
-            Id="c46dc2c7-16a3-4ea0-8937-5db370e677de"
+            Id="ba0cd008-c6b1-406d-8a8e-67d9943477f7"
             isDerived="false"
             sourceEndRoleName=""
             targetEndRoleName=""
@@ -1997,26 +2017,26 @@
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd
-                  Id="a9b8b7af-489c-43d7-be2a-35a82ba9c50f"
+                  Id="b95a61a8-d121-4900-b756-b56b413368ec"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
                   isDerived="false"
                   isDerivedUnion="false"
-                  aggregation="Shared"
+                  aggregation="Composite"
                   isComposite="false"
                   isNavigableOwned="false" />
               </associationHasOwnedEnds>
               <associationHasOwnedEnds>
                 <memberEnd
-                  Id="9e206932-17b7-4038-873f-89a1ea602494"
+                  Id="0ebd80b4-96e9-49dd-9d33-88f8a6a11454"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
                   isDerived="false"
                   isDerivedUnion="false"
                   aggregation="None"
-                  isComposite="false" />
+                  isComposite="true" />
               </associationHasOwnedEnds>
             </relationshipOwnedElementsInternal>
           </association>
@@ -2192,7 +2212,7 @@
         isActiveClass="false">
         <targetEnds>
           <association
-            Id="345a3710-5855-4a2f-8a7a-caff7a2ea963"
+            Id="af78f3b0-a836-4f37-9462-4282ef061b79"
             isDerived="false"
             sourceEndRoleName=""
             targetEndRoleName=""
@@ -2205,26 +2225,26 @@
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd
-                  Id="8865603b-e550-4295-8d63-f3378ec7ed7e"
+                  Id="202f65bc-dd87-401c-98a8-375eb1db8367"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
                   isDerived="false"
                   isDerivedUnion="false"
-                  aggregation="Shared"
+                  aggregation="Composite"
                   isComposite="false"
                   isNavigableOwned="false" />
               </associationHasOwnedEnds>
               <associationHasOwnedEnds>
                 <memberEnd
-                  Id="a3f689c2-100e-4bd0-97db-bf444a4d7211"
+                  Id="a835f399-0a4f-41e5-8de4-e87ca703a6b3"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
                   isDerived="false"
                   isDerivedUnion="false"
                   aggregation="None"
-                  isComposite="false" />
+                  isComposite="true" />
               </associationHasOwnedEnds>
             </relationshipOwnedElementsInternal>
           </association>
@@ -3011,7 +3031,7 @@
         </suppliersInternal>
         <targetEnds>
           <association
-            Id="b687e57b-8f0a-4ffa-95c8-a3a909c7808f"
+            Id="076e35a9-9bad-4233-b13a-9346a2c1c2be"
             isDerived="false"
             sourceEndRoleName=""
             targetEndRoleName=""
@@ -3024,31 +3044,31 @@
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd
-                  Id="6dc4aee8-b2eb-4f6b-b5db-3565d0b467e7"
+                  Id="be1a5197-f156-4a43-b6e5-ae2b760c7633"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
                   isDerived="false"
                   isDerivedUnion="false"
-                  aggregation="Shared"
+                  aggregation="Composite"
                   isComposite="false"
                   isNavigableOwned="false" />
               </associationHasOwnedEnds>
               <associationHasOwnedEnds>
                 <memberEnd
-                  Id="211dc93e-086f-4624-94b7-87816ff3fe4a"
+                  Id="ad3010aa-51ca-44f5-864b-71ff46c04d49"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
                   isDerived="false"
                   isDerivedUnion="false"
                   aggregation="None"
-                  isComposite="false" />
+                  isComposite="true" />
               </associationHasOwnedEnds>
             </relationshipOwnedElementsInternal>
           </association>
           <association
-            Id="bd3f7b50-a5ed-4bcf-a966-b27101f9c054"
+            Id="fc4ef224-ce8b-4d59-9d5c-7916087ad5aa"
             isDerived="false"
             sourceEndRoleName=""
             targetEndRoleName=""
@@ -3061,26 +3081,26 @@
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd
-                  Id="088eb0b5-7606-4103-b9f7-90696fc8338c"
+                  Id="a699a9e4-dfb8-4ab5-a972-99b1cb60d97f"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
                   isDerived="false"
                   isDerivedUnion="false"
-                  aggregation="Shared"
+                  aggregation="Composite"
                   isComposite="false"
                   isNavigableOwned="false" />
               </associationHasOwnedEnds>
               <associationHasOwnedEnds>
                 <memberEnd
-                  Id="7b2f7fe0-515e-450c-8a65-84daf3b90329"
+                  Id="ab45f4f4-d861-4b95-8c72-bd13e2a323d1"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
                   isDerived="false"
                   isDerivedUnion="false"
                   aggregation="None"
-                  isComposite="false" />
+                  isComposite="true" />
               </associationHasOwnedEnds>
             </relationshipOwnedElementsInternal>
           </association>

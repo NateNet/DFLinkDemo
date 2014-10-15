@@ -1,5 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner" dslVersion="1.0.0.0" Id="a5263052-973f-476d-9861-05bb565455be" name="Controler" linkedPackageId="f023f066-4c53-433f-8180-9814910932a5" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <ownedCommentsInternal>
+    <comment Id="72e18fa0-f7ae-49bb-b628-d0730d4a0832">
+      <elementDefinition Id="8ed5ea98-431e-4f3f-98e7-3c58bdbc7930" />
+      <body>a file:
+app.config
+
+Contains all the Task classes implementating ITask</body>
+      <annotatedElements>
+        <classMoniker Id="394c7dee-d3ff-4d80-b16f-ec779d6f5de0" LastKnownName="TaskFactory" />
+      </annotatedElements>
+    </comment>
+  </ownedCommentsInternal>
   <packagedElements>
     <logicalClassDesignerModelHasTypes>
       <class Id="28141a0f-fedd-4772-9c17-3c5606ca8724" name="TaskManager" isAbstract="false" isLeaf="false" isActiveClass="false">
@@ -9,6 +21,10 @@
             <interfaceMoniker Id="fb7ac4ad-0452-439f-ad05-4be7da5733bf" LastKnownName="ITaskManager" />
             <elementDefinition Id="6de98ccc-65c2-4131-b991-3d6962566b5a" />
           </interfaceRealization>
+          <dependency Id="67415d90-775f-4d24-9fd4-652e65a14971">
+            <classMoniker Id="d1525ab8-50f3-4afc-90c4-a49013c13b59" LastKnownName="RequestTask" />
+            <elementDefinition Id="a30c3751-55fc-4c58-bd03-9f6ebdfcdebe" />
+          </dependency>
         </suppliersInternal>
         <targetEnds>
           <association Id="1d777826-0508-48e0-b792-847a21b1e7fe" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
@@ -47,21 +63,21 @@
             </relationshipOwnedElementsInternal>
             <elementDefinition Id="56386ae3-9d38-40f8-a489-df142664fc7d" />
           </association>
-          <association Id="394612e4-d41f-4982-b251-b6c8b27e2eb6" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
+          <association Id="709f9098-93ed-44d6-9eac-d87156338d3e" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
             <interfaceMoniker Id="c0a8bfce-d7b1-4210-9d31-2edc210de513" LastKnownName="ITaskCreator" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
-                <memberEnd Id="826d1aff-19ba-492b-8b83-d68e09aac021" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
-                  <elementDefinition Id="a9b8b7af-489c-43d7-be2a-35a82ba9c50f" />
+                <memberEnd Id="d85ed613-cc8e-4671-a681-cb01c0c405af" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="b95a61a8-d121-4900-b756-b56b413368ec" />
                 </memberEnd>
               </associationHasOwnedEnds>
               <associationHasOwnedEnds>
-                <memberEnd Id="053b715a-4ea7-4ea8-b6b2-280a5f7452ff" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-                  <elementDefinition Id="9e206932-17b7-4038-873f-89a1ea602494" />
+                <memberEnd Id="89755778-0ddb-48ec-9fb5-6d70163bcd45" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="true">
+                  <elementDefinition Id="0ebd80b4-96e9-49dd-9d33-88f8a6a11454" />
                 </memberEnd>
               </associationHasOwnedEnds>
             </relationshipOwnedElementsInternal>
-            <elementDefinition Id="c46dc2c7-16a3-4ea0-8937-5db370e677de" />
+            <elementDefinition Id="ba0cd008-c6b1-406d-8a8e-67d9943477f7" />
           </association>
         </targetEnds>
         <ownedAttributesInternal>
@@ -155,21 +171,21 @@
       <class Id="2885129c-2d21-4c5e-89f2-297ac00c556a" name="Invoker" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="b82aadb4-9b6a-4624-992b-688bc82f29fd" />
         <targetEnds>
-          <association Id="2f1f2dd5-6dce-4320-aed8-013ac1455c8c" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
+          <association Id="b471a1ae-e065-4f53-aa00-27103db7fc9f" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
             <classMoniker Id="28141a0f-fedd-4772-9c17-3c5606ca8724" LastKnownName="TaskManager" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
-                <memberEnd Id="48fc0143-fa87-4826-a3b5-3bf147f85bd7" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
-                  <elementDefinition Id="8865603b-e550-4295-8d63-f3378ec7ed7e" />
+                <memberEnd Id="6fb61fc9-89c9-4ecd-8a43-3d687246e201" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="202f65bc-dd87-401c-98a8-375eb1db8367" />
                 </memberEnd>
               </associationHasOwnedEnds>
               <associationHasOwnedEnds>
-                <memberEnd Id="6a32d01f-9b6d-4178-b676-a9657985e2a8" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-                  <elementDefinition Id="a3f689c2-100e-4bd0-97db-bf444a4d7211" />
+                <memberEnd Id="88da9b38-eb8f-4e49-9c38-05dc7c1e0206" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="true">
+                  <elementDefinition Id="a835f399-0a4f-41e5-8de4-e87ca703a6b3" />
                 </memberEnd>
               </associationHasOwnedEnds>
             </relationshipOwnedElementsInternal>
-            <elementDefinition Id="345a3710-5855-4a2f-8a7a-caff7a2ea963" />
+            <elementDefinition Id="af78f3b0-a836-4f37-9462-4282ef061b79" />
           </association>
         </targetEnds>
         <ownedAttributesInternal>
@@ -585,37 +601,37 @@
           </interfaceRealization>
         </suppliersInternal>
         <targetEnds>
-          <association Id="4358a236-2a13-4827-aae3-778c5f2a4b30" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
+          <association Id="a96b21ee-1a54-4d03-8f44-775640251c54" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
             <interfaceMoniker Id="02358e54-3060-4293-925f-98cedf338700" LastKnownName="IScheduleFactory" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
-                <memberEnd Id="e7f9a406-92c0-4634-b3d4-4f3225be0bae" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
-                  <elementDefinition Id="6dc4aee8-b2eb-4f6b-b5db-3565d0b467e7" />
+                <memberEnd Id="7674b8ab-24a1-4647-a93f-51964b5589cd" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="be1a5197-f156-4a43-b6e5-ae2b760c7633" />
                 </memberEnd>
               </associationHasOwnedEnds>
               <associationHasOwnedEnds>
-                <memberEnd Id="cd4b4ab0-0088-4d7e-9624-841a43db7cb0" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-                  <elementDefinition Id="211dc93e-086f-4624-94b7-87816ff3fe4a" />
+                <memberEnd Id="ae0e2559-b971-45fb-b308-e7e9bfba4826" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="true">
+                  <elementDefinition Id="ad3010aa-51ca-44f5-864b-71ff46c04d49" />
                 </memberEnd>
               </associationHasOwnedEnds>
             </relationshipOwnedElementsInternal>
-            <elementDefinition Id="b687e57b-8f0a-4ffa-95c8-a3a909c7808f" />
+            <elementDefinition Id="076e35a9-9bad-4233-b13a-9346a2c1c2be" />
           </association>
-          <association Id="c07dec6d-6f44-4dbb-8edf-da1d3eb8c6fe" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
+          <association Id="89a21c88-f19e-41d6-bfc7-efd6ff4fb278" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
             <interfaceMoniker Id="2d0d2ed7-aa76-4a99-83cb-be6e37bd585e" LastKnownName="ITaskFactory" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
-                <memberEnd Id="30114b11-16c8-4208-a332-25dd4915b2ec" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
-                  <elementDefinition Id="088eb0b5-7606-4103-b9f7-90696fc8338c" />
+                <memberEnd Id="a94c3ca7-4336-4ee4-a04f-6bb7b3d67734" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="a699a9e4-dfb8-4ab5-a972-99b1cb60d97f" />
                 </memberEnd>
               </associationHasOwnedEnds>
               <associationHasOwnedEnds>
-                <memberEnd Id="2429c9b2-0b31-4ed8-9a9d-a244a16424cf" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-                  <elementDefinition Id="7b2f7fe0-515e-450c-8a65-84daf3b90329" />
+                <memberEnd Id="70329761-bf5b-49f1-b7db-9d7e928d0e50" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="true">
+                  <elementDefinition Id="ab45f4f4-d861-4b95-8c72-bd13e2a323d1" />
                 </memberEnd>
               </associationHasOwnedEnds>
             </relationshipOwnedElementsInternal>
-            <elementDefinition Id="bd3f7b50-a5ed-4bcf-a966-b27101f9c054" />
+            <elementDefinition Id="fc4ef224-ce8b-4d59-9d5c-7916087ad5aa" />
           </association>
         </targetEnds>
         <ownedOperationsInternal>
