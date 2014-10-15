@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="a5263052-973f-476d-9861-05bb565455be" name="Controler" linkedPackageId="f023f066-4c53-433f-8180-9814910932a5" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner" dslVersion="1.0.0.0" Id="a5263052-973f-476d-9861-05bb565455be" name="Controler" linkedPackageId="f023f066-4c53-433f-8180-9814910932a5" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
   <packagedElements>
     <logicalClassDesignerModelHasTypes>
       <class Id="28141a0f-fedd-4772-9c17-3c5606ca8724" name="TaskManager" isAbstract="false" isLeaf="false" isActiveClass="false">
@@ -196,17 +196,35 @@
     <logicalClassDesignerModelHasTypes>
       <Interface Id="903ec68a-9b8e-49e0-b11f-4de86a309ac0" name="ITask" isAbstract="false" isLeaf="false">
         <elementDefinition Id="0115c51f-90b8-4b65-ac51-6cf642e55377" />
+        <targetEnds>
+          <association Id="e139f494-8c23-4125-ae45-064b0dd7b679" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
+            <interfaceMoniker Id="3268868c-bed7-45b2-84f0-c3c9c4e26be0" LastKnownName="ISchedule" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="c63d81fe-75f7-4a25-8064-a12f6ae755b1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="203a29eb-8a29-404e-ad0b-875be985c6f2" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="bb775aa3-023d-4ed0-83f8-f0a98d86dd7d" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="7f8e7f8c-4685-4ade-8783-854b8b229e50" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="5fd5616a-6d27-4472-8ffc-f152c87d9492" />
+          </association>
+        </targetEnds>
         <ownedAttributes>
-          <property Id="1c5fec0f-3921-418e-9cfd-6f540fb07391" name="Id" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="1c5fec0f-3921-418e-9cfd-6f540fb07391" name="int Id" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="af08c746-849f-4083-a7fc-cf88d28ce442" />
           </property>
-          <property Id="4a417641-9d8d-4fc7-965c-72f6a4646c0f" name="Name" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="4a417641-9d8d-4fc7-965c-72f6a4646c0f" name="string Name" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="ef0d9e10-da47-4383-a58b-1db1eef7a836" />
           </property>
-          <property Id="360c6893-fc49-4793-b2c8-b361917b9a86" name="Description" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="360c6893-fc49-4793-b2c8-b361917b9a86" name="string Description" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="ea414287-7c60-41da-8f44-148c7859b119" />
           </property>
-          <property Id="70a6433b-05c1-44b6-8398-d25cc31e4c47" name="Schedule" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="70a6433b-05c1-44b6-8398-d25cc31e4c47" name="ISchedule Schedule" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="efc87649-88af-4cb6-8010-1f8165eb94a6" />
           </property>
         </ownedAttributes>
@@ -247,34 +265,18 @@
             </relationshipOwnedElementsInternal>
             <elementDefinition Id="76db40c2-9f29-47b3-981a-68494f16df73" />
           </association>
-          <association Id="2ae0131c-656c-4343-89b2-90c1b853caf3" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
-            <interfaceMoniker Id="3268868c-bed7-45b2-84f0-c3c9c4e26be0" LastKnownName="ISchedule" />
-            <relationshipOwnedElementsInternal>
-              <associationHasOwnedEnds>
-                <memberEnd Id="f74af8d3-bc88-41a9-9440-3dea1637b106" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
-                  <elementDefinition Id="1854a26d-4d35-4edb-9d55-78837c6e6b92" />
-                </memberEnd>
-              </associationHasOwnedEnds>
-              <associationHasOwnedEnds>
-                <memberEnd Id="67cc25c0-7892-4140-9eb9-f75c112a8d48" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-                  <elementDefinition Id="6b4184e0-0795-4ec1-9bae-52773e7fd329" />
-                </memberEnd>
-              </associationHasOwnedEnds>
-            </relationshipOwnedElementsInternal>
-            <elementDefinition Id="ec00a798-efbe-4c8a-8e09-5ec76a226be2" />
-          </association>
         </targetEnds>
         <ownedAttributesInternal>
-          <property Id="2128961c-6f0e-4282-a607-e38872960510" name="Description" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="2128961c-6f0e-4282-a607-e38872960510" name="string Description" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="e1099e89-3601-4a02-b9cd-bae23975fa3f" />
           </property>
-          <property Id="78502c06-6bcf-46e1-99b6-945f18ac891e" name="Id" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="78502c06-6bcf-46e1-99b6-945f18ac891e" name="int Id" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="a9d1b1c6-f9d2-4932-a175-5f08ec6af0f2" />
           </property>
-          <property Id="b58395cc-b35a-4422-ac59-0eab0d8d79ae" name="Name" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="b58395cc-b35a-4422-ac59-0eab0d8d79ae" name="string Name" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="f07ef868-d7f4-4448-8a43-f5e0450aac1c" />
           </property>
-          <property Id="9d09a7a4-5880-4f7c-b771-1d540377f0a8" name="Schedule" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="9d09a7a4-5880-4f7c-b771-1d540377f0a8" name="ISchedule Schedule" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="cb76f485-f415-462b-a2ef-577a2ab4f391" />
           </property>
         </ownedAttributesInternal>
@@ -282,7 +284,7 @@
           <operation Id="feb4eba0-c776-4ef7-b5f8-4dec44266005" name="Execute" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="af307e83-b110-4569-9e36-64c4da35d852" />
           </operation>
-          <operation Id="46ddfe00-94e2-4053-b924-45bc93223706" name="MakeTask" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+          <operation Id="46ddfe00-94e2-4053-b924-45bc93223706" name="ITask MakeTask" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="dc492626-d1e4-40fc-8c74-7b5bd3438ebe" />
           </operation>
         </ownedOperationsInternal>
@@ -567,7 +569,7 @@
           </dependency>
         </suppliersInternal>
         <ownedOperations>
-          <operation Id="b82f2b2a-01b4-4e67-b70a-1a51c65c5f2e" name="MakeTask" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+          <operation Id="b82f2b2a-01b4-4e67-b70a-1a51c65c5f2e" name="ITask MakeTask" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="996f3569-1877-4b37-861c-e57c6ae75bca" />
           </operation>
         </ownedOperations>

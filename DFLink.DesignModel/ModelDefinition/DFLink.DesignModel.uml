@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm9="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner"
   dslVersion="1.0.0.0"
   Id="cf2caf21-add9-4e75-808f-9d4dd13e2a7a"
   name="DFLink.DesignModel" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
@@ -2294,10 +2294,49 @@
         name="ITask"
         isAbstract="false"
         isLeaf="false">
+        <targetEnds>
+          <association
+            Id="5fd5616a-6d27-4472-8ffc-f152c87d9492"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName=""
+            isLeaf="false"
+            isAbstract="false">
+            <interfaceMoniker
+              Id="5ec5210c-f5fc-4cf5-85bb-c69cf26c919d"
+              LastKnownName="ISchedule"
+              LastKnownLocation="DFLink.DesignModel.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="203a29eb-8a29-404e-ad0b-875be985c6f2"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Shared"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="7f8e7f8c-4685-4ade-8783-854b8b229e50"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
         <ownedAttributes>
           <property
             Id="af08c746-849f-4083-a7fc-cf88d28ce442"
-            name="Id"
+            name="int Id"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -2308,7 +2347,7 @@
             isComposite="false" />
           <property
             Id="ef0d9e10-da47-4383-a58b-1db1eef7a836"
-            name="Name"
+            name="string Name"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -2319,7 +2358,7 @@
             isComposite="false" />
           <property
             Id="ea414287-7c60-41da-8f44-148c7859b119"
-            name="Description"
+            name="string Description"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -2330,7 +2369,7 @@
             isComposite="false" />
           <property
             Id="efc87649-88af-4cb6-8010-1f8165eb94a6"
-            name="Schedule"
+            name="ISchedule Schedule"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -2413,48 +2452,11 @@
               </associationHasOwnedEnds>
             </relationshipOwnedElementsInternal>
           </association>
-          <association
-            Id="ec00a798-efbe-4c8a-8e09-5ec76a226be2"
-            isDerived="false"
-            sourceEndRoleName=""
-            targetEndRoleName=""
-            isLeaf="false"
-            isAbstract="false">
-            <interfaceMoniker
-              Id="5ec5210c-f5fc-4cf5-85bb-c69cf26c919d"
-              LastKnownName="ISchedule"
-              LastKnownLocation="DFLink.DesignModel.uml" />
-            <relationshipOwnedElementsInternal>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="1854a26d-4d35-4edb-9d55-78837c6e6b92"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="Shared"
-                  isComposite="false"
-                  isNavigableOwned="false" />
-              </associationHasOwnedEnds>
-              <associationHasOwnedEnds>
-                <memberEnd
-                  Id="6b4184e0-0795-4ec1-9bae-52773e7fd329"
-                  isLeaf="false"
-                  isStatic="false"
-                  isReadOnly="false"
-                  isDerived="false"
-                  isDerivedUnion="false"
-                  aggregation="None"
-                  isComposite="false" />
-              </associationHasOwnedEnds>
-            </relationshipOwnedElementsInternal>
-          </association>
         </targetEnds>
         <ownedAttributesInternal>
           <property
             Id="e1099e89-3601-4a02-b9cd-bae23975fa3f"
-            name="Description"
+            name="string Description"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -2465,7 +2467,7 @@
             isComposite="false" />
           <property
             Id="a9d1b1c6-f9d2-4932-a175-5f08ec6af0f2"
-            name="Id"
+            name="int Id"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -2476,7 +2478,7 @@
             isComposite="false" />
           <property
             Id="f07ef868-d7f4-4448-8a43-f5e0450aac1c"
-            name="Name"
+            name="string Name"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -2487,7 +2489,7 @@
             isComposite="false" />
           <property
             Id="cb76f485-f415-462b-a2ef-577a2ab4f391"
-            name="Schedule"
+            name="ISchedule Schedule"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -2508,7 +2510,7 @@
             isQuery="false" />
           <operation
             Id="dc492626-d1e4-40fc-8c74-7b5bd3438ebe"
-            name="MakeTask"
+            name="ITask MakeTask"
             isLeaf="false"
             isStatic="false"
             isAbstract="false"
@@ -2982,7 +2984,7 @@
         <ownedOperations>
           <operation
             Id="996f3569-1877-4b37-861c-e57c6ae75bca"
-            name="MakeTask"
+            name="ITask MakeTask"
             isLeaf="false"
             isStatic="false"
             isAbstract="true"
