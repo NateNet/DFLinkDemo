@@ -6,8 +6,10 @@
 
 namespace Demandforce.DFLink.Logger
 {
+    using System;
     using Listener;
     using log4net;
+    using Newtonsoft.Json;
 
     /// <summary>
     /// TODO: Update summary.
@@ -104,6 +106,33 @@ namespace Demandforce.DFLink.Logger
         {
             ILog logger = LogManager.GetLogger(className);
             MessagePact messagePack = this.GetMessagePack(taskId, details, status);
+            logger.Info(messagePack);
+        }
+
+        /// <summary>
+        /// Report the status to the server
+        /// </summary>
+        /// <typeparam name="P">type of the class</typeparam>
+        /// <param name="className">component's name</param>
+        /// <param name="taskId">task id</param>
+        /// <param name="status">status</param>
+        /// <param name="details">details</param>
+        /// <param name="callFun">a function</param>
+        public void ReportStatus<P>(string className, int taskId, int status, P details, Func<P, string> callFun) where P : class
+        {
+            ILog logger = LogManager.GetLogger(className);
+
+            string s;
+            if (callFun == null)
+            {
+                s = JsonConvert.SerializeObject(details);
+            }
+            else
+            {
+                s = callFun(details);
+            }
+
+            MessagePact messagePack = this.GetMessagePack(taskId, s, status);
             logger.Info(messagePack);
         }
 

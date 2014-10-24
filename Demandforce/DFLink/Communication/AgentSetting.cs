@@ -51,6 +51,11 @@ namespace Demandforce.DFLink.Communication
         /// <summary>
         /// Gets or sets the property
         /// </summary>
+        public static string CommandConfigUpload { get; set; }
+
+        /// <summary>
+        /// Gets or sets the property
+        /// </summary>
         public static string AddressUrl { get; set; }
 
         /// <summary>

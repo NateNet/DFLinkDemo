@@ -4,6 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using System;
 namespace Demandforce.DFLink.Logger
 {
     /// <summary>
@@ -59,5 +60,16 @@ namespace Demandforce.DFLink.Logger
         /// <param name="status">the status</param>
         /// <param name="details">the details of the status</param>
         void ReportStatus(string className, int taskId, int status, string details);
+
+        /// <summary>
+        /// Report the status to the server
+        /// </summary>
+        /// <typeparam name="P">type of the class</typeparam>
+        /// <param name="className">component's name</param>
+        /// <param name="taskId">task id</param>
+        /// <param name="status">status</param>
+        /// <param name="details">details</param>
+        /// <param name="callFun">a function</param>
+        void ReportStatus<P>(string className, int taskId, int status, P details, Func<P, string> callFun) where P : class;
     }
 }
