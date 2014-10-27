@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="CommonClasses">
+  <logicalClassDesignerModelMoniker Id="c0befc13-f042-459b-b6ed-00b8129692a2" />
+  <nestedChildShapes>
+    <classShape Id="8591540d-486c-4d28-a296-dad8ad9c7f0e" absoluteBounds="2.125, 1.25, 2.375, 1.0624999801317849" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
+      <classMoniker Id="6f043e81-b4f1-4bf9-8a1a-70e302314d54" LastKnownName="Downloader" />
+      <nestedChildShapes>
+        <AttributeElementListCompartment Id="d9bc78b2-1305-4027-90af-f20db0765cef" absoluteBounds="2.14, 1.6400000000000001, 2.3449999999999998, 0.2011718675494194" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <OperationElementListCompartment Id="1bfe3d08-9d34-4607-bf68-1359ad696917" absoluteBounds="2.14, 1.8511718675494193, 2.3449999999999998, 0.36132811258236563" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0d63ae69-8b94-45a5-b72b-41be9f4eec58" absoluteBounds="5.75, 1.25, 2.875, 1.2226562251647315" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
+      <classMoniker Id="87174310-4b10-4741-8834-eeb1209be5ea" LastKnownName="MD5Maker" />
+      <nestedChildShapes>
+        <AttributeElementListCompartment Id="1f868e35-401f-421d-b719-e25a03cb0e8c" absoluteBounds="5.765, 1.6400000000000001, 2.8449999999999998, 0.2011718675494194" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <OperationElementListCompartment Id="574817e3-4ac5-4853-8550-d055ed6af429" absoluteBounds="5.765, 1.8511718675494193, 2.8449999999999998, 0.52148435761531187" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</logicalClassDesignerDiagram>

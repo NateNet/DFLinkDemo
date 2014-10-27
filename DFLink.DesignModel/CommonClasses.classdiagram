@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="c0befc13-f042-459b-b6ed-00b8129692a2" name="CommonClasses" linkedPackageId="467ba2a5-ccfc-4c80-829f-f305ed53d1d1" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="f7c79a9e-bc00-4836-922d-88a3181f686f">
+      <profileInstance Id="e6350721-3fdb-4868-aba4-0b8674acd783" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="39c1527b-e1de-43f8-8dd5-cfc25552fbec">
+      <profileInstance Id="2539a883-b4b0-4d16-8327-64e8041e63ac" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="6f043e81-b4f1-4bf9-8a1a-70e302314d54" name="Downloader" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="0bb6e129-0053-4474-bed9-62a095797306" />
+        <ownedOperationsInternal>
+          <operation Id="df631b5a-4d0f-4f2d-9fc1-cada6db82c3d" name="bool Download" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="df2ce852-5988-482e-a713-4a57162c028f" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="eba6cd7d-51c0-48dc-a020-77861bfe0c29" name="url" direction="In" isUnique="false">
+                  <elementDefinition Id="d36cf8c4-9d81-4c3d-8d0b-449201e3aa91" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="e01d3c43-1eb2-49eb-86d2-09b1a4dd3a43" name="filename" direction="In" isUnique="false">
+                  <elementDefinition Id="bc76f414-9942-4da9-9fba-536b3ba53d76" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="87174310-4b10-4741-8834-eeb1209be5ea" name="MD5Maker" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="a4264f06-2af0-4464-adf3-8bd1b2a9392e" />
+        <ownedOperationsInternal>
+          <operation Id="f28fd972-85d1-4c8b-8006-3830c3ff3f2c" name="string GetMD5ForString" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="64ae4235-cf70-43b2-8a43-9ff56083de25" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="db0ab107-9e0c-416b-8dbd-6509fb1f276c" name="string" direction="In" isUnique="false">
+                  <elementDefinition Id="7aa97d5e-3aa6-42c2-b648-9b364d5274ae" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="7c8f74bf-73cb-4c28-8454-f14392599f8c" name="string GetMD5ForFile" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="d7e5cfdc-4e91-4640-a70c-cb0b1ae6ae42" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="2bae254f-a74b-4883-8f38-8d2c1b802a90" name="string fileName" direction="In" isUnique="false">
+                  <elementDefinition Id="e5024ca9-8073-4cb3-9ed5-ec79b3ecf4dc" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+  </packagedElements>
+  <package Id="467ba2a5-ccfc-4c80-829f-f305ed53d1d1" name="DFLink.DesignModel">
+    <elementDefinition Id="cf2caf21-add9-4e75-808f-9d4dd13e2a7a" />
+  </package>
+</logicalClassDesignerModel>

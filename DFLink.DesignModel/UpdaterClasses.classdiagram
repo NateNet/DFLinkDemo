@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="7eb57c75-9b71-4352-9dac-dd3f3572e13c" name="UpdaterClasses" linkedPackageId="0b0dc39d-3bbb-4923-a975-8b21b1ed6b64" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="ce0ee34c-6b28-483c-a08f-6fa8a67dc0c2">
+      <profileInstance Id="cfc4584b-c964-4f8a-8fca-309dad3fca07" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="93b8026c-7b41-4255-94f5-36d53f4256ee">
+      <profileInstance Id="661ab371-9e05-4f19-a057-b3c21276904e" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="9e8b4d22-6d8a-4e36-a438-f2d74cf73773" name="Updater" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="cab82751-8c54-4c0d-9648-d69b6e4892ce" />
+        <suppliersInternal>
+          <interfaceRealization Id="475364de-0bf1-4c80-8d37-0841c922b4a7">
+            <interfaceMoniker Id="619ce54c-3511-4a84-9cde-c2e6fc850b3e" LastKnownName="Itask" />
+            <elementDefinition Id="79e84c71-b866-4c3a-b512-ac7acc16a41d" />
+          </interfaceRealization>
+          <interfaceRealization Id="9f00b757-7d16-4f3c-afe3-659ed786e9ea">
+            <interfaceMoniker Id="79f82971-1b81-402b-933c-bd9e0a3b0356" LastKnownName="ItaskMaker" />
+            <elementDefinition Id="f504c649-5370-479c-a011-190511fb8a50" />
+          </interfaceRealization>
+        </suppliersInternal>
+        <ownedAttributesInternal>
+          <property Id="edea6a85-4115-4c40-b310-2e8ef5ba1506" name="it Id" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="b71115ac-925a-48eb-b3e9-813f76dcd968" />
+          </property>
+          <property Id="377bf77d-2b27-4d26-bbe7-f2ca3070cc17" name="IScheduleSchedule" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="ecb45d73-0040-43fc-bd60-e47ce4203a36" />
+          </property>
+          <property Id="ddd5f1a0-e547-439a-a456-a2d35a3d42e6" name="string Description" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="e8c7bb38-3ca7-4a34-84a5-c059e25ac41f" />
+          </property>
+          <property Id="014d8559-891f-4216-9a5f-4296d3a5fe3e" name="String Name" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="1a3a65d4-f868-4ac5-a872-234051851ea6" />
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation Id="65beffcd-1802-479d-af3f-2df1ed696681" name="void Execute" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="f6285498-a093-4980-9f90-2d7b94646150" />
+          </operation>
+          <operation Id="e39a1048-c6f6-4fff-9fd4-9e846897b3a8" name="ITask MakeTask" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="0e4c3899-9dd7-405e-afc3-2f817bb00ad5" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="974c5b5b-deb0-4edd-bd9b-775e0b1c5466" name="string taskId" direction="In" isUnique="false">
+                  <elementDefinition Id="8fc8e1f6-5c02-434f-8a11-fc02a0906f18" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="b0a08049-1042-4c98-8272-01f62d3eaae0" name="bool Update" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="0c97e41a-e00b-462d-a75b-c77719b3f57b" />
+          </operation>
+          <operation Id="2ad9b0f1-448e-4e5d-8aa3-f8d88ee81bf8" name="string GetFullFileName" visibility="Private" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="51d7e2a3-56e1-49a6-b12c-3da0ab47ffd2" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="028980f1-b831-4d41-9844-c71df5dad92c" name="filePath" direction="In" isUnique="false">
+                  <elementDefinition Id="7a4dcc19-ab51-43c0-b10a-96f9a9759b4e" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="61ca5ba9-df51-445a-84b3-77e34f440ddd" name="fileName" direction="In" isUnique="false">
+                  <elementDefinition Id="dfb88a23-3772-4bbe-9d57-b14bbf84b050" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="bfe636ba-5bbd-40ce-87a5-ec2b712c7ec7" name="XmlDocument CreateXmlForBusiness" visibility="Private" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="fb7f44b7-f1fb-4ad8-9d57-515a02f9fea0" />
+          </operation>
+          <operation Id="e25571ab-7d17-46bb-b118-1b72f45536b7" name="string GetApiNameFromBusiness" visibility="Private" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="e06a6db0-fa43-4a59-b793-72b71f9399ee" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="e1d0e7dc-4405-4c53-983b-796cf3f3e36f" name="XmlDocument doc" direction="In" isUnique="false">
+                  <elementDefinition Id="2a079fea-6ea1-4ea2-a41b-b5c61056f375" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="3a8c46b4-d64b-4053-a24e-e680303b9cef" name="void UpdateCoreComponents" visibility="Private" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="81a1f48f-042e-4d4d-8b50-f56d4af9258a" />
+          </operation>
+          <operation Id="cdd9213d-e23a-4be0-afca-281725088d92" name="void UpdateAPIComponents" visibility="Private" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="6c97ae72-5155-40b5-87fb-764665ec9e72" />
+          </operation>
+          <operation Id="c2a2acd4-8caf-40c3-a179-3cf607ec40d4" name="..." visibility="Private" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="dd7043a2-c7a0-4ffa-b8b6-da8525834467" />
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasPackages>
+      <package Id="3bf1e97f-251c-4065-9010-2aafba74b654" name="Controller">
+        <elementDefinition Id="911c9a99-20cc-4d1a-9a49-d62d26df1e9f" />
+        <packagedElements>
+          <packageHasNamedElement>
+            <Interface Id="619ce54c-3511-4a84-9cde-c2e6fc850b3e" name="Itask" isAbstract="false" isLeaf="false">
+              <elementDefinition Id="a4ca3a33-9472-4c16-b081-1e8dad32e67f" />
+              <ownedAttributes>
+                <property Id="92c740d5-9094-47c4-82b6-318a7be3a4c2" name="int Id" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="2cb83c01-6d94-4f8d-8214-f80a772f3e2d" />
+                </property>
+                <property Id="4ea5b99f-4da7-4658-85dd-8fe33dd616c9" name="string Name" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="45da8928-0f81-4a26-bd24-767794bb9d54" />
+                </property>
+                <property Id="3a442654-a543-48b6-a986-afbffcaa021e" name="string Description" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="452ddf4b-6f1a-4935-819d-8dd7b4d8c8b5" />
+                </property>
+                <property Id="d46f02b5-443f-4ac2-8e0e-1763145c50a1" name="ISchedule Schedule" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="a39bd640-cc4a-49a4-a0d8-21a64a3d71e9" />
+                </property>
+              </ownedAttributes>
+              <ownedOperations>
+                <operation Id="13334d95-477a-4d36-b66f-d3afdfff5bce" name="void Execute" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="3ec5067b-9777-469d-8dae-788c1c072bae" />
+                </operation>
+              </ownedOperations>
+            </Interface>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <Interface Id="79f82971-1b81-402b-933c-bd9e0a3b0356" name="ItaskMaker" isAbstract="false" isLeaf="false">
+              <elementDefinition Id="7080fcbc-c33a-49c9-bda1-01f0dfb53c86" />
+              <suppliersInternal>
+                <dependency Id="df96bc3e-7067-4fb5-ac85-e0d4abf053c1">
+                  <interfaceMoniker Id="619ce54c-3511-4a84-9cde-c2e6fc850b3e" LastKnownName="Itask" />
+                  <elementDefinition Id="f90a244e-2df0-4d41-acc6-314da8128ba5" />
+                </dependency>
+              </suppliersInternal>
+              <ownedOperations>
+                <operation Id="c204baf0-4438-4e5e-90dc-bedad0f7c2ae" name="ITask MakeTask" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+                  <elementDefinition Id="934d2fab-5faa-4631-9c31-f62947cf4ff2" />
+                  <ownedParameters>
+                    <operationHasOwnedParameters>
+                      <parameter Id="7d1141ef-2064-4dea-8ae6-1a589490c444" name="string arguments" direction="In" isUnique="false">
+                        <elementDefinition Id="b0867daf-257a-4dd2-882b-6ba6b53e87b0" />
+                      </parameter>
+                    </operationHasOwnedParameters>
+                  </ownedParameters>
+                </operation>
+              </ownedOperations>
+            </Interface>
+          </packageHasNamedElement>
+        </packagedElements>
+      </package>
+    </logicalClassDesignerModelHasPackages>
+  </packagedElements>
+  <package Id="0b0dc39d-3bbb-4923-a975-8b21b1ed6b64" name="DFLink.DesignModel">
+    <elementDefinition Id="cf2caf21-add9-4e75-808f-9d4dd13e2a7a" />
+  </package>
+</logicalClassDesignerModel>
