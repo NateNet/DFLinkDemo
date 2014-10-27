@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgentUploadFile.cs" />
     <Compile Include="Command\BaseCommand.cs" />
     <Compile Include="Command\BusinessInfo.cs" />
     <Compile Include="Command\DownloadLog.cs" />

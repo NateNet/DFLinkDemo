@@ -15,6 +15,11 @@ namespace Demandforce.DFLink.Communication.Command
     public class UploadFile : BaseCommand
     {
         /// <summary>
+        /// Gets or sets a task id
+        /// </summary>
+        public int TaskId { get; set; }
+
+        /// <summary>
         /// Gets or sets the file name
         /// </summary>
         public string FileName { get; set; }

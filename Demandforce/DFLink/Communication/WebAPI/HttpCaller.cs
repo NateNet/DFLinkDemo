@@ -11,6 +11,17 @@ namespace Demandforce.DFLink.Communication.WebAPI
     using System.Net;
     using System.Text;
 
+    public enum Week
+    {
+        wkMonday,
+        wkTuesday,
+        wkWednesday,
+        wkThurisday,
+        wkFriday,
+        wkSaturday,
+        wkSunday
+    }
+
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
