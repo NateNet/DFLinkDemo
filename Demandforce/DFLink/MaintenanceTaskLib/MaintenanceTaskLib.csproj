@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{86EB13D3-AD5E-4922-BF17-1B21B9E79348}</ProjectGuid>
+    <ProjectGuid>{1D8E0424-FBE3-4FF6-8935-D4BA0E370E98}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Demandforce.DFLink.Common</RootNamespace>
-    <AssemblyName>Common</AssemblyName>
+    <RootNamespace>Demandforce.DFLink.MaintenanceTaskLib</RootNamespace>
+    <AssemblyName>MaintenanceTaskLib</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,11 +40,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants\Constants.cs" />
-    <Compile Include="Downloader.cs" />
-    <Compile Include="Extensions\XElementExtensions.cs" />
-    <Compile Include="MD5Maker.cs" />
+    <Compile Include="FileMaintenance\FileVersionExploreOperationHandler.cs" />
+    <Compile Include="FileMaintenance\FileMaintenanceTask.cs" />
+    <Compile Include="FileMaintenance\FileOperation.cs" />
+    <Compile Include="FileMaintenance\FileOperationHandlerFactory.cs" />
+    <Compile Include="FileMaintenance\FileUploadOperationHandler.cs" />
+    <Compile Include="IOperation.cs" />
+    <Compile Include="IOperationHandler.cs" />
+    <Compile Include="IOperationHandlerFactory.cs" />
+    <Compile Include="LogOperationHandlerDecorator.cs" />
+    <Compile Include="NullOperationHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{86EB13D3-AD5E-4922-BF17-1B21B9E79348}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Communication\Communication.csproj">
+      <Project>{79C22FDA-2296-466D-927B-43930B0D4F2E}</Project>
+      <Name>Communication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Controller\Controller.csproj">
+      <Project>{2AD97B95-A201-4AFE-A57F-4A93957E114F}</Project>
+      <Name>Controller</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Logger\Logger.csproj">
+      <Project>{4B5E4E55-D4D7-490F-888F-A74223618BEE}</Project>
+      <Name>Logger</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
