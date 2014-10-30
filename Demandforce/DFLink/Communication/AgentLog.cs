@@ -1,32 +1,44 @@
-﻿// -----------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="AgentLog.cs" company="Demandforce">
-// TODO: Update copyright text.
+//   Copyright (c) Demandforce. All rights reserved.
 // </copyright>
-// -----------------------------------------------------------------------
-
+// <summary>
+//   TODO: It is a log class to operate all the log command
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 namespace Demandforce.DFLink.Communication
 {
-    using Command;
+    using Demandforce.DFLink.Communication.Command;
 
     /// <summary>
-    /// TODO: It is a log class to operate all the log command
+    ///     TODO: It is a log class to operate all the log command
     /// </summary>
     public class AgentLog
     {
+        #region Static Fields
+
         /// <summary>
-        /// a Singleton instance
+        ///     a Singleton instance
         /// </summary>
         private static readonly AgentLog Instance = new AgentLog();
 
+        #endregion
+
+        #region Constructors and Destructors
+
         /// <summary>
-        /// Prevents a default instance of the <see cref="AgentLog"/> class from being created
+        ///     Prevents a default instance of the <see cref="AgentLog" /> class from being created
         /// </summary>
         private AgentLog()
         {
         }
 
+        #endregion
+
+        #region Public Methods and Operators
+
         /// <summary>
-        /// To get a Singleton object
+        ///     To get a Singleton object
         /// </summary>
         /// <returns>a singleton object</returns>
         public static AgentLog GetStartedInstance()
@@ -37,15 +49,21 @@ namespace Demandforce.DFLink.Communication
         /// <summary>
         /// To get logs with task id
         /// </summary>
-        /// <param name="taskId">it is a task id</param>
-        /// <returns>a string</returns>
+        /// <param name="taskId">
+        /// it is a task id
+        /// </param>
+        /// <returns>
+        /// a string
+        /// </returns>
         public string GetLog(int taskId)
         {
-            DownloadLog downloadLog = new DownloadLog();
-            downloadLog.BusinessCredentials = new BusinessInfo() { LicenseKey = AgentSetting.LicenseId };
+            var downloadLog = new DownloadLog();
+            downloadLog.BusinessCredentials = new BusinessInfo { LicenseKey = AgentSetting.LicenseId };
             downloadLog.TaskId = taskId;
             downloadLog.Request(null);
             return downloadLog.GetTheCallResult();
         }
+
+        #endregion
     }
 }

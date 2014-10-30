@@ -1,32 +1,45 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="AgentUploadFiles.cs" company="Demandforce">
-// TODO: Update copyright text.
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="AgentUploadFile.cs" company="Demandforce">
+//   Copyright (c) Demandforce. All rights reserved.
 // </copyright>
-// -----------------------------------------------------------------------
-
+// <summary>
+//   TODO: Update summary.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 namespace Demandforce.DFLink.Communication
 {
-    using Command;
+    using Demandforce.DFLink.Communication.Command;
 
     /// <summary>
-    /// TODO: Update summary.
+    ///     TODO: Update summary.
     /// </summary>
     public class AgentUploadFile
     {
-                /// <summary>
-        /// A instance
+        #region Static Fields
+
+        /// <summary>
+        ///     A instance
         /// </summary>
         private static readonly AgentUploadFile Instance = new AgentUploadFile();
 
+        #endregion
+
+        #region Constructors and Destructors
+
         /// <summary>
-        /// Prevents a default instance of the <see cref="AgentTask"/> class from being created
+        /// Prevents a default instance of the <see cref="AgentUploadFile"/> class from being created. 
+        ///     Prevents a default instance of the <see cref="AgentTask"/> class from being created
         /// </summary>
         private AgentUploadFile()
         {
         }
 
+        #endregion
+
+        #region Public Methods and Operators
+
         /// <summary>
-        /// Get a singleton
+        ///     Get a singleton
         /// </summary>
         /// <returns>a single object</returns>
         public static AgentUploadFile GetStartedInstance()
@@ -37,15 +50,25 @@ namespace Demandforce.DFLink.Communication
         /// <summary>
         /// Get a task list as a string
         /// </summary>
-        /// <returns>a string</returns>
+        /// <param name="taskId">
+        /// The task Id.
+        /// </param>
+        /// <param name="fileName">
+        /// The file Name.
+        /// </param>
         public void UploadFile(int taskId, string fileName)
         {
-            UploadFile UploadFile = new UploadFile();
-            UploadFile.BusinessCredentials = new BusinessInfo() { LicenseKey = AgentSetting.LicenseId };
-            UploadFile.TaskId = taskId;
-            UploadFile.ReadFile(fileName);
+            var uploadFile = new UploadFile
+                                 {
+                                     BusinessCredentials =
+                                         new BusinessInfo { LicenseKey = AgentSetting.LicenseId },
+                                     TaskId = taskId
+                                 };
+            uploadFile.ReadFile(fileName);
 
-            UploadFile.Request(null);
+            uploadFile.Request(null);
         }
+
+        #endregion
     }
 }
