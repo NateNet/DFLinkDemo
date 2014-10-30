@@ -53,7 +53,7 @@
     <Compile Include="Command\DownloadLog.cs" />
     <Compile Include="Command\DownloadTask.cs" />
     <Compile Include="Command\JsonPack.cs" />
-    <Compile Include="Command\UpdateFile.cs" />
+    <Compile Include="Command\UploadFile.cs" />
     <Compile Include="Command\UpdateLog.cs" />
     <Compile Include="Command\UpdateStatus.cs" />
     <Compile Include="AgentLog.cs" />

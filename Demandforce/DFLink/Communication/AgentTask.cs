@@ -1,32 +1,44 @@
-﻿// -----------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="AgentTask.cs" company="Demandforce">
-// TODO: Update copyright text.
+//   Copyright (c) Demandforce. All rights reserved.
 // </copyright>
-// -----------------------------------------------------------------------
-
+// <summary>
+//   TODO: It is a singleton class to operate all the task command
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 namespace Demandforce.DFLink.Communication
 {
-    using Command;
+    using Demandforce.DFLink.Communication.Command;
 
     /// <summary>
-    /// TODO: It is a singleton class to operate all the task command
+    ///     TODO: It is a singleton class to operate all the task command
     /// </summary>
     public sealed class AgentTask
     {
+        #region Static Fields
+
         /// <summary>
-        /// A instance
+        ///     A instance
         /// </summary>
         private static readonly AgentTask Instance = new AgentTask();
 
+        #endregion
+
+        #region Constructors and Destructors
+
         /// <summary>
-        /// Prevents a default instance of the <see cref="AgentTask"/> class from being created
+        ///     Prevents a default instance of the <see cref="AgentTask" /> class from being created
         /// </summary>
         private AgentTask()
         {
         }
 
+        #endregion
+
+        #region Public Methods and Operators
+
         /// <summary>
-        /// Get a singleton
+        ///     Get a singleton
         /// </summary>
         /// <returns>a single object</returns>
         public static AgentTask GetStartedInstance()
@@ -35,15 +47,17 @@ namespace Demandforce.DFLink.Communication
         }
 
         /// <summary>
-        /// Get a task list as a string
+        ///     Get a task list as a string
         /// </summary>
         /// <returns>a string</returns>
         public string GetTask()
         {
-            DownloadTask downloadTask = new DownloadTask();
-            downloadTask.BusinessCredentials = new BusinessInfo() { LicenseKey = AgentSetting.LicenseId };
+            var downloadTask = new DownloadTask();
+            downloadTask.BusinessCredentials = new BusinessInfo { LicenseKey = AgentSetting.LicenseId };
             downloadTask.Request(null);
             return downloadTask.GetTheCallResult();
         }
+
+        #endregion
     }
 }

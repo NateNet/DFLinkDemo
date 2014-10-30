@@ -1,48 +1,60 @@
-﻿// -----------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="LogInit.cs" company="Demandforce">
-// TODO: Update copyright text.
+//   Copyright (c) Demandforce. All rights reserved.
 // </copyright>
-// -----------------------------------------------------------------------
-
+// <summary>
+//   TODO: initialize the log tool
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 namespace Demandforce.DFLink.Logger
 {
+    using System.IO;
+
+    using log4net.Config;
+
     /// <summary>
-    /// TODO: initialize the log tool
+    ///     TODO: initialize the log tool
     /// </summary>
     public static class LogInit
     {
-        /// <summary>
-        /// True: has been initialized, else hasn't
-        /// </summary>
-        private static bool haveCallInit = false;
+        #region Constructors and Destructors
 
         /// <summary>
-        /// Gets or sets a value indicating whether.
+        /// Initializes static members of the <see cref="LogInit"/> class.
         /// </summary>
-        public static bool HaveCallInit
+        static LogInit()
         {
-            get
-            {
-                return haveCallInit;
-            }
-
-            set
-            {
-                haveCallInit = value;
-            }
+            HaveCallInit = false;
         }
+
+        #endregion
+
+        #region Public Properties
+
+        /// <summary>
+        ///     Gets or sets a value indicating whether.
+        /// </summary>
+        public static bool HaveCallInit { get; set; }
+
+        #endregion
+
+        #region Public Methods and Operators
 
         /// <summary>
         /// initialize the log tool
         /// </summary>
-        /// <param name="logSettingName">log setting name, it is a xml file</param>
+        /// <param name="logSettingName">
+        /// log setting name, it is a xml file
+        /// </param>
         public static void InitLog(string logSettingName)
         {
             if (!HaveCallInit)
             {
                 HaveCallInit = true;
-                log4net.Config.XmlConfigurator.ConfigureAndWatch(new System.IO.FileInfo(logSettingName));
+                XmlConfigurator.ConfigureAndWatch(new FileInfo(logSettingName));
             }
         }
+
+        #endregion
     }
 }

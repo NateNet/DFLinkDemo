@@ -1,45 +1,57 @@
-﻿// -----------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Listener.cs" company="Demandforce">
-// TODO: Update copyright text.
+//   Copyright (c) Demandforce. All rights reserved.
 // </copyright>
-// -----------------------------------------------------------------------
-
+// <summary>
+//   TODO: It a sealed class for listen the log messages.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 namespace Demandforce.DFLink.Communication.Log
 {
-    using System;
     using System.Threading;
-    using Command;
+
+    using Demandforce.DFLink.Communication.Command;
+    using Demandforce.DFLink.Logger.Listener;
     using log4net.Core;
-    using Logger.Listener;
 
     /// <summary>
-    /// TODO: It a sealed class for listen the log messages.
+    ///     TODO: It a sealed class for listen the log messages.
     /// </summary>
     public sealed class Listener
     {
+        #region Static Fields
+
         /// <summary>
-        /// Static field which is be created at the beginning.
+        ///     Static field which is be created at the beginning.
         /// </summary>
         private static readonly Listener Instance = new Listener();
 
+        #endregion
+
+        #region Constructors and Destructors
+
         /// <summary>
-        /// Prevents a default instance of the <see cref="Listener"/> class from being created
+        ///     Prevents a default instance of the <see cref="Listener" /> class from being created
         /// </summary>
         private Listener()
         {
-            AppenderListener.EventLogListen += new EventHandler<LogEventArgs>(this.LogListener);
+            AppenderListener.EventLogListen += this.LogListener;
         }
 
         /// <summary>
-        /// Finalizes an instance of the <see cref="Listener"/> class.
+        ///     Finalizes an instance of the <see cref="Listener" /> class.
         /// </summary>
         ~Listener()
         {
-            AppenderListener.EventLogListen -= new EventHandler<LogEventArgs>(this.LogListener);
+            AppenderListener.EventLogListen -= this.LogListener;
         }
 
+        #endregion
+
+        #region Public Methods and Operators
+
         /// <summary>
-        /// Get the listener.
+        ///     Get the listener.
         /// </summary>
         /// <returns>is a listener</returns>
         public static Listener GetInstance()
@@ -47,21 +59,29 @@ namespace Demandforce.DFLink.Communication.Log
             return Instance;
         }
 
+        #endregion
+
+        #region Methods
+
         /// <summary>
         /// It is a listener
         /// </summary>
-        /// <param name="sender">a sender</param>
-        /// <param name="e">a packed message</param>
+        /// <param name="sender">
+        /// a sender
+        /// </param>
+        /// <param name="e">
+        /// a packed message
+        /// </param>
         private void LogListener(object sender, LogEventArgs e)
         {
             LoggingEvent logEvent = e.LogEvent;
-            MessagePact messagePack = (MessagePact)logEvent.MessageObject;
+            var messagePack = (MessagePact)logEvent.MessageObject;
 
             switch (messagePack.MessageType)
             {
-                case MsgType.mtLog:
-                    UpdateLog updateLog = new UpdateLog();
-                    updateLog.BusinessCredentials = new BusinessInfo() { LicenseKey = AgentSetting.LicenseId };
+                case MsgType.MtLog:
+                    var updateLog = new UpdateLog();
+                    updateLog.BusinessCredentials = new BusinessInfo { LicenseKey = AgentSetting.LicenseId };
                     updateLog.Level = logEvent.Level.ToString();
                     updateLog.Message = messagePack.MessageDetails;
                     updateLog.TaskId = messagePack.TaskId;
@@ -70,9 +90,9 @@ namespace Demandforce.DFLink.Communication.Log
                     ThreadPool.QueueUserWorkItem(updateLog.Request);
 
                     break;
-                case MsgType.mtStatus:
-                    UpdateStatus updateStatus = new UpdateStatus();
-                    updateStatus.BusinessCredentials = new BusinessInfo() { LicenseKey = AgentSetting.LicenseId };
+                case MsgType.MtStatus:
+                    var updateStatus = new UpdateStatus();
+                    updateStatus.BusinessCredentials = new BusinessInfo { LicenseKey = AgentSetting.LicenseId };
                     updateStatus.Status = messagePack.Status;
                     updateStatus.Message = messagePack.MessageDetails;
                     updateStatus.TaskId = messagePack.TaskId;
@@ -82,5 +102,7 @@ namespace Demandforce.DFLink.Communication.Log
                     break;
             }
         }
+
+        #endregion
     }
 }

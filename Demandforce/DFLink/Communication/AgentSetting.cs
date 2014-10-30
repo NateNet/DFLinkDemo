@@ -1,89 +1,111 @@
-﻿// -----------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="AgentSetting.cs" company="Demandforce">
-// TODO: Update copyright text.
+//   Copyright (c) Demandforce. All rights reserved.
 // </copyright>
-// -----------------------------------------------------------------------
-
+// <summary>
+//   TODO: It is a initialization
+//   Before call this module's others function, please initialize this work
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 namespace Demandforce.DFLink.Communication
 {
     using System;
+    using System.IO;
     using System.Reflection;
     using System.Xml;
-    using Log;
-    using WebAPI;
+
+    using Demandforce.DFLink.Communication.Log;
+    using Demandforce.DFLink.Communication.WebAPI;
 
     /// <summary>
-    /// TODO: It is a initialization
-    /// Before call this module's others function, please initialize this work 
+    ///     TODO: It is a initialization
+    ///     Before call this module's others function, please initialize this work
     /// </summary>
     public static class AgentSetting
     {
+        #region Static Fields
+
         /// <summary>
-        /// A factory
+        ///     A factory
         /// </summary>
         private static ICallerFactory callerFactory = new HttpCallerFactory();
 
         /// <summary>
-        /// root of a xml document
+        ///     root of a xml document
         /// </summary>
-        private static XmlNode root = null;
+        private static XmlNode root;
+
+        #endregion
+
+        #region Public Properties
 
         /// <summary>
-        /// Gets or sets the property
-        /// </summary>
-        public static string CommandTaskGet { get; set; }
-
-        /// <summary>
-        /// Gets or sets the property
-        /// </summary>
-        public static string CommandLogUpload { get; set; }
-
-        /// <summary>
-        /// Gets or sets the property
-        /// </summary>
-        public static string CommandLogStatusUpdate { get; set; }
-
-        /// <summary>
-        /// Gets or sets the property
-        /// </summary>
-        public static string CommandLogDownload { get; set; }
-
-        /// <summary>
-        /// Gets or sets the property
-        /// </summary>
-        public static string CommandConfigUpload { get; set; }
-
-        /// <summary>
-        /// Gets or sets the property
+        ///     Gets or sets the property
         /// </summary>
         public static string AddressUrl { get; set; }
 
         /// <summary>
-        /// Gets or sets the property
-        /// </summary>
-        public static string LicenseId { get; set; }
-
-        /// <summary>
-        /// Gets or sets the caller factory
+        ///     Gets or sets the caller factory
         /// </summary>
         public static ICallerFactory CallerFactory
         {
-            get { return callerFactory; }
-            set { callerFactory = value; }
+            get
+            {
+                return callerFactory;
+            }
+
+            set
+            {
+                callerFactory = value;
+            }
         }
 
         /// <summary>
-        /// Initialize the setting
+        ///     Gets or sets the property
+        /// </summary>
+        public static string CommandConfigUpload { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the property
+        /// </summary>
+        public static string CommandLogDownload { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the property
+        /// </summary>
+        public static string CommandLogStatusUpdate { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the property
+        /// </summary>
+        public static string CommandLogUpload { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the property
+        /// </summary>
+        public static string CommandTaskGet { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the property
+        /// </summary>
+        public static string LicenseId { get; set; }
+
+        #endregion
+
+        #region Public Methods and Operators
+
+        /// <summary>
+        ///     Initialize the setting
         /// </summary>
         public static void InitialSetting()
         {
             Listener.GetInstance();
 
-            XmlDocument doc = new XmlDocument();
-            string settingFile = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            settingFile = System.IO.Path.GetDirectoryName(settingFile) + @"\ServerSet.xml";
+            var doc = new XmlDocument();
+            string settingFile = Assembly.GetExecutingAssembly().Location;
+            settingFile = Path.GetDirectoryName(settingFile) + @"\ServerSet.xml";
             doc.Load(settingFile);
-            AgentSetting.root = doc.DocumentElement;
+            root = doc.DocumentElement;
             foreach (XmlNode node in root.ChildNodes)
             {
                 string nodeName = node.Name;
@@ -102,7 +124,7 @@ namespace Demandforce.DFLink.Communication
                         if (int.TryParse(nodeValue, out defaultValue))
                         {
                             info.SetValue(null, defaultValue, null);
-                        }                       
+                        }
                     }
                     else if (t.Equals(typeof(bool)))
                     {
@@ -123,5 +145,7 @@ namespace Demandforce.DFLink.Communication
                 }
             }
         }
+
+        #endregion
     }
 }
