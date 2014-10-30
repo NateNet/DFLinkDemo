@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="IOperationHandlerFactory.cs" company="Demandforce">
-//  Demandforce 
+//  Copyright (c) Demandforce. All rights reserved.
 // </copyright>
 // <summary>
 //   TODO: Update summary.
@@ -9,8 +9,6 @@
 
 namespace Demandforce.DFLink.MaintenanceTaskLib
 {
-    using Demandforce.DFLink.MaintenanceTaskLib.FileMaintenance;
-
     /// <summary>
     /// TODO: Update summary.
     /// </summary>

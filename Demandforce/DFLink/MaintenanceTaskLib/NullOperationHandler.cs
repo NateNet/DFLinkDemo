@@ -1,8 +1,11 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="NullOperationHandler.cs" company="">
-// TODO: Update copyright text.
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="NullOperationHandler.cs" company="Demandforce">
+//  Copyright (c) Demandforce. All rights reserved.
 // </copyright>
-// -----------------------------------------------------------------------
+// <summary>
+//   TODO: Update summary.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Demandforce.DFLink.MaintenanceTaskLib
 {
