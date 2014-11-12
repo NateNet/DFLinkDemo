@@ -45,6 +45,21 @@ namespace Demandforce.DFLink.Communication
         public static string AddressUrl { get; set; }
 
         /// <summary>
+        /// Gets or sets the URL for socket
+        /// </summary>
+        public static string SocketIp { get; set; }
+
+        /// <summary>
+        /// Gets or sets the port for socket
+        /// </summary>
+        public static int SocketPort { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to keep the connection alive
+        /// </summary>
+        public static bool SocketBeat { get; set; }
+
+        /// <summary>
         ///     Gets or sets the caller factory
         /// </summary>
         public static ICallerFactory CallerFactory
@@ -128,7 +143,7 @@ namespace Demandforce.DFLink.Communication
                     }
                     else if (t.Equals(typeof(bool)))
                     {
-                        bool defaultValue = true;
+                        bool defaultValue = false;
                         if (bool.TryParse(nodeValue, out defaultValue))
                         {
                             info.SetValue(null, defaultValue, null);
