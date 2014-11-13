@@ -37,9 +37,30 @@ namespace Demandforce.DFLink.Communication
         private PushManager()
         {
             ISocketListener listener = TcpclientListener.GetListener();
-            listener.RegisterDataCallback(r => this.EventDataComming(r));
-            listener.RegisterConnectedCallback(r => this.EventConnected(r));
-            listener.RegisterDisconnectedCallBack(r => this.EventDisconnected(r));
+            listener.RegisterDataCallback(
+                r =>
+                    {
+                        if (this.EventDataComming != null)
+                        {
+                            this.EventDataComming(r);
+                        }
+                    });
+            listener.RegisterConnectedCallback(
+                r =>
+                    {
+                        if (this.EventConnected != null)
+                        {
+                            this.EventConnected(r);
+                        }
+                    });
+            listener.RegisterDisconnectedCallBack(
+                r =>
+                    {
+                        if (this.EventDisconnected != null)
+                        {
+                            this.EventDisconnected(r);
+                        }
+                    });
         }
 
         #endregion
