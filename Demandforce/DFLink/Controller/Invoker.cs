@@ -42,7 +42,7 @@ namespace Demandforce.DFLink.Controller
         /// <summary>
         /// if nothing is scheduled the timer sleeps for a maximum of 1 minute.
         /// </summary>
-        private TimeSpan maxInterval = new TimeSpan(0, 1, 0);
+        /// private TimeSpan MaxInterval = new TimeSpan(0, 0, 10);
 
         /// <summary>
         /// It determines the method used to store the last event fire time.  It defaults to keeping it in memory.
@@ -77,6 +77,11 @@ namespace Demandforce.DFLink.Controller
         /// </summary>
         /// <param name="task">The task</param>
         private delegate void ExecuteHandler(ITask task);
+
+        /// <summary>
+        /// Gets or sets the max interval.
+        /// </summary>
+        public TimeSpan MaxInterval { get; set; }
 
         /// <summary>
         /// Begins executing all assigned tasks
@@ -175,10 +180,10 @@ namespace Demandforce.DFLink.Controller
             TimeSpan interval = this.NextRunTime(thisTime) - thisTime;
 
             // for real time schedule, next time may be less than this time
-            if ((interval > this.maxInterval) |
+            if ((interval > this.MaxInterval) |
                 (interval.TotalMilliseconds < 0))  
             {
-                interval = this.maxInterval;
+                interval = this.MaxInterval;
             }
 
             // Handles the case of 0 wait time, the interval property requires a duration > 0.

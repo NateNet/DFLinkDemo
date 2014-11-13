@@ -13,6 +13,7 @@ namespace Demandforce.DFLink.Controller
     using Demandforce.DFLink.Common.Extensions;
     using Demandforce.DFLink.Communication;
     using Demandforce.DFLink.Controller.Task;
+    using Demandforce.DFLink.ExceptionHandling.Logging.ExceptionHandleWrapper;
     using Demandforce.DFLink.Logger;
 
     /// <summary>
@@ -26,15 +27,24 @@ namespace Demandforce.DFLink.Controller
         private readonly ITaskCreator taskCreator;
 
         /// <summary>
+        /// The exception policy.
+        /// </summary>
+        private readonly IExceptionPolicy exceptionPolicy;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="TaskManager"/> class.
         /// </summary>
         /// <param name="taskCreator">
         /// The task Creator, which is create task with its schedule
         /// </param>
-        public TaskManager(ITaskCreator taskCreator)
+        /// <param name="exceptionPolicy">
+        /// The exception Policy.
+        /// </param>
+        public TaskManager(ITaskCreator taskCreator, IExceptionPolicy exceptionPolicy)
         {
             this.Tasks = new ConcurrentDictionary<int, ITask>();
             this.taskCreator = taskCreator;
+            this.exceptionPolicy = exceptionPolicy;
         }
 
         /// <summary>
@@ -43,19 +53,84 @@ namespace Demandforce.DFLink.Controller
         public ConcurrentDictionary<int, ITask> Tasks { get; set; }
 
         /// <summary>
-        /// The initialize task, that is to create request task with 
-        /// simple interval schedule. the interval is 1 minute
+        /// Gets or sets the mode.
+        /// </summary>
+        public RequestTaskMode Mode { get; set; }
+
+        /// <summary>
+        /// The initialize task.
         /// </summary>
         public void InitializeTask()
         {
-            var initialTask =
-                "<Task><Id>0</Id><Name>Request</Name>"
-                + "<Schedule><Type>SimpleIntervalSchedule</Type></Schedule>" 
-                + "</Task>";
-            var task = this.taskCreator.Creator(initialTask);
-            ((RequestTask)task).TaskManager = this;
-            this.AddTask(task);
+            // initialize the communication setting
+             AgentSetting.InitialSetting();
+            if (this.Mode == RequestTaskMode.Pull)
+            {
+                this.InitializeRequestTask(
+                    TaskAction.Update.ToString(),
+                    "SimpleIntervalSchedule");
+            }
+            else
+            {
+                PushManager.GetInstance().EventDataComming += this.NotifyHandler;
+            }
         }
+
+        /// <summary>
+        /// The initialize task, that is to create request task with 
+        /// simple interval schedule. the interval is 1 minute.
+        /// or create real time schedule according to server message.
+        /// </summary>
+        /// <param name="action">
+        /// The Action include create or update due to different request way.
+        /// if request mode is pull, action is just create, if mix, action is 
+        /// update.
+        /// </param>
+        /// <param name="scheduleTypeName">
+        /// The schedule Type Name.
+        /// </param>
+        public void InitializeRequestTask(string action, string scheduleTypeName)
+        {
+            string initialTask = string.Format(
+                "<Task><Action>{0}</Action><Id>0</Id><Name>Request</Name>"
+                + "<Schedule><Type>{1}</Type></Schedule></Task>",
+                action,
+                scheduleTypeName);
+            this.ParseTasks(initialTask);
+            //var task = this.taskCreator.Creator(initialTask);
+            //((RequestTask)task).TaskManager = this;
+            //this.AddTask(task);
+        }
+
+        /// <summary>
+        /// The notify handler, which handler server 
+        /// notification what are some task need to be handler by client.
+        /// </summary>
+        /// <param name="message">
+        /// The message.
+        /// </param>
+        public void NotifyHandler(string message)
+        {
+            LogHelper.GetLoggerHandle().Debug(
+                "TaskManager",
+                0,
+                "The message from server:" + message);
+
+            // Mix represents server notify there is task,
+            // still need api to get task list, otherwise, Server
+            // push task list here
+            if (this.Mode == RequestTaskMode.Mix)
+            {
+                this.InitializeRequestTask(
+                    TaskAction.Update.ToString(), 
+                    "RealTimeSchedule");
+            }
+            else
+            {
+                this.ParseTasks(message);
+            }
+        }
+
 
         /// <summary>
         /// Request tasks xml from server
@@ -67,7 +142,6 @@ namespace Demandforce.DFLink.Controller
         {
              // it is for test
              // var taskxml = XDocument.Load(@"F:\DFLinkReload\TaskXML.xml");
-             AgentSetting.InitialSetting();
              var taskxml = AgentTask.GetStartedInstance().GetTask();
              return taskxml;
         }
@@ -83,7 +157,7 @@ namespace Demandforce.DFLink.Controller
             LogHelper.GetLoggerHandle().Debug(
                 "TaskManager", 
                 0, 
-                "The current task list:" + doc.Root.GetFormatXml());
+                "The task list:" + doc.Root.GetFormatXml());
 
             var tasks = from taskItem in doc.Descendants("Task") 
                         select new
@@ -96,8 +170,19 @@ namespace Demandforce.DFLink.Controller
             // Create the task instance and operate task in the current list
             foreach (var taskItem in tasks)
             {
-                ITask task = this.taskCreator.Creator(taskItem.Argument);
-                this.OperateTask(taskItem.Action, task);
+                try
+                {
+                    ITask task = this.taskCreator.Creator(taskItem.Argument);
+                    this.OperateTask(taskItem.Action, task);
+                }
+                catch (Exception ex)
+                {
+                    bool rethrow = this.exceptionPolicy.HandlerException(ex, "Default Policy");
+                    if (rethrow)
+                    {
+                        throw;
+                    }
+                }
             }
         }
 

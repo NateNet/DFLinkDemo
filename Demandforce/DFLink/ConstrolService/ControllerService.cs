@@ -6,13 +6,17 @@
 
 namespace Demandforce.DFLink.ConstrolService
 {
+    using System;
+    using System.Configuration;
     using System.ServiceProcess;
 
-    using Castle.Windsor;
-    using Castle.Windsor.Installer;
 
     using Demandforce.DFLink.Controller;
+    using Demandforce.DFLink.Controller.Task;
+    using Demandforce.DFLink.ControlService;
     using Demandforce.DFLink.Logger;
+
+    using Microsoft.Practices.Unity;
 
     /// <summary>
     /// The controller service.
@@ -22,7 +26,7 @@ namespace Demandforce.DFLink.ConstrolService
         /// <summary>
         /// The container.
         /// </summary>
-        private IWindsorContainer container;
+        private IUnityContainer container;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ControllerService"/> class.
@@ -30,8 +34,9 @@ namespace Demandforce.DFLink.ConstrolService
         public ControllerService()
         {
             this.InitializeComponent();
-            this.container = new WindsorContainer();
-            this.container.Install(FromAssembly.This());
+            this.container = new UnityContainer();
+            Installers installers = new Installers(this.container);
+            installers.Install();
         }
 
         /// <summary>
@@ -46,8 +51,14 @@ namespace Demandforce.DFLink.ConstrolService
             logSettingName = System.IO.Path.GetDirectoryName(logSettingName) + @"\log4net.Setting.xml";
             LogInit.InitLog(logSettingName);
             var taskManager = this.container.Resolve<ITaskManager>();
+            ((TaskManager)taskManager).Mode =
+                (RequestTaskMode)
+                Enum.Parse(typeof(RequestTaskMode), ConfigurationManager.AppSettings["RequestTaskMode"]);
             ((TaskManager)taskManager).InitializeTask();
             var invoker = new Invoker((TaskManager)taskManager);
+            invoker.MaxInterval = new TimeSpan(
+                int.Parse(ConfigurationManager.AppSettings["MaxInvokerInterval"])
+                                  * TimeSpan.TicksPerSecond);
             invoker.Start();
         }
 

@@ -6,30 +6,46 @@
 
 namespace Demandforce.DFLink.ControlService
 {
-    using Castle.MicroKernel.Registration;
+    using Demandforce.DFLink.Controller;
+    using Demandforce.DFLink.Controller.Schedule;
+    using Demandforce.DFLink.Controller.Task;
+    using Demandforce.DFLink.ExceptionHandling.Logging.ExceptionHandleWrapper;
+
+    using Microsoft.Practices.Unity;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class Installers : IWindsorInstaller
+    public class Installers 
     {
         /// <summary>
-        /// The install.
+        /// The container.
+        /// </summary>
+        private IUnityContainer container;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Installers"/> class.
         /// </summary>
         /// <param name="container">
         /// The container.
         /// </param>
-        /// <param name="store">
-        /// The store.
-        /// </param>
-        public void Install(
-            Castle.Windsor.IWindsorContainer container,
-            Castle.MicroKernel.SubSystems.Configuration.IConfigurationStore store)
+        public Installers(IUnityContainer container)
         {
-             container.Register(
-                 Classes.FromAssemblyNamed("Controller")
-                 .Pick()
-                 .WithService.AllInterfaces());
+            this.container = container;
+        }
+
+        /// <summary>
+        /// The install to register type.
+        /// </summary>
+        public void Install()
+        {
+            this.container.RegisterType<ITaskManager, TaskManager>();
+            this.container.RegisterType<ITaskCreator, DefaultTaskCreator>();
+            this.container
+                .RegisterType<IExceptionPolicy, ExceptionPolicyWrapper>();
+            this.container.RegisterType<ITaskFactory, TaskFactory>();
+            this.container.RegisterType<IScheduleFactory, ScheduleFactory>();
+
         }
     }
 }
