@@ -90,6 +90,13 @@ namespace Demandforce.DFLink.Communication.Socket
         private TcpclientListener()
         {
             this.AsynConnectServer();
+
+            if (AgentSetting.SocketBeat)
+            {
+                this.connectBeat = new Thread(this.Beat);
+                this.connectBeat.IsBackground = true;
+                this.connectBeat.Start();
+            }
         }
 
         /// <summary>
@@ -167,13 +174,6 @@ namespace Demandforce.DFLink.Communication.Socket
             this.connectThread = new Thread(this.Connect);
             this.connectThread.IsBackground = true;
             this.connectThread.Start();
-
-            if (AgentSetting.SocketBeat)
-            {
-                this.connectBeat = new Thread(this.Beat);
-                this.connectBeat.IsBackground = true;
-                this.connectBeat.Start();
-            }
         }
 
 
@@ -258,10 +258,10 @@ namespace Demandforce.DFLink.Communication.Socket
 
                     if ((this.tcp != null) && this.tcp.Connected)
                     {
-                        this.workStream = this.tcp.GetStream();
-                        this.SendLicense();
-                        this.DoConnectedCallback(AgentSetting.SocketIp + ":" + AgentSetting.SocketPort);
+                        this.workStream = this.tcp.GetStream();                       
                         this.AsyncRead(this.tcp);
+                        this.DoConnectedCallback(AgentSetting.SocketIp + ":" + AgentSetting.SocketPort);
+                        this.SendLicense();
                     }
                     else
                     {
