@@ -33,7 +33,7 @@ namespace Demandforce.DFLink.Communication
         /// <summary>
         /// The UI context.
         /// </summary>
-        private readonly SynchronizationContext uiContext = SynchronizationContext.Current;
+        private readonly SynchronizationContext uiContext = new SynchronizationContext();
 
         /// <summary>
         /// The timer.
@@ -109,7 +109,7 @@ namespace Demandforce.DFLink.Communication
         /// <summary>
         /// The start.
         /// </summary>
-        public static void Start()
+        public void Start()
         {
             client.Connect();
         }

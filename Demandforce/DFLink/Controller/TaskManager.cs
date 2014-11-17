@@ -72,7 +72,9 @@ namespace Demandforce.DFLink.Controller
             }
             else
             {
-                PushManager.GetInstance().EventDataComming += this.NotifyHandler;
+                var manager = PushManager.GetInstance();
+                manager.EventDataComming += this.NotifyHandler;
+                manager.Start();
             }
         }
 
