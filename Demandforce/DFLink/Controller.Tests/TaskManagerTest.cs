@@ -9,11 +9,13 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace Demandforce.DFLink.Controller.Tests
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
     using Demandforce.DFLink.Controller;
     using Demandforce.DFLink.Controller.Task;
+    using Demandforce.DFLink.ExceptionHandling.Logging.ExceptionHandleWrapper;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -26,11 +28,23 @@ namespace Demandforce.DFLink.Controller.Tests
     [TestClass()]
     public class TaskManagerTest
     {
+        private Mock<IExceptionPolicy> mockExceptionPolicy;
+
         /// <summary>
         /// Gets or sets the test context which provides
         /// information about and functionality for the current test run.
         /// </summary>
         public TestContext TestContext { get; set; }
+
+        [TestInitialize()]
+        public void MyTestInitialize()
+        {
+            mockExceptionPolicy = new Mock<IExceptionPolicy>();
+            mockExceptionPolicy.Setup(
+                m => m.HandlerException(
+                    It.IsAny<Exception>(), It.IsAny<string>()))
+                    .Returns(true);
+        }
 
         /// <summary>
         /// A test for ParseTasks
@@ -43,7 +57,9 @@ namespace Demandforce.DFLink.Controller.Tests
             var mockUpdateTask = new Moq.Mock<ITask>();
             mockTaskCreator.Setup(ct => ct.Creator(It.IsAny<string>()))
                 .Returns(mockUpdateTask.Object);
-            var target = new TaskManager(mockTaskCreator.Object);
+            var target = new TaskManager(
+                mockTaskCreator.Object,
+                this.mockExceptionPolicy.Object);
 
             // this set is not complete, it ignores the content for TaskCreator.
             const string Taskxml =
@@ -68,7 +84,9 @@ namespace Demandforce.DFLink.Controller.Tests
             mockUpdateTask.SetupGet(x => x.Id).Returns(2);
             mockTaskCreator.Setup(ct => ct.Creator(It.IsAny<string>()))
                 .Returns(mockUpdateTask.Object);
-            var target = new TaskManager(mockTaskCreator.Object);
+            var target = new TaskManager(
+                mockTaskCreator.Object, 
+                this.mockExceptionPolicy.Object);
 
             // this set is not complete, it ignores the content for TaskCreator. execute 
             // create first
@@ -112,7 +130,9 @@ namespace Demandforce.DFLink.Controller.Tests
                                              });
             mockTaskCreator.Setup(
                 ct => ct.Creator(It.IsAny<string>())).Returns(tasks.Dequeue);
-            var target = new TaskManager(mockTaskCreator.Object);
+            var target = new TaskManager(
+                mockTaskCreator.Object, 
+                this.mockExceptionPolicy.Object);
 
             // create tasks first
             var taskxml = "<Tasks>" 

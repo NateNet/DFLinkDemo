@@ -60,6 +60,7 @@
     <Compile Include="Task\RequestTask.cs" />
     <Compile Include="Schedule\ScheduleFactory.cs" />
     <Compile Include="Schedule\SimpleIntervalSchedule.cs" />
+    <Compile Include="Task\RequestTaskMode.cs" />
     <Compile Include="Task\TaskAction.cs" />
     <Compile Include="Task\TaskFactory.cs" />
     <Compile Include="TaskManager.cs" />
@@ -72,6 +73,10 @@
     <ProjectReference Include="..\Communication\Communication.csproj">
       <Project>{79C22FDA-2296-466D-927B-43930B0D4F2E}</Project>
       <Name>Communication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExceptionHandlingController\ExceptionHandlingController.csproj">
+      <Project>{EC311AD3-0A26-4808-901B-A983E97E5790}</Project>
+      <Name>ExceptionHandlingController</Name>
     </ProjectReference>
     <ProjectReference Include="..\Logger\Logger.csproj">
       <Project>{4B5E4E55-D4D7-490F-888F-A74223618BEE}</Project>
