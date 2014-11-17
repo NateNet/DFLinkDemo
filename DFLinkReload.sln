@@ -36,6 +36,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaintenanceTaskLib", "Deman
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaintenanceTaskLib.Tests", "Demandforce\DFLink\MaintenanceTaskLib.Tests\MaintenanceTaskLib.Tests.csproj", "{B9AB476D-4767-46EC-B3DD-D8A66B93A938}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommunicationtTestForm", "..\CommunicationTestForm\CommunicationtTestForm.csproj", "{969E73A4-2F32-4C5F-873C-9261FE09438D}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = DFLinkReload.vsmdi
@@ -189,6 +191,16 @@ Global
 		{B9AB476D-4767-46EC-B3DD-D8A66B93A938}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{B9AB476D-4767-46EC-B3DD-D8A66B93A938}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{B9AB476D-4767-46EC-B3DD-D8A66B93A938}.Release|x86.ActiveCfg = Release|Any CPU
+		{969E73A4-2F32-4C5F-873C-9261FE09438D}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{969E73A4-2F32-4C5F-873C-9261FE09438D}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{969E73A4-2F32-4C5F-873C-9261FE09438D}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{969E73A4-2F32-4C5F-873C-9261FE09438D}.Debug|x86.ActiveCfg = Debug|x86
+		{969E73A4-2F32-4C5F-873C-9261FE09438D}.Debug|x86.Build.0 = Debug|x86
+		{969E73A4-2F32-4C5F-873C-9261FE09438D}.Release|Any CPU.ActiveCfg = Release|x86
+		{969E73A4-2F32-4C5F-873C-9261FE09438D}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{969E73A4-2F32-4C5F-873C-9261FE09438D}.Release|Mixed Platforms.Build.0 = Release|x86
+		{969E73A4-2F32-4C5F-873C-9261FE09438D}.Release|x86.ActiveCfg = Release|x86
+		{969E73A4-2F32-4C5F-873C-9261FE09438D}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
