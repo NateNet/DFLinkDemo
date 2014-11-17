@@ -36,7 +36,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaintenanceTaskLib", "Deman
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaintenanceTaskLib.Tests", "Demandforce\DFLink\MaintenanceTaskLib.Tests\MaintenanceTaskLib.Tests.csproj", "{B9AB476D-4767-46EC-B3DD-D8A66B93A938}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommunicationtTestForm", "..\CommunicationTestForm\CommunicationtTestForm.csproj", "{969E73A4-2F32-4C5F-873C-9261FE09438D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExceptionHandlingController", "Demandforce\DFLink\ExceptionHandlingController\ExceptionHandlingController.csproj", "{EC311AD3-0A26-4808-901B-A983E97E5790}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
@@ -191,18 +191,21 @@ Global
 		{B9AB476D-4767-46EC-B3DD-D8A66B93A938}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{B9AB476D-4767-46EC-B3DD-D8A66B93A938}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{B9AB476D-4767-46EC-B3DD-D8A66B93A938}.Release|x86.ActiveCfg = Release|Any CPU
-		{969E73A4-2F32-4C5F-873C-9261FE09438D}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{969E73A4-2F32-4C5F-873C-9261FE09438D}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{969E73A4-2F32-4C5F-873C-9261FE09438D}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{969E73A4-2F32-4C5F-873C-9261FE09438D}.Debug|x86.ActiveCfg = Debug|x86
-		{969E73A4-2F32-4C5F-873C-9261FE09438D}.Debug|x86.Build.0 = Debug|x86
-		{969E73A4-2F32-4C5F-873C-9261FE09438D}.Release|Any CPU.ActiveCfg = Release|x86
-		{969E73A4-2F32-4C5F-873C-9261FE09438D}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{969E73A4-2F32-4C5F-873C-9261FE09438D}.Release|Mixed Platforms.Build.0 = Release|x86
-		{969E73A4-2F32-4C5F-873C-9261FE09438D}.Release|x86.ActiveCfg = Release|x86
-		{969E73A4-2F32-4C5F-873C-9261FE09438D}.Release|x86.Build.0 = Release|x86
+		{EC311AD3-0A26-4808-901B-A983E97E5790}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC311AD3-0A26-4808-901B-A983E97E5790}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC311AD3-0A26-4808-901B-A983E97E5790}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{EC311AD3-0A26-4808-901B-A983E97E5790}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{EC311AD3-0A26-4808-901B-A983E97E5790}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EC311AD3-0A26-4808-901B-A983E97E5790}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC311AD3-0A26-4808-901B-A983E97E5790}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC311AD3-0A26-4808-901B-A983E97E5790}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{EC311AD3-0A26-4808-901B-A983E97E5790}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{EC311AD3-0A26-4808-901B-A983E97E5790}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35;packages\Unity.Interception.2.1.505.0\lib\NET35;packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35;packages\EnterpriseLibrary.ExceptionHandling.5.0.505.0\lib\NET35
 	EndGlobalSection
 EndGlobal
