@@ -6,13 +6,14 @@
 //   The state object.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace Demandforce.DFLink.Communication.Socket
 {
     using System.Net.Sockets;
     using System.Text;
 
     /// <summary>
-    ///     The state object.
+    /// The state object.
     /// </summary>
     internal class StateObject
     {
@@ -25,35 +26,44 @@ namespace Demandforce.DFLink.Communication.Socket
 
         #endregion
 
-        #region Constructors and Destructors
+        #region Fields
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="StateObject"/> class.
+        /// The buffer.
         /// </summary>
-        public StateObject()
+        private readonly byte[] buffer = new byte[BufferSize];
+
+        /// <summary>
+        /// Gets the buffer.
+        /// </summary>
+        public byte[] Buffer
         {
-            this.Buffer = new byte[BufferSize];
-            this.TotalBytesRead = 0;
+            get
+            {
+                return this.buffer;
+            }
         }
 
-        #endregion
-
-        #region Public Properties
-
         /// <summary>
-        ///     Gets buffer
-        /// </summary>
-        public byte[] Buffer { get; private set; }
-
-        /// <summary>
-        /// Gets or sets Client
+        /// Gets or sets the client.
         /// </summary>
         public TcpClient Client { get; set; }
 
         /// <summary>
-        /// Gets or sets the read type
+        /// The message buffer.
         /// </summary>
-        public string ReadType { get; set; }
+        private readonly StringBuilder messageBuffer = new StringBuilder();
+
+        /// <summary>
+        /// Gets the message buffer.
+        /// </summary>
+        public StringBuilder MessageBuffer
+        {
+            get
+            {
+                return this.messageBuffer;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the total bytes read.

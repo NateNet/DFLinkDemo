@@ -10,7 +10,7 @@
 namespace Demandforce.DFLink.Communication
 {
     using System;
-
+    using System.Threading;
     using Demandforce.DFLink.Communication.Socket;
 
     /// <summary>
@@ -25,7 +25,20 @@ namespace Demandforce.DFLink.Communication
         /// </summary>
         private static readonly PushManager Instance = new PushManager();
 
-        //private static ISocketListener listener;
+        /// <summary>
+        /// The client.
+        /// </summary>
+        private static ClientTcp client;
+
+        /// <summary>
+        /// The UI context.
+        /// </summary>
+        private readonly SynchronizationContext uiContext = new SynchronizationContext();
+
+        /// <summary>
+        /// The timer.
+        /// </summary>
+        private Timer timer;
 
         #endregion
 
@@ -36,31 +49,17 @@ namespace Demandforce.DFLink.Communication
         /// </summary>
         private PushManager()
         {
-            ISocketListener listener = TcpclientListener.GetListener();
-            listener.RegisterDataCallback(
-                r =>
-                    {
-                        if (this.EventDataComming != null)
-                        {
-                            this.EventDataComming(r);
-                        }
-                    });
-            listener.RegisterConnectedCallback(
-                r =>
-                    {
-                        if (this.EventConnected != null)
-                        {
-                            this.EventConnected(r);
-                        }
-                    });
-            listener.RegisterDisconnectedCallBack(
-                r =>
-                    {
-                        if (this.EventDisconnected != null)
-                        {
-                            this.EventDisconnected(r);
-                        }
-                    });
+            client = new ClientTcp
+            {
+                License = AgentSetting.LicenseId,
+                RemoteIp = AgentSetting.SocketIp,
+                RemotePort = AgentSetting.SocketPort,
+                OnGetData = msg => this.SynchonizeRunEvent(this.EventDataComming, msg),
+                OnConnecting = msg => this.SynchonizeRunEvent(this.EventConnecting, msg),
+                OnConnected = msg => this.SynchonizeRunEvent(this.EventConnected, msg),
+                OnDisconnected = msg => this.SynchonizeRunEvent(this.EventDisconnected, msg),
+                OnReadError = msg => this.SynchonizeRunEvent(this.EventReadError, msg)
+            };
         }
 
         #endregion
@@ -82,6 +81,16 @@ namespace Demandforce.DFLink.Communication
         /// </summary>
         public event Action<string> EventDisconnected;
 
+        /// <summary>
+        /// When begin connecting call this event
+        /// </summary>
+        public event Action<string> EventConnecting;
+
+        /// <summary>
+        /// The event read error.
+        /// </summary>
+        public event Action<string> EventReadError;
+
         #endregion
 
         #region Public Methods and Operators
@@ -95,6 +104,75 @@ namespace Demandforce.DFLink.Communication
         public static PushManager GetInstance()
         {
             return Instance;
+        }
+
+        /// <summary>
+        /// The start.
+        /// </summary>
+        public void Start()
+        {
+            client.Connect();
+        }
+
+        #endregion
+
+        #region Private Methods and Operators
+
+        /// <summary>
+        /// The synchronized run event.
+        /// </summary>
+        /// <param name="action">
+        /// The action.
+        /// </param>
+        /// <param name="message">
+        /// The message.
+        /// </param>
+        private void SynchonizeRunEvent(Action<string> action, string message)
+        {
+            if (action != null)
+            {
+                if (action == this.EventDisconnected)
+                {
+                    this.uiContext.Post(
+                        stat =>
+                            {
+                                string msg = stat.ToString();
+                                action(msg);
+                                this.ReconnectServer();
+                            },
+                        message);
+                }
+                else
+                {
+                    this.uiContext.Post(
+                       stat =>
+                       {
+                           string msg = stat.ToString();
+                           action(msg);
+                       },
+                        message);
+                }
+            }
+        }
+
+        /// <summary>
+        /// The reconnect server.
+        /// </summary>
+        private void ReconnectServer()
+        {
+            this.timer = new Timer(this.TimeCall, this, 3000, 0);
+        }
+
+        /// <summary>
+        /// The time call.
+        /// </summary>
+        /// <param name="obj">
+        /// The object.
+        /// </param>
+        private void TimeCall(object obj)
+        {
+            this.timer.Dispose();
+            client.Connect();
         }
 
         #endregion
