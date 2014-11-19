@@ -14,7 +14,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controller", "Demandforce\D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controller.Tests", "Demandforce\DFLink\Controller.Tests\Controller.Tests.csproj", "{A42BE41C-1941-4BC1-92D1-6FA5040E66ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlService", "Demandforce\DFLink\ConstrolService\ControlService.csproj", "{12FAB449-EC40-4279-9318-B3A0C1F04517}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlService", "Demandforce\DFLink\ControlService\ControlService.csproj", "{12FAB449-EC40-4279-9318-B3A0C1F04517}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "Demandforce\DFLink\Logger\Logger.csproj", "{4B5E4E55-D4D7-490F-888F-A74223618BEE}"
 EndProject
