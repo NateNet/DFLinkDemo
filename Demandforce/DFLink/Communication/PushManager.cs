@@ -31,11 +31,6 @@ namespace Demandforce.DFLink.Communication
         private static ClientTcp client;
 
         /// <summary>
-        /// The UI context.
-        /// </summary>
-        private readonly SynchronizationContext uiContext = new SynchronizationContext();
-
-        /// <summary>
         /// The timer.
         /// </summary>
         private Timer timer;
@@ -54,12 +49,15 @@ namespace Demandforce.DFLink.Communication
                 License = AgentSetting.LicenseId,
                 RemoteIp = AgentSetting.SocketIp,
                 RemotePort = AgentSetting.SocketPort,
-                OnGetData = msg => this.SynchonizeRunEvent(this.EventDataComming, msg),
-                OnConnecting = msg => this.SynchonizeRunEvent(this.EventConnecting, msg),
-                OnConnected = msg => this.SynchonizeRunEvent(this.EventConnected, msg),
-                OnDisconnected = msg => this.SynchonizeRunEvent(this.EventDisconnected, msg),
-                OnReadError = msg => this.SynchonizeRunEvent(this.EventReadError, msg)
+                OnGetData = msg => this.SynchonizeRunEvent(this.EventDataComming, msg, false),
+                OnConnecting = msg => this.SynchonizeRunEvent(this.EventConnecting, msg, false),
+                OnConnected = msg => this.SynchonizeRunEvent(this.EventConnected, msg, false),
+                OnDisconnected = msg => this.SynchonizeRunEvent(this.EventDisconnected, msg, true),
+                OnReadError = msg => this.SynchonizeRunEvent(this.EventReadError, msg, false)
             };
+
+            int id = Thread.CurrentThread.ManagedThreadId;
+            Console.WriteLine("Constrctwww " + id.ToString());
         }
 
         #endregion
@@ -127,31 +125,29 @@ namespace Demandforce.DFLink.Communication
         /// <param name="message">
         /// The message.
         /// </param>
-        private void SynchonizeRunEvent(Action<string> action, string message)
+        private void SynchonizeRunEvent(Action<string> action, string message, bool isDisconnected)
         {
+            int id = Thread.CurrentThread.ManagedThreadId;
+            Console.WriteLine("SynchonizeRunEvent " + id.ToString() + " " + message);
             if (action != null)
             {
-                if (action == this.EventDisconnected)
+                if (isDisconnected)
                 {
-                    this.uiContext.Post(
-                        stat =>
-                            {
-                                string msg = stat.ToString();
-                                action(msg);
-                                this.ReconnectServer();
-                            },
-                        message);
+                    int id2 = Thread.CurrentThread.ManagedThreadId;
+                    Console.WriteLine("lambd1 " + id2.ToString() + " " + message);
+                    action(message);
                 }
                 else
                 {
-                    this.uiContext.Post(
-                       stat =>
-                       {
-                           string msg = stat.ToString();
-                           action(msg);
-                       },
-                        message);
+                    int id2 = Thread.CurrentThread.ManagedThreadId;
+                    Console.WriteLine("lambd2 " + id2.ToString() + " " + message);
+                    action(message);
                 }
+            }
+
+            if (isDisconnected)
+            {
+                this.ReconnectServer();
             }
         }
 
