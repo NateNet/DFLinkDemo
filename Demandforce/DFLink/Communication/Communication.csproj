@@ -70,6 +70,10 @@
     <Compile Include="WebAPI\ICallerFactory.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{86EB13D3-AD5E-4922-BF17-1B21B9E79348}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Logger\Logger.csproj">
       <Project>{4B5E4E55-D4D7-490F-888F-A74223618BEE}</Project>
       <Name>Logger</Name>
@@ -77,12 +81,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ServerSet.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </Content>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
