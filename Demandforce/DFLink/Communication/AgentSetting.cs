@@ -14,6 +14,7 @@ namespace Demandforce.DFLink.Communication
     using System.Reflection;
     using System.Xml;
 
+    using Demandforce.DFLink.Common;
     using Demandforce.DFLink.Communication.Log;
     using Demandforce.DFLink.Communication.WebAPI;
 
@@ -115,7 +116,18 @@ namespace Demandforce.DFLink.Communication
         public static void InitialSetting()
         {
             Listener.GetInstance();
+            AddressUrl = Settings.Get("serverSettings", "AddressUrl");
+            SocketIp = Settings.Get("serverSettings", "SocketIp");
+            SocketPort = Convert.ToInt32(Settings.Get("serverSettings", "SocketPort"));
+            SocketBeat = Convert.ToBoolean(Settings.Get("serverSettings", "SocketBeat"));
+            CommandConfigUpload = Settings.Get("serverSettings", "CommandConfigUpload");
+            CommandLogDownload = Settings.Get("serverSettings", "CommandLogDownload");
+            CommandLogStatusUpdate = Settings.Get("serverSettings", "CommandLogStatusUpdate");
+            CommandLogUpload = Settings.Get("serverSettings", "CommandLogUpload");
+            CommandTaskGet = Settings.Get("serverSettings", "CommandTaskGet");
+            LicenseId = Settings.Get("serverSettings", "LicenseId");
 
+            /*
             var doc = new XmlDocument();
             string settingFile = Assembly.GetExecutingAssembly().Location;
             settingFile = Path.GetDirectoryName(settingFile) + @"\ServerSet.xml";
@@ -159,6 +171,7 @@ namespace Demandforce.DFLink.Communication
                     }
                 }
             }
+            */
         }
 
         #endregion
