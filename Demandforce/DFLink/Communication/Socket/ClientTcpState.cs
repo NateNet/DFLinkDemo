@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ClientState.cs" company="Demandforce">
+// <copyright file="ClientTcpState.cs" company="Demandforce">
 //   Copyright (c) Demandforce. All rights reserved.
 // </copyright>
 // <summary>
@@ -14,7 +14,7 @@ namespace Demandforce.DFLink.Communication.Socket
     /// <summary>
     /// The state object.
     /// </summary>
-    internal class ClientState
+    internal class ClientTcpState
     {
         #region Constants
 

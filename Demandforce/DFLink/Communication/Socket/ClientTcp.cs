@@ -196,7 +196,7 @@ namespace Demandforce.DFLink.Communication.Socket
         /// </param>
         private void Asyncread(TcpClient sock)
         {
-            var state = new ClientState { Client = sock };
+            var state = new ClientTcpState { Client = sock };
             NetworkStream stream = sock.GetStream();
 
             if (stream.CanRead)
@@ -206,7 +206,7 @@ namespace Demandforce.DFLink.Communication.Socket
                     stream.BeginRead(
                         state.Buffer, 
                         0, 
-                        ClientState.BufferSize, 
+                        ClientTcpState.BufferSize, 
                         this.TcpReadCallBack, 
                         state);
                 }
@@ -291,7 +291,7 @@ namespace Demandforce.DFLink.Communication.Socket
         /// </param>
         private void TcpReadCallBack(IAsyncResult ar)
         {
-            var state = (ClientState)ar.AsyncState;
+            var state = (ClientTcpState)ar.AsyncState;
 
             // active disconnect
             if ((state.Client == null) || (!state.Client.Connected))
@@ -313,7 +313,7 @@ namespace Demandforce.DFLink.Communication.Socket
                     this.DoEvent(this.OnGetData, message);
                     this.logHelper.Info(this.className, -1, "Received message:" + message);
 
-                    mas.BeginRead(state.Buffer, 0, ClientState.BufferSize, this.TcpReadCallBack, state);
+                    mas.BeginRead(state.Buffer, 0, ClientTcpState.BufferSize, this.TcpReadCallBack, state);
                 }
                 else
                 {

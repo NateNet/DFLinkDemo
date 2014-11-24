@@ -62,8 +62,10 @@
     <Compile Include="AgentSetting.cs" />
     <Compile Include="AgentTask.cs" />
     <Compile Include="Socket\ClientTcp.cs" />
-    <Compile Include="Socket\IClient.cs" />
-    <Compile Include="Socket\ClientState.cs" />
+    <Compile Include="Socket\ClientUdp.cs" />
+    <Compile Include="Socket\ClientUdpState.cs" />
+    <Compile Include="Socket\INetworkClient.cs" />
+    <Compile Include="Socket\ClientTcpState.cs" />
     <Compile Include="WebAPI\HttpCallerFactory.cs" />
     <Compile Include="WebAPI\HttpCaller.cs" />
     <Compile Include="WebAPI\ICaller.cs" />
