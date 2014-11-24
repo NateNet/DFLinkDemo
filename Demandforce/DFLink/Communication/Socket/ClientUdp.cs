@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ClientUdp.cs" company="">
-//   
+// <copyright file="ClientUdp.cs" company="Demandforce">
+//   Copyright (c) Demandforce. All rights reserved.
 // </copyright>
 // <summary>
 //   The client udp.
