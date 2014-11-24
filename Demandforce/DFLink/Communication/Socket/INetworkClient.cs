@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IClient.cs" company="Demandforce">
+// <copyright file="INetworkClient.cs" company="Demandforce">
 //   Copyright (c) Demandforce. All rights reserved.
 // </copyright>
 // <summary>
@@ -14,7 +14,7 @@ namespace Demandforce.DFLink.Communication.Socket
     /// <summary>
     /// The Client interface.
     /// </summary>
-    public interface IClient
+    public interface INetworkClient
     {
         /// <summary>
         /// Gets or sets the on get data.

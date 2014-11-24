@@ -77,7 +77,7 @@ namespace Demandforce.DFLink.Controller
                 //manager.EventDataComming += this.NotifyHandler;
                 //manager.Start();
 
-                IClient client = new ClientTcp();
+                INetworkClient client = new ClientTcp();
                 client.OnGetData = this.NotifyHandler;
                 client.Connect();
             }

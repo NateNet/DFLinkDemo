@@ -18,7 +18,7 @@ namespace Demandforce.DFLink.Communication.Socket
     /// <summary>
     ///     The client TCP.
     /// </summary>
-    public class ClientTcp : IClient
+    public class ClientTcp : INetworkClient
     {
         #region Fields
 
