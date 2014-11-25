@@ -61,9 +61,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AgentSetting.cs" />
     <Compile Include="AgentTask.cs" />
-    <Compile Include="PushManager.cs" />
     <Compile Include="Socket\ClientTcp.cs" />
-    <Compile Include="Socket\StateObject.cs" />
+    <Compile Include="Socket\ClientUdp.cs" />
+    <Compile Include="Socket\ClientUdpState.cs" />
+    <Compile Include="Socket\INetworkClient.cs" />
+    <Compile Include="Socket\ClientTcpState.cs" />
     <Compile Include="WebAPI\HttpCallerFactory.cs" />
     <Compile Include="WebAPI\HttpCaller.cs" />
     <Compile Include="WebAPI\ICaller.cs" />

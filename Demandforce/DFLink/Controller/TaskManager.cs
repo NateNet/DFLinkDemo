@@ -12,6 +12,7 @@ namespace Demandforce.DFLink.Controller
     using System.Xml.Linq;
     using Demandforce.DFLink.Common.Extensions;
     using Demandforce.DFLink.Communication;
+    using Demandforce.DFLink.Communication.Socket;
     using Demandforce.DFLink.Controller.Task;
     using Demandforce.DFLink.ExceptionHandling.Logging.ExceptionHandleWrapper;
     using Demandforce.DFLink.Logger;
@@ -58,6 +59,11 @@ namespace Demandforce.DFLink.Controller
         public RequestTaskMode Mode { get; set; }
 
         /// <summary>
+        /// Gets or sets the network type.
+        /// </summary>
+        public string NetworkType { get; set; }
+
+        /// <summary>
         /// The initialize task.
         /// </summary>
         public void InitializeTask()
@@ -66,15 +72,28 @@ namespace Demandforce.DFLink.Controller
              AgentSetting.InitialSetting();
             if (this.Mode == RequestTaskMode.Pull)
             {
-                this.InitializeRequestTask(
-                    TaskAction.Update.ToString(),
-                    "SimpleIntervalSchedule");
+                this.InitializeRequestTask(TaskAction.Update.ToString(), "SimpleIntervalSchedule");
             }
             else
             {
-                var manager = PushManager.GetInstance();
-                manager.EventDataComming += this.NotifyHandler;
-                manager.Start();
+                INetworkClient client = null;
+                if (this.NetworkType == "UDP")
+                {
+                    client = new ClientUdp();
+                }
+
+                if (this.NetworkType == "TCP")
+                {
+                    client = new ClientUdp();
+                }
+
+                if (client == null)
+                {
+                    return;
+                }
+
+                client.OnGetData = this.NotifyHandler;
+                client.Connect();
             }
         }
 
