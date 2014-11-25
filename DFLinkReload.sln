@@ -38,6 +38,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaintenanceTaskLib.Tests", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExceptionHandlingController", "Demandforce\DFLink\ExceptionHandlingController\ExceptionHandlingController.csproj", "{EC311AD3-0A26-4808-901B-A983E97E5790}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiCaller", "Demandforce\DFLink\ApiCaller\ApiCaller.csproj", "{C1841380-D6EF-423C-B59D-70510345E71D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiCaller.Test", "Demandforce\DFLink\ApiCaller.Test\ApiCaller.Test.csproj", "{0EBD6E14-C158-41D0-B312-0C1CC9A41C6A}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = DFLinkReload.vsmdi
@@ -201,6 +205,26 @@ Global
 		{EC311AD3-0A26-4808-901B-A983E97E5790}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{EC311AD3-0A26-4808-901B-A983E97E5790}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{EC311AD3-0A26-4808-901B-A983E97E5790}.Release|x86.ActiveCfg = Release|Any CPU
+		{C1841380-D6EF-423C-B59D-70510345E71D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1841380-D6EF-423C-B59D-70510345E71D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1841380-D6EF-423C-B59D-70510345E71D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C1841380-D6EF-423C-B59D-70510345E71D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C1841380-D6EF-423C-B59D-70510345E71D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C1841380-D6EF-423C-B59D-70510345E71D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1841380-D6EF-423C-B59D-70510345E71D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1841380-D6EF-423C-B59D-70510345E71D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C1841380-D6EF-423C-B59D-70510345E71D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C1841380-D6EF-423C-B59D-70510345E71D}.Release|x86.ActiveCfg = Release|Any CPU
+		{0EBD6E14-C158-41D0-B312-0C1CC9A41C6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EBD6E14-C158-41D0-B312-0C1CC9A41C6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EBD6E14-C158-41D0-B312-0C1CC9A41C6A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{0EBD6E14-C158-41D0-B312-0C1CC9A41C6A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{0EBD6E14-C158-41D0-B312-0C1CC9A41C6A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0EBD6E14-C158-41D0-B312-0C1CC9A41C6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EBD6E14-C158-41D0-B312-0C1CC9A41C6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EBD6E14-C158-41D0-B312-0C1CC9A41C6A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{0EBD6E14-C158-41D0-B312-0C1CC9A41C6A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{0EBD6E14-C158-41D0-B312-0C1CC9A41C6A}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
