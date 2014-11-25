@@ -57,6 +57,7 @@
     <Compile Include="Task\ITaskMaker.cs" />
     <Compile Include="Schedule\RealTimeSchedule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Task\ITaskWithResult.cs" />
     <Compile Include="Task\RequestTask.cs" />
     <Compile Include="Schedule\ScheduleFactory.cs" />
     <Compile Include="Schedule\SimpleIntervalSchedule.cs" />
