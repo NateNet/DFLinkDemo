@@ -14,7 +14,6 @@ namespace Demandforce.DFLink.Logger.Tests
     using System.IO;
     using System.Reflection;
     using System.Threading;
-    using Demandforce.DFLink.Logger.Listener;
     using log4net.Core;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Newtonsoft.Json;
@@ -68,10 +67,10 @@ namespace Demandforce.DFLink.Logger.Tests
         ///     The my class cleanup.
         /// </summary>
         [ClassCleanup]
-        public static void MyClassCleanup()
-        {
-            AppenderListener.EventLogListen -= LogListener;
-        }
+        //public static void MyClassCleanup()
+        //{
+        //    AppenderListener.EventLogListen -= LogListener;
+        //}
 
         /// <summary>
         /// The my class initialize.
@@ -85,7 +84,7 @@ namespace Demandforce.DFLink.Logger.Tests
             string logSettingName = Assembly.GetExecutingAssembly().Location;
             logSettingName = Path.GetDirectoryName(logSettingName) + @"\log4net.Setting.xml";
             LogInit.InitLog(logSettingName);
-            AppenderListener.EventLogListen += LogListener;
+            //AppenderListener.EventLogListen += LogListener;
         }
 
         // Use TestInitialize to run code before running each test
@@ -221,26 +220,6 @@ namespace Demandforce.DFLink.Logger.Tests
             Assert.AreEqual(taskId, TheReturnPact.TaskId);
             Assert.AreEqual(message, TheReturnPact.MessageDetails);
             Assert.AreEqual(MsgType.MtLog, TheReturnPact.MessageType);
-        }
-
-        #endregion
-
-        #region Methods
-
-        /// <summary>
-        /// It is a listener
-        /// </summary>
-        /// <param name="sender">
-        /// a sender
-        /// </param>
-        /// <param name="e">
-        /// a packed message
-        /// </param>
-        private static void LogListener(object sender, LogEventArgs e)
-        {
-            LogLevel = e.LogEvent.Level;
-            LoggerName = e.LogEvent.LoggerName;
-            TheReturnPact = (MessagePact)e.LogEvent.MessageObject;
         }
 
         #endregion

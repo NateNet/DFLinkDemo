@@ -9,11 +9,7 @@
 namespace Demandforce.DFLink.Logger
 {
     using System;
-
-    using Demandforce.DFLink.Logger.Listener;
-
     using log4net;
-
     using Newtonsoft.Json;
 
     /// <summary>

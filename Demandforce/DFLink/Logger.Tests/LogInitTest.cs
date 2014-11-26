@@ -13,9 +13,6 @@ namespace Demandforce.DFLink.Logger.Tests
     using System.IO;
     using System.Reflection;
     using System.Threading;
-
-    using Demandforce.DFLink.Logger.Listener;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
@@ -66,47 +63,6 @@ namespace Demandforce.DFLink.Logger.Tests
         // public void MyTestCleanup()
         // {
         // }
-        #region Public Methods and Operators
 
-        /// <summary>
-        ///     A test
-        /// </summary>
-        [TestMethod]
-        public void InitLogTest()
-        {
-            string logSettingName = Assembly.GetExecutingAssembly().Location;
-            logSettingName = Path.GetDirectoryName(logSettingName) + @"\log4net.Setting.xml";
-            LogInit.InitLog(logSettingName);
-            AppenderListener.EventLogListen += LogListener;
-
-            string className = "abcde";
-            int taskId = 12345;
-            string message = "a message";
-            worked = false;
-            LogHelper.GetLoggerHandle().Debug(className, taskId, message);
-            Thread.Sleep(200);
-            Assert.AreEqual(worked, true);
-            AppenderListener.EventLogListen -= LogListener;
-        }
-
-        #endregion
-
-        #region Methods
-
-        /// <summary>
-        /// It is a listener
-        /// </summary>
-        /// <param name="sender">
-        /// a sender
-        /// </param>
-        /// <param name="e">
-        /// a packed message
-        /// </param>
-        private static void LogListener(object sender, LogEventArgs e)
-        {
-            worked = true;
-        }
-
-        #endregion
     }
 }

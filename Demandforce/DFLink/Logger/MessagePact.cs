@@ -6,7 +6,7 @@
 //   It is a message type
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Demandforce.DFLink.Logger.Listener
+namespace Demandforce.DFLink.Logger
 {
     /// <summary>
     ///     It is a message type

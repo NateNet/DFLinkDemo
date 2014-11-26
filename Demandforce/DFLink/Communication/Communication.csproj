@@ -57,7 +57,7 @@
     <Compile Include="Command\UpdateLog.cs" />
     <Compile Include="Command\UpdateStatus.cs" />
     <Compile Include="AgentLog.cs" />
-    <Compile Include="Log\Listener.cs" />
+    <Compile Include="Log\AppenderListener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AgentSetting.cs" />
     <Compile Include="AgentTask.cs" />

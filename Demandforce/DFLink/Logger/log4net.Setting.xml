@@ -12,7 +12,7 @@
       <appender-ref ref="RollingFileAppender" />
     </root>
     
-    <appender name="LogListener" type="Demandforce.DFLink.Logger.Listener.AppenderListener,Logger">
+    <appender name="LogListener" type="Demandforce.DFLink.Communication.Log.AppenderListener,Communication">
       <layout type="log4net.Layout.PatternLayout">
         <conversionPattern value="%d{HH:mm:ss.fff} %p %c.%M %L - %m%n" />
       </layout>

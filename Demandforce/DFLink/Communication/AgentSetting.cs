@@ -10,12 +10,8 @@
 namespace Demandforce.DFLink.Communication
 {
     using System;
-    using System.IO;
-    using System.Reflection;
     using System.Xml;
-
     using Demandforce.DFLink.Common;
-    using Demandforce.DFLink.Communication.Log;
     using Demandforce.DFLink.Communication.WebAPI;
 
     /// <summary>
@@ -115,7 +111,6 @@ namespace Demandforce.DFLink.Communication
         /// </summary>
         public static void InitialSetting()
         {
-            Listener.GetInstance();
             AddressUrl = Settings.Get("serverSettings", "AddressUrl");
             SocketIp = Settings.Get("serverSettings", "SocketIp");
             SocketPort = Convert.ToInt32(Settings.Get("serverSettings", "SocketPort"));
