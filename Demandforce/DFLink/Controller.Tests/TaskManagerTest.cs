@@ -13,6 +13,7 @@ namespace Demandforce.DFLink.Controller.Tests
     using System.Collections.Generic;
     using System.Linq;
 
+    using Demandforce.DFLink.Communication.Socket;
     using Demandforce.DFLink.Controller;
     using Demandforce.DFLink.Controller.Task;
     using Demandforce.DFLink.ExceptionHandling.Logging.ExceptionHandleWrapper;
@@ -28,7 +29,16 @@ namespace Demandforce.DFLink.Controller.Tests
     [TestClass()]
     public class TaskManagerTest
     {
+        /// <summary>
+        /// The mock exception policy.
+        /// </summary>
         private Mock<IExceptionPolicy> mockExceptionPolicy;
+
+        /// <summary>
+        /// The mock network client.
+        /// </summary>
+        private Mock<INetworkClient> mockNetworkClient;
+
 
         /// <summary>
         /// Gets or sets the test context which provides
@@ -36,6 +46,9 @@ namespace Demandforce.DFLink.Controller.Tests
         /// </summary>
         public TestContext TestContext { get; set; }
 
+        /// <summary>
+        /// The my test initialize.
+        /// </summary>
         [TestInitialize()]
         public void MyTestInitialize()
         {
@@ -44,6 +57,7 @@ namespace Demandforce.DFLink.Controller.Tests
                 m => m.HandlerException(
                     It.IsAny<Exception>(), It.IsAny<string>()))
                     .Returns(true);
+            mockNetworkClient = new Mock<INetworkClient>();
         }
 
         /// <summary>
@@ -59,6 +73,7 @@ namespace Demandforce.DFLink.Controller.Tests
                 .Returns(mockUpdateTask.Object);
             var target = new TaskManager(
                 mockTaskCreator.Object,
+                this.mockNetworkClient.Object,
                 this.mockExceptionPolicy.Object);
 
             // this set is not complete, it ignores the content for TaskCreator.
@@ -86,6 +101,7 @@ namespace Demandforce.DFLink.Controller.Tests
                 .Returns(mockUpdateTask.Object);
             var target = new TaskManager(
                 mockTaskCreator.Object, 
+                this.mockNetworkClient.Object,
                 this.mockExceptionPolicy.Object);
 
             // this set is not complete, it ignores the content for TaskCreator. execute 
@@ -132,6 +148,7 @@ namespace Demandforce.DFLink.Controller.Tests
                 ct => ct.Creator(It.IsAny<string>())).Returns(tasks.Dequeue);
             var target = new TaskManager(
                 mockTaskCreator.Object, 
+                this.mockNetworkClient.Object,
                 this.mockExceptionPolicy.Object);
 
             // create tasks first

@@ -63,6 +63,10 @@
     <Compile Include="TaskManagerTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Communication\Communication.csproj">
+      <Project>{79C22FDA-2296-466D-927B-43930B0D4F2E}</Project>
+      <Name>Communication</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Controller\Controller.csproj">
       <Project>{2AD97B95-A201-4AFE-A57F-4A93957E114F}</Project>
       <Name>Controller</Name>
