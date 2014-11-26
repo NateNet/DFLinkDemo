@@ -33,19 +33,31 @@ namespace Demandforce.DFLink.Controller
         private readonly IExceptionPolicy exceptionPolicy;
 
         /// <summary>
+        /// The network client.
+        /// </summary>
+        private readonly INetworkClient networkClient;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="TaskManager"/> class.
         /// </summary>
         /// <param name="taskCreator">
         /// The task Creator, which is create task with its schedule
         /// </param>
+        /// <param name="networkClient">
+        /// The network Client.
+        /// </param>
         /// <param name="exceptionPolicy">
         /// The exception Policy.
         /// </param>
-        public TaskManager(ITaskCreator taskCreator, IExceptionPolicy exceptionPolicy)
+        public TaskManager(
+            ITaskCreator taskCreator, 
+            INetworkClient networkClient, 
+            IExceptionPolicy exceptionPolicy)
         {
             this.Tasks = new ConcurrentDictionary<int, ITask>();
             this.taskCreator = taskCreator;
             this.exceptionPolicy = exceptionPolicy;
+            this.networkClient = networkClient;
         }
 
         /// <summary>
@@ -59,41 +71,23 @@ namespace Demandforce.DFLink.Controller
         public RequestTaskMode Mode { get; set; }
 
         /// <summary>
-        /// Gets or sets the network type.
-        /// </summary>
-        public string NetworkType { get; set; }
-
-        /// <summary>
         /// The initialize task.
         /// </summary>
         public void InitializeTask()
         {
-            // initialize the communication setting
-             AgentSetting.InitialSetting();
+
+            // if Task request mode is pull is just to call web api,
+            // otherwise need to request task use long connection to 
+            // receive task/task notification from server.
             if (this.Mode == RequestTaskMode.Pull)
             {
-                this.InitializeRequestTask(TaskAction.Update.ToString(), "SimpleIntervalSchedule");
+                this.InitializeRequestTask(
+                    TaskAction.Update.ToString(), "SimpleIntervalSchedule");
             }
             else
             {
-                INetworkClient client = null;
-                if (this.NetworkType == "UDP")
-                {
-                    client = new ClientUdp();
-                }
-
-                if (this.NetworkType == "TCP")
-                {
-                    client = new ClientTcp();
-                }
-
-                if (client == null)
-                {
-                    return;
-                }
-
-                client.OnGetData = this.NotifyHandler;
-                client.Connect();
+                this.networkClient.OnGetData = this.NotifyHandler;
+                this.networkClient.Connect();
             }
         }
 
@@ -118,9 +112,6 @@ namespace Demandforce.DFLink.Controller
                 action,
                 scheduleTypeName);
             this.ParseTasks(initialTask);
-            //var task = this.taskCreator.Creator(initialTask);
-            //((RequestTask)task).TaskManager = this;
-            //this.AddTask(task);
         }
 
         /// <summary>
@@ -174,35 +165,47 @@ namespace Demandforce.DFLink.Controller
         /// The xml presents the task list</param>
         public void ParseTasks(string taskXml)
         {
-            var doc = XDocument.Parse(taskXml);
-            LogHelper.GetLoggerHandle().Debug(
-                "TaskManager", 
-                0, 
-                "The task list:" + doc.Root.GetFormatXml());
-
-            var tasks = from taskItem in doc.Descendants("Task") 
-                        select new
-                                   {
-                                       Argument = taskItem.ToString(),
-                                       Action = taskItem.Element("Action")
-                                       .GetValueOrDefault("Update")
-                                   };
-
-            // Create the task instance and operate task in the current list
-            foreach (var taskItem in tasks)
+            try
             {
-                try
+                var doc = XDocument.Parse(taskXml);
+                LogHelper.GetLoggerHandle().Debug(
+                    "TaskManager", 
+                    0, 
+                    "The task list:" + doc.Root.GetFormatXml());
+
+                var tasks = from taskItem in doc.Descendants("Task") 
+                            select new
+                                       {
+                                           Argument = taskItem.ToString(),
+                                           Action = taskItem.Element("Action")
+                                           .GetValueOrDefault("Update")
+                                       };
+
+                // Create the task instance and operate task in the current list
+                foreach (var taskItem in tasks)
                 {
-                    ITask task = this.taskCreator.Creator(taskItem.Argument);
-                    this.OperateTask(taskItem.Action, task);
-                }
-                catch (Exception ex)
-                {
-                    bool rethrow = this.exceptionPolicy.HandlerException(ex, "Default Policy");
-                    if (rethrow)
+                    // make sure one task created fail does not affect next task to create
+                    try
                     {
-                        throw;
+                        ITask task = this.taskCreator.Creator(taskItem.Argument);
+                        this.OperateTask(taskItem.Action, task);
                     }
+                    catch (Exception ex)
+                    {
+                        bool rethrow = this.exceptionPolicy.HandlerException(ex, "Default Policy");
+                        if (rethrow)
+                        {
+                            throw;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                bool rethrow = this.exceptionPolicy.HandlerException(ex, "Default Policy");
+                if (rethrow)
+                {
+                    throw;
                 }
             }
         }
