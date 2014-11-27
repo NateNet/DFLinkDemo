@@ -84,7 +84,7 @@ namespace Demandforce.DFLink.Controller
 
                 if (this.NetworkType == "TCP")
                 {
-                    client = new ClientUdp();
+                    client = new ClientTcp();
                 }
 
                 if (client == null)
