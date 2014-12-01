@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="StateObject.cs" company="Demandforce">
+// <copyright file="ClientTcpState.cs" company="Demandforce">
 //   Copyright (c) Demandforce. All rights reserved.
 // </copyright>
 // <summary>
@@ -10,12 +10,11 @@
 namespace Demandforce.DFLink.Communication.Socket
 {
     using System.Net.Sockets;
-    using System.Text;
 
     /// <summary>
     /// The state object.
     /// </summary>
-    internal class StateObject
+    internal class ClientTcpState
     {
         #region Constants
 
@@ -48,22 +47,6 @@ namespace Demandforce.DFLink.Communication.Socket
         /// Gets or sets the client.
         /// </summary>
         public TcpClient Client { get; set; }
-
-        /// <summary>
-        /// The message buffer.
-        /// </summary>
-        private readonly StringBuilder messageBuffer = new StringBuilder();
-
-        /// <summary>
-        /// Gets the message buffer.
-        /// </summary>
-        public StringBuilder MessageBuffer
-        {
-            get
-            {
-                return this.messageBuffer;
-            }
-        }
 
         /// <summary>
         /// Gets or sets the total bytes read.

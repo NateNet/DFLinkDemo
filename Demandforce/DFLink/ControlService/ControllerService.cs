@@ -54,6 +54,7 @@ namespace Demandforce.DFLink.ConstrolService
             ((TaskManager)taskManager).Mode =
                 (RequestTaskMode)
                 Enum.Parse(typeof(RequestTaskMode), ConfigurationManager.AppSettings["RequestTaskMode"]);
+
             ((TaskManager)taskManager).InitializeTask();
             var invoker = new Invoker((TaskManager)taskManager);
             invoker.MaxInterval = new TimeSpan(
