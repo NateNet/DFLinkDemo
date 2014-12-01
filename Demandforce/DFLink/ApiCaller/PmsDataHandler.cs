@@ -14,7 +14,7 @@ namespace Demandforce.DFLink.ApiCaller
     /// some operation for the data extract out from PMS
     /// </summary>
     public class PmsDataHandler
-    {
+    {                
         /// <summary>
         /// Append content to a file
         /// </summary>
@@ -61,6 +61,6 @@ namespace Demandforce.DFLink.ApiCaller
             objStringBuilder.Append(DateTime.Now.ToString("yyyyMMdd_hhmmssffftt"));
             objStringBuilder.Append(".xml");
             return objStringBuilder.ToString();
-        }
+        }                
     }
 }

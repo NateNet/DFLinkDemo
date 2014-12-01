@@ -44,8 +44,9 @@ namespace ApiCaller.Test
             
             // case 1: d3ofmapi.dll, test for GetData() with old version
             objStringBuilder.Append("<Task>" + Environment.NewLine);
+            objStringBuilder.Append("<BusinessLicense>D13E93EF-D71F-0335-782A-1977B513AC90</BusinessLicense>" + Environment.NewLine);
             objStringBuilder.Append("<Id>901</Id>" + Environment.NewLine);
-            objStringBuilder.Append("<Parameters>" + Environment.NewLine);            
+            objStringBuilder.Append("<Parameters>" + Environment.NewLine);
             objStringBuilder.Append("<ApiPath>C:\\test\\d3ofmapi.dll</ApiPath>" + Environment.NewLine);
             objStringBuilder.Append("<DataLocation>C:\\test\\OMATE.MDB</DataLocation>" + Environment.NewLine);
             objStringBuilder.Append("<Version>7.4</Version>" + Environment.NewLine);
@@ -64,11 +65,12 @@ namespace ApiCaller.Test
            
             // case 2: d3mwrapi.dll, test for GetData() with new version
             //objStringBuilder.Append("<Task>" + Environment.NewLine);
+            //objStringBuilder.Append("<BusinessLicense>D13E93EF-D71F-0335-782A-1977B513AC90</BusinessLicense>" + Environment.NewLine);
             //objStringBuilder.Append("<Id>901</Id>" + Environment.NewLine);
             //objStringBuilder.Append("<Parameters>" + Environment.NewLine);
             //objStringBuilder.Append("<ApiPath>C:\\test\\d3mwrapi.dll</ApiPath>" + Environment.NewLine);
             //objStringBuilder.Append("<DataLocation>C:\\test\\RocketServiceCenter2011\\Data</DataLocation>" + Environment.NewLine);
-            //objStringBuilder.Append("<Version></Version>" + Environment.NewLine);
+            //objStringBuilder.Append("<Version>2007</Version>" + Environment.NewLine);
             //objStringBuilder.Append("<APIParameters>*</APIParameters>" + Environment.NewLine);
             //objStringBuilder.Append("<DateFilter>1/1/2000</DateFilter>" + Environment.NewLine);
             //objStringBuilder.Append("<OptionList>OptionActiveOnly=True</OptionList>" + Environment.NewLine);

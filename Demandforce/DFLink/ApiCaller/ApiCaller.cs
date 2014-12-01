@@ -57,6 +57,11 @@ namespace Demandforce.DFLink.ApiCaller
         private StringBuilder objStringBuilder = new StringBuilder();
 
         /// <summary>
+        /// Indicates the License for a customer
+        /// </summary>
+        private string businessLicense = string.Empty;
+
+        /// <summary>
         /// declare API's interface function: Initialize
         /// </summary>
         /// <param name="dataLocation">database connection parameters</param>
@@ -74,8 +79,8 @@ namespace Demandforce.DFLink.ApiCaller
         /// <param name="outBuffer">A string buffer that stored the data(customer, appointment, transaction, etc.)</param>
         /// <param name="startRec">current record number</param>
         /// <returns>the record number after executed GetData() once</returns>
-        private delegate int GetData(StringBuilder outBuffer, int startRec);
-        
+        private delegate int GetData(byte[] outBuffer, int startRec);
+
         /// <summary>
         /// declare API's interface function: Cleanup
         /// </summary>        
@@ -175,6 +180,7 @@ namespace Demandforce.DFLink.ApiCaller
         /// </returns>
         public ITask MakeTask(string arguments)
         {
+            string license;
             string apiPath;
             string dataLocation;
             string version;
@@ -196,6 +202,9 @@ namespace Demandforce.DFLink.ApiCaller
                 XmlDocument xmlParams = new XmlDocument();
                 xmlParams.LoadXml(arguments);
                 XmlNode rootNode = xmlParams.DocumentElement;
+
+                tempNode = rootNode.SelectSingleNode("BusinessLicense");
+                license = tempNode.InnerText;
 
                 tempNode = rootNode.SelectSingleNode("Id");
                 taskId = int.Parse(tempNode.InnerText);
@@ -241,6 +250,7 @@ namespace Demandforce.DFLink.ApiCaller
 
             var caller = new ApiCaller()
             {
+                businessLicense = license,
                 Id = taskId,
                 ApiPath = apiPath,
                 DataLocation = dataLocation,
@@ -308,8 +318,9 @@ namespace Demandforce.DFLink.ApiCaller
                 return;
             }
 
-            // NOTE: must be set up Capacity of StringBuilder object, use default value will occurs exception 
-            StringBuilder outBuffer = new StringBuilder(BufferSize);                        
+            // Define a byte array with BufferSize length 
+            byte[] outBuffer = new byte[BufferSize];
+
             PmsDataHandler dataHandler = new PmsDataHandler();
             int lastRec = funcGetData(outBuffer, 0);
             if (lastRec > 0)
@@ -317,15 +328,23 @@ namespace Demandforce.DFLink.ApiCaller
                 // Generate a complete xml file name
                 string xmlPath = dataHandler.GenXmlFilePath();                                
                 dataHandler.MakePathExist(xmlPath);
-                string xmlFile = dataHandler.GenXmlFileName(xmlPath);
+                string extractFileName = dataHandler.GenXmlFileName(xmlPath);
+                string xmlContent = Encoding.ASCII.GetString(outBuffer).TrimEnd('\0');
 
-                // put data into xml file via PmsDataHandler.AppendToFile method
-                dataHandler.AppendToFile(xmlFile, outBuffer.ToString());                
+                // 1. add header
+                this.AddHeaderToFile(extractFileName);
+                    
+                // 2. add body: put data into xml file via PmsDataHandler.AppendToFile method
+                dataHandler.AppendToFile(extractFileName, xmlContent); 
                 while (lastRec > 0)
                 {
                     lastRec = funcGetData(outBuffer, lastRec++);
-                    dataHandler.AppendToFile(xmlFile, outBuffer.ToString());
+                    xmlContent = Encoding.ASCII.GetString(outBuffer).TrimEnd('\0');
+                    dataHandler.AppendToFile(extractFileName, xmlContent); 
                 }
+
+                // 3. add footer
+                this.AddFooterToFile(extractFileName);
             }
             else
             {
@@ -334,7 +353,7 @@ namespace Demandforce.DFLink.ApiCaller
                 this.objStringBuilder.Append(this.ApiPath);
                 this.objStringBuilder.Append("failed!('GetData--record No returned is not > 0')");
                 LogHelper.GetLoggerHandle().Error(LogTag, this.Id, this.objStringBuilder.ToString());                
-            }            
+            }
         }
 
         /// <summary>
@@ -435,6 +454,72 @@ namespace Demandforce.DFLink.ApiCaller
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Add additional header information to the xml file
+        /// </summary>
+        /// <param name="fileName">
+        ///     the xml file 
+        /// </param>  
+        /// <returns>call result: True-success; False-failed</returns>
+        private bool AddHeaderToFile(string fileName)
+        {
+            this.objStringBuilder.Clear();
+
+            // "xml" elemet
+            this.objStringBuilder.AppendLine(@"<?xml version=""1.0""?>");
+
+            // "DemandForce" element and its attributes
+            this.objStringBuilder.Append("<DemandForce");
+            this.objStringBuilder.Append(@" licenseKey=""");
+            this.objStringBuilder.Append(this.businessLicense);
+            this.objStringBuilder.Append(@"""");
+            this.objStringBuilder.Append(@" dFAPI=""");
+            this.objStringBuilder.Append(Path.GetFileName(this.ApiPath));
+                this.objStringBuilder.Append(@"""");
+            this.objStringBuilder.Append(@" dFAPIVersion=""");
+            this.objStringBuilder.Append(this.Version);
+            this.objStringBuilder.Append(@"""");
+            this.objStringBuilder.Append(@" dataLocation=""");
+            this.objStringBuilder.Append(this.DataLocation);
+            this.objStringBuilder.AppendLine(@""">");
+
+            // "Business" elemet
+            this.objStringBuilder.AppendLine("<Business>");
+
+            // "Extract" elemet and its attributes
+            this.objStringBuilder.Append("<Extract");
+            this.objStringBuilder.Append(@" managementSystemName=""");
+            this.objStringBuilder.Append(Path.GetFileName(this.ApiPath));
+            this.objStringBuilder.Append(@"""");
+            this.objStringBuilder.Append(@" managementSystemVersion=""");
+            this.objStringBuilder.Append(this.Version);
+            this.objStringBuilder.Append(@"""");
+            this.objStringBuilder.Append(@" manual=""1""");
+            this.objStringBuilder.AppendLine(">");
+            this.objStringBuilder.AppendLine("</Extract>");
+
+            PmsDataHandler dataHandler = new PmsDataHandler();
+            dataHandler.AppendToFile(fileName, this.objStringBuilder.ToString());
+
+            return true;
+        }
+
+        /// <summary>
+        /// Add additional footer information to the xml file
+        /// </summary>
+        /// <param name="fileName">
+        ///     the xml file 
+        /// </param>          
+        private void AddFooterToFile(string fileName)
+        {
+            this.objStringBuilder.Clear();
+            this.objStringBuilder.AppendLine("</Business>");
+            this.objStringBuilder.AppendLine("</DemandForce>");
+
+            PmsDataHandler dataHandler = new PmsDataHandler();
+            dataHandler.AppendToFile(fileName, this.objStringBuilder.ToString());            
         }
         #endregion 
     }

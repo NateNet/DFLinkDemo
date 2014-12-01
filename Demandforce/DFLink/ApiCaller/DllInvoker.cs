@@ -53,13 +53,13 @@ namespace Demandforce.DFLink.ApiCaller
         }
 
         #region Win API
-        [DllImport("Kernel32.dll", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("Kernel32.dll", CallingConvention = CallingConvention.StdCall, CharSet = CharSet.Ansi)]
         private static extern IntPtr LoadLibrary(string path);
 
-        [DllImport("Kernel32.dll", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("Kernel32.dll", CallingConvention = CallingConvention.StdCall, CharSet = CharSet.Ansi)]
         private static extern IntPtr GetProcAddress(IntPtr lib, string funcName);
 
-        [DllImport("Kernel32.dll", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("Kernel32.dll", CallingConvention = CallingConvention.StdCall, CharSet = CharSet.Ansi)]
         private static extern bool FreeLibrary(IntPtr lib);
         #endregion
     }
