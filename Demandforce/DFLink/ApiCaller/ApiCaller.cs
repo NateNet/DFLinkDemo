@@ -165,7 +165,7 @@ namespace Demandforce.DFLink.ApiCaller
         public void Execute()
         {
             this.Call();         
-            LogHelper.GetLoggerHandle().ReportStatus(LogTag, this.Id, 10, "Calls API done");
+            LogHelper.GetLoggerHandle().ReportStatus(LogTag, this.Id, 9, "Calls API done");
         }
 
         /// <summary>
