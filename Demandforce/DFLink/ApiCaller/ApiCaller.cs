@@ -339,7 +339,8 @@ namespace Demandforce.DFLink.ApiCaller
                 dataHandler.AppendToFile(extractFileName, xmlContent); 
                 while (lastRec > 0)
                 {
-                    lastRec = funcGetData(outBuffer, lastRec++);
+                    Array.Clear(outBuffer, 0, outBuffer.Length);
+                    lastRec = funcGetData(outBuffer, ++lastRec);
                     xmlContent = Encoding.ASCII.GetString(outBuffer).TrimEnd('\0');
                     dataHandler.AppendToFile(extractFileName, xmlContent); 
                 }
@@ -468,7 +469,7 @@ namespace Demandforce.DFLink.ApiCaller
         {
             this.objStringBuilder.Clear();
 
-            // "xml" elemet
+            // "xml" element
             this.objStringBuilder.AppendLine(@"<?xml version=""1.0""?>");
 
             // "DemandForce" element and its attributes
@@ -486,10 +487,10 @@ namespace Demandforce.DFLink.ApiCaller
             this.objStringBuilder.Append(this.DataLocation);
             this.objStringBuilder.AppendLine(@""">");
 
-            // "Business" elemet
+            // "Business" element
             this.objStringBuilder.AppendLine("<Business>");
 
-            // "Extract" elemet and its attributes
+            // "Extract" element and its attributes
             this.objStringBuilder.Append("<Extract");
             this.objStringBuilder.Append(@" managementSystemName=""");
             this.objStringBuilder.Append(Path.GetFileName(this.ApiPath));
