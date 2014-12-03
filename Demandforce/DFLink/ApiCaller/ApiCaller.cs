@@ -6,11 +6,13 @@
 
 namespace Demandforce.DFLink.ApiCaller
 {
-    using System;   
+    using System;
+    using System.Configuration;
     using System.IO;        
     using System.Text;
     using System.Xml;
 
+    using Demandforce.DFLink.Common;
     using Demandforce.DFLink.Controller.Schedule;
     using Demandforce.DFLink.Controller.Task;
     using Demandforce.DFLink.Logger;    
@@ -202,9 +204,8 @@ namespace Demandforce.DFLink.ApiCaller
                 XmlDocument xmlParams = new XmlDocument();
                 xmlParams.LoadXml(arguments);
                 XmlNode rootNode = xmlParams.DocumentElement;
-
-                tempNode = rootNode.SelectSingleNode("BusinessLicense");
-                license = tempNode.InnerText;
+              
+                license = Settings.Get("serverSettings", "LicenseId");
 
                 tempNode = rootNode.SelectSingleNode("Id");
                 taskId = int.Parse(tempNode.InnerText);
