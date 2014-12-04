@@ -1,4 +1,7 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+﻿using Demandforce.DFLink.Common;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="UploadFileTest.cs" company="Demandforce">
 //   Copyright (c) Demandforce. All rights reserved.
 // </copyright>
@@ -9,51 +12,43 @@
 
 namespace Demandfore.DFLink.Common.Tests
 {
+    using System;
     using System.Collections.Specialized;
-    using System.Globalization;
     using System.IO;
-
+    using System.Xml;
     using Demandforce.DFLink.Common;
-
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
-    ///     UploadFileTest 
+    /// UploadFileTest 
     /// </summary>
     [TestClass]
-    public class UploadFileTest
+    public class HttpUtilTest
     {
         #region Public Properties
 
         /// <summary>
-        ///     test context
+        /// Gets or sets test context
         /// </summary>
         public TestContext TestContext { get; set; }
 
         #endregion
 
-        // 编写测试时，还可使用以下特性:
-        // 使用 ClassInitialize 在运行类中的第一个测试前先运行代码
-        // [ClassInitialize()]
-        // public static void MyClassInitialize(TestContext testContext)
-        // {
-        // }
-        // 使用 ClassCleanup 在运行完类中的所有测试后再运行代码
-        // [ClassCleanup()]
-        // public static void MyClassCleanup()
-        // {
-        // }
-        // 使用 TestInitialize 在运行每个测试前先运行代码
-        // [TestInitialize()]
-        // public void MyTestInitialize()
-        // {
-        // }
-        // 使用 TestCleanup 在运行完每个测试后运行代码
-        // [TestCleanup()]
-        // public void MyTestCleanup()
-        // {
-        // }
         #region Public Methods and Operators
+
+        /// <summary>
+        /// A test for Download
+        /// </summary>
+        [TestMethod]
+        public void DownloadTest()
+        {
+            var url = "http://www.demandforce.com/_assets/images/logos/logo-intuit-df-657.png"; // TODO: Initialize to an appropriate value
+            var fileName = AppDomain.CurrentDomain.BaseDirectory + "\\logo-intuit-df-657.png"; // TODO: Initialize to an appropriate value
+            var expected = true; // TODO: Initialize to an appropriate value
+            var actual = HttpUtil.DownloadFile(url, fileName);
+            Assert.AreEqual(expected, actual);
+        }
+
 
         /// <summary>
         ///     HttpPostData
@@ -91,12 +86,40 @@ namespace Demandfore.DFLink.Common.Tests
             stringDict.Add("pass", string.Empty);
             stringDict.Add("license", license);
 
-            string actual;
-            actual = UploadFile.HttpPostData(url, timeOut, fileKeyName, filePathName, stringDict);
+            string actual = HttpUtil.PostFormData(url, timeOut, fileKeyName, filePathName, stringDict);
 
             Assert.IsTrue(actual.Contains("zip with size of " + size.ToString() + " bytes.  BusinessId ="));
         }
 
         #endregion
+
+        /// <summary>
+        /// Test for PostJsonForXml 
+        ///</summary>
+        [TestMethod()]
+        public void PostJsonForXmlTest()
+        {
+            string url = @"http://172.18.3.100/task/get";
+            string paramsList = @"{'LicenseKey':'xxxxx-xxxxxx'}";
+            string expected = "<Tasks></Tasks>";
+            string actual = HttpUtil.PostJsonForXml(url, paramsList);
+            Assert.AreEqual(expected, actual);
+
+            paramsList = @"{'LicenseKey':'61D13359-C3A6-301C-8B17-9283A2188A9A'}";
+            actual = HttpUtil.PostJsonForXml(url, paramsList);
+            
+            XmlDocument xmlDocument = new XmlDocument();
+            bool b = true;
+            try
+            {
+                xmlDocument.LoadXml(actual);
+            }
+            catch (Exception e)
+            {
+                b = false;
+            }
+
+            Assert.IsTrue(b);
+        }
     }
 }
