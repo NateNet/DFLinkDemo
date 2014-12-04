@@ -8,7 +8,9 @@ namespace Demandforce.DFLink.Controller
 {
     using System;
     using System.Collections.Concurrent;
+    using System.IO;
     using System.Linq;
+    using System.Text;
     using System.Xml.Linq;
     using Demandforce.DFLink.Common.Extensions;
     using Demandforce.DFLink.Communication;
@@ -22,6 +24,11 @@ namespace Demandforce.DFLink.Controller
     /// </summary>
     public class TaskManager : ITaskManager
     {
+        /// <summary>
+        /// Indicates the tasks storage file in local machine
+        /// </summary>
+        private const string LocalTasksFile = "Tasks.xml";
+
         /// <summary>
         /// The task creator.
         /// </summary>
@@ -75,6 +82,8 @@ namespace Demandforce.DFLink.Controller
         /// </summary>
         public void InitializeTask()
         {
+            // load tasks from local storage file
+            this.LoadLocalTasks();
 
             // if Task request mode is pull is just to call web api,
             // otherwise need to request task use long connection to 
@@ -143,7 +152,6 @@ namespace Demandforce.DFLink.Controller
             }
         }
 
-
         /// <summary>
         /// Request tasks xml from server
         /// </summary>
@@ -189,6 +197,9 @@ namespace Demandforce.DFLink.Controller
                     {
                         ITask task = this.taskCreator.Creator(taskItem.Argument);
                         this.OperateTask(taskItem.Action, task);
+
+                        // maintain tasks in local storage file
+                        this.OperateTaskStorage(taskItem.Action, taskItem.Argument);
                     }
                     catch (Exception ex)
                     {
@@ -217,7 +228,7 @@ namespace Demandforce.DFLink.Controller
         /// <param name="task">The task</param>
         private void OperateTask(string action, ITask task)
         {
-            switch ((TaskAction)Enum.Parse(typeof(TaskAction),action))
+            switch ((TaskAction)Enum.Parse(typeof(TaskAction), action))
             {
                 case TaskAction.Create:
                     {
@@ -266,6 +277,7 @@ namespace Demandforce.DFLink.Controller
             {
                 ((RequestTask)newTask).TaskManager = this;
             }
+
             this.Tasks.TryAdd(newTask.Id, newTask);
         }
 
@@ -282,6 +294,163 @@ namespace Demandforce.DFLink.Controller
 
             ITask task;
             this.Tasks.TryRemove(taskId, out task);
+        }
+
+        /// <summary>
+        /// Operates task in local storage file
+        /// </summary>
+        /// <param name="action">The action:Add Update Delete </param>
+        /// <param name="taskXml">The task</param>
+        private void OperateTaskStorage(string action, string taskXml)
+        {
+            var doc = XDocument.Parse(taskXml);
+
+            // get schedule Type
+            string scheduleType = doc.Descendants("Schedule").Descendants("Type").Single().Value;
+
+            if (!scheduleType.Equals("SimpleIntervalSchedule"))
+            {
+                return;
+            }
+
+            switch ((TaskAction)Enum.Parse(typeof(TaskAction), action))
+            {
+                case TaskAction.Create:
+                    {
+                        this.AddTaskStorage(taskXml);
+                        break;
+                    }
+
+                case TaskAction.Update:
+                    {
+                        this.UpdateTaskStorage(taskXml);
+                        break;
+                    }
+
+                case TaskAction.Delete:
+                    {
+                        this.DeleteTaskStorage(taskXml);
+                        break;
+                    }
+            }
+        }
+
+        /// <summary>
+        /// Add the task to the local storage file
+        /// </summary>
+        /// <param name="taskXml">a whole xml text for a task</param>
+        private void AddTaskStorage(string taskXml)
+        {
+            // tasks.xml doesn't exist
+            if (File.Exists(LocalTasksFile))
+            {
+                // get the task id from "taskXml" paramter
+                XDocument stringDoc = XDocument.Parse(taskXml);
+                string taskId = stringDoc.Element("Task").Element("Id").Value;
+
+                XDocument fileDoc = XDocument.Load(LocalTasksFile);
+
+                // get a collection with a filter
+                var taskQuery = from task in fileDoc.Element("Tasks").Elements("Task")
+                                 where task.Element("Id").Value == taskId
+                                 select task;
+
+                // if this task doesn't exist in storage file then add that
+                if (taskQuery.Count() == 0)
+                {
+                    fileDoc.Element("Tasks").Add(stringDoc.Element("Task"));
+                    fileDoc.Save(LocalTasksFile);
+                }
+            }
+            else
+            {
+                // tasks.xml exist
+                StringBuilder objStringBuilder = new StringBuilder();
+                objStringBuilder.AppendLine("<Tasks>");
+                objStringBuilder.AppendLine(taskXml);
+                objStringBuilder.AppendLine("</Tasks>");
+
+                XDocument xdoc = XDocument.Parse(objStringBuilder.ToString());
+                xdoc.Save(LocalTasksFile);
+            }
+        }
+
+        /// <summary>
+        /// Update the task within the local storage file
+        /// </summary>
+        /// <param name="taskXml">a whole xml text for a task</param>
+        private void UpdateTaskStorage(string taskXml)
+        {
+            // only do this if tasks.xml exists
+            if (File.Exists(LocalTasksFile))
+            {                
+                // get the task id from "taskXml" paramter
+                XDocument stringDoc = XDocument.Parse(taskXml);
+                string taskId = stringDoc.Element("Task").Element("Id").Value;
+
+                // Exit if task is initialized Request Task (id is 0)
+                if (taskId.Equals("0"))
+                {
+                    return;
+                }
+
+                // 1. delete this task firstly
+                this.DeleteTaskStorage(taskXml);
+
+                // 2. then add this task
+                this.AddTaskStorage(taskXml);
+            }
+        }
+
+        /// <summary>
+        /// Delete the task within the local storage file
+        /// </summary>
+        /// <param name="taskXml">a whole xml text for a task</param>
+        private void DeleteTaskStorage(string taskXml)
+        {
+            // only do this if tasks.xml exists
+            if (File.Exists(LocalTasksFile))
+            {
+                // get the task id from "taskXml" paramter
+                XDocument stringDoc = XDocument.Parse(taskXml);
+                string taskId = stringDoc.Element("Task").Element("Id").Value;
+
+                XDocument fileDoc = XDocument.Load(LocalTasksFile);
+
+                // get a collection with a filter
+                var taskQuery = from task in fileDoc.Element("Tasks").Elements("Task")
+                                where task.Element("Id").Value == taskId
+                                select task;
+
+                // if this task exists in storage file then delete that
+                if (taskQuery.Count() > 0)
+                {
+                    foreach (var task in taskQuery)
+                    {
+                        task.Remove();
+                    }
+
+                    fileDoc.Save(LocalTasksFile);
+
+                    // delete file if no tasks in "tasks.xml"
+                    if (!fileDoc.Element("Tasks").HasElements)
+                    {
+                        File.Delete(LocalTasksFile);    
+                    }                    
+                }
+            }
+        }
+
+        /// <summary>
+        /// Load tasks from local storage file
+        /// </summary>
+        private void LoadLocalTasks()
+        {
+            if (File.Exists(LocalTasksFile))
+            {
+                XDocument fileDoc = XDocument.Load(LocalTasksFile);
+                this.ParseTasks(fileDoc.ToString());
+            }
         }
     }
 }
