@@ -48,7 +48,7 @@ namespace Demandforce.DFLink.Communication.Tests
         [ClassInitialize]
         public static void MyClassInitialize(TestContext testContext)
         {
-            AgentSetting.InitialSetting();
+            // AgentSetting.InitialSetting();
         }
 
         // Use ClassCleanup to run code after all tests in a class have run

@@ -55,8 +55,7 @@ namespace Demandforce.DFLink.Communication.Command
         public override void Request(object idleParam)
         {
             string jsonStr = JsonPack<UpdateLog>.SerializeObject(this);
-            AgentSetting.CallerFactory.CreateCaller()
-                .PostCommand(AgentSetting.AddressUrl + AgentSetting.CommandLogUpload, jsonStr);
+            this.Caller.PostCommand(this.ServerSettings.AddressUrl + this.ServerSettings.CommandLogUpload, jsonStr);
         }
 
         #endregion

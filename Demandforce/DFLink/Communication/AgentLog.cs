@@ -8,43 +8,24 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace Demandforce.DFLink.Communication
 {
+    using Demandforce.DFLink.Common.Configuration;
     using Demandforce.DFLink.Communication.Command;
+    using Demandforce.DFLink.Communication.WebAPI;
+
+    using Microsoft.Practices.Unity;
 
     /// <summary>
     ///     TODO: It is a log class to operate all the log command
     /// </summary>
-    public class AgentLog
+    public class AgentLog : IAgentLog
     {
-        #region Static Fields
-
         /// <summary>
-        ///     a Singleton instance
+        /// Gets or sets the server settings.
         /// </summary>
-        private static readonly AgentLog Instance = new AgentLog();
-
-        #endregion
-
-        #region Constructors and Destructors
-
-        /// <summary>
-        ///     Prevents a default instance of the <see cref="AgentLog" /> class from being created
-        /// </summary>
-        private AgentLog()
-        {
-        }
-
-        #endregion
+        [Dependency]
+        public IServerSettings ServerSettings { get; set; }
 
         #region Public Methods and Operators
-
-        /// <summary>
-        ///     To get a Singleton object
-        /// </summary>
-        /// <returns>a singleton object</returns>
-        public static AgentLog GetStartedInstance()
-        {
-            return Instance;
-        }
 
         /// <summary>
         /// To get logs with task id
@@ -58,7 +39,9 @@ namespace Demandforce.DFLink.Communication
         public string GetLog(int taskId)
         {
             var downloadLog = new DownloadLog();
-            downloadLog.BusinessCredentials = new BusinessInfo { LicenseKey = AgentSetting.LicenseId };
+            downloadLog.ServerSettings = this.ServerSettings;
+            downloadLog.Caller = new HttpCallerFactory().CreateCaller();
+            downloadLog.BusinessCredentials = new BusinessInfo { LicenseKey = this.ServerSettings.LicenseId };
             downloadLog.TaskId = taskId;
             downloadLog.Request(null);
             return downloadLog.GetTheCallResult();

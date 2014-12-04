@@ -8,43 +8,25 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace Demandforce.DFLink.Communication
 {
+    using Demandforce.DFLink.Common.Configuration;
     using Demandforce.DFLink.Communication.Command;
+
+    using Microsoft.Practices.Unity;
+    using Demandforce.DFLink.Communication.WebAPI;
 
     /// <summary>
     ///     TODO: It is a singleton class to operate all the task command
     /// </summary>
-    public sealed class AgentTask
+    public sealed class AgentTask : IAgentTask
     {
-        #region Static Fields
-
         /// <summary>
-        ///     A instance
+        /// Gets or sets the server settings.
         /// </summary>
-        private static readonly AgentTask Instance = new AgentTask();
+        [Dependency]
+        public IServerSettings ServerSettings { get; set; }
 
-        #endregion
-
-        #region Constructors and Destructors
-
-        /// <summary>
-        ///     Prevents a default instance of the <see cref="AgentTask" /> class from being created
-        /// </summary>
-        private AgentTask()
-        {
-        }
-
-        #endregion
 
         #region Public Methods and Operators
-
-        /// <summary>
-        ///     Get a singleton
-        /// </summary>
-        /// <returns>a single object</returns>
-        public static AgentTask GetStartedInstance()
-        {
-            return Instance;
-        }
 
         /// <summary>
         ///     Get a task list as a string
@@ -53,7 +35,9 @@ namespace Demandforce.DFLink.Communication
         public string GetTask()
         {
             var downloadTask = new DownloadTask();
-            downloadTask.BusinessCredentials = new BusinessInfo { LicenseKey = AgentSetting.LicenseId };
+            downloadTask.ServerSettings = this.ServerSettings;
+            downloadTask.Caller = new HttpCallerFactory().CreateCaller();
+            downloadTask.BusinessCredentials = new BusinessInfo { LicenseKey = this.ServerSettings.LicenseId };
             downloadTask.Request(null);
             return downloadTask.GetTheCallResult();
         }

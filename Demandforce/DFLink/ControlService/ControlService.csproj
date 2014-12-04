@@ -71,6 +71,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{86EB13D3-AD5E-4922-BF17-1B21B9E79348}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Communication\Communication.csproj">
       <Project>{79C22FDA-2296-466D-927B-43930B0D4F2E}</Project>
       <Name>Communication</Name>

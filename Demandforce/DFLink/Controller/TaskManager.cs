@@ -17,6 +17,8 @@ namespace Demandforce.DFLink.Controller
     using Demandforce.DFLink.ExceptionHandling.Logging.ExceptionHandleWrapper;
     using Demandforce.DFLink.Logger;
 
+    using Microsoft.Practices.Unity;
+
     /// <summary>
     /// The class is to manage a task list
     /// </summary>
@@ -36,6 +38,12 @@ namespace Demandforce.DFLink.Controller
         /// The network client.
         /// </summary>
         private readonly INetworkClient networkClient;
+
+        /// <summary>
+        /// Gets or sets the agent task.
+        /// </summary>
+        [Dependency]
+        public IAgentTask AgentTask { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TaskManager"/> class.
@@ -154,7 +162,7 @@ namespace Demandforce.DFLink.Controller
         {
              // it is for test
              // var taskxml = XDocument.Load(@"F:\DFLinkReload\TaskXML.xml");
-             var taskxml = AgentTask.GetStartedInstance().GetTask();
+             var taskxml = this.AgentTask.GetTask();
              return taskxml;
         }
 

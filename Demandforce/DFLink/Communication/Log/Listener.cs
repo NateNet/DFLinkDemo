@@ -10,6 +10,7 @@ namespace Demandforce.DFLink.Communication.Log
 {
     using System.Threading;
 
+    using Demandforce.DFLink.Common.Configuration;
     using Demandforce.DFLink.Communication.Command;
     using Demandforce.DFLink.Logger.Listener;
     using log4net.Core;
@@ -48,6 +49,11 @@ namespace Demandforce.DFLink.Communication.Log
 
         #endregion
 
+        /// <summary>
+        /// Gets or sets the server settings.
+        /// </summary>
+        public IServerSettings ServerSettings { get; set; }
+
         #region Public Methods and Operators
 
         /// <summary>
@@ -81,7 +87,7 @@ namespace Demandforce.DFLink.Communication.Log
             {
                 case MsgType.MtLog:
                     var updateLog = new UpdateLog();
-                    updateLog.BusinessCredentials = new BusinessInfo { LicenseKey = AgentSetting.LicenseId };
+                    updateLog.BusinessCredentials = new BusinessInfo { LicenseKey = this.ServerSettings.LicenseId };
                     updateLog.Level = logEvent.Level.ToString();
                     updateLog.Message = messagePack.MessageDetails;
                     updateLog.TaskId = messagePack.TaskId;
@@ -92,7 +98,7 @@ namespace Demandforce.DFLink.Communication.Log
                     break;
                 case MsgType.MtStatus:
                     var updateStatus = new UpdateStatus();
-                    updateStatus.BusinessCredentials = new BusinessInfo { LicenseKey = AgentSetting.LicenseId };
+                    updateStatus.BusinessCredentials = new BusinessInfo { LicenseKey = this.ServerSettings.LicenseId };
                     updateStatus.Status = messagePack.Status;
                     updateStatus.Message = messagePack.MessageDetails;
                     updateStatus.TaskId = messagePack.TaskId;
