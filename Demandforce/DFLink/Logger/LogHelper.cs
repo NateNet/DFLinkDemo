@@ -9,11 +9,8 @@
 namespace Demandforce.DFLink.Logger
 {
     using System;
-
-    using Demandforce.DFLink.Logger.Listener;
-
+    using Demandforce.DFLink.Logger.Appender;
     using log4net;
-
     using Newtonsoft.Json;
 
     /// <summary>
@@ -220,9 +217,9 @@ namespace Demandforce.DFLink.Logger
         private MessagePact GetMessagePack(int taskId, string message, int status)
         {
             var messagePack = new MessagePact();
-            messagePack.TaskId = taskId;
+            messagePack.Taskid = taskId;
             messagePack.MessageDetails = message;
-            messagePack.Status = status;
+            messagePack.AStatus = status;
             if (status == -1)
             {
                 messagePack.MessageType = MsgType.MtLog;

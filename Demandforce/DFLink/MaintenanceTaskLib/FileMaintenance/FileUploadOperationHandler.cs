@@ -30,7 +30,7 @@ namespace Demandforce.DFLink.MaintenanceTaskLib.FileMaintenance
             // so it can post file to server
             using (var sr = new StreamReader(operation.FileFullName))
             {
-                AgentUploadFile.GetStartedInstance()
+                WebAPIClientFactory.InstanceUploadFile()
                     .UploadFile(operation.Task.Id, operation.FileFullName);
             }
 

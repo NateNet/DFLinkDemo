@@ -47,17 +47,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ILogger.cs" />
-    <Compile Include="Listener\AppenderListener.cs" />
-    <Compile Include="Listener\LogEventArgs.cs" />
+    <Compile Include="Appender\WebAppender.cs" />
     <Compile Include="LogHelper.cs">
       <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="LogInit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Listener\MessagePact.cs" />
+    <Compile Include="Appender\MessagePact.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{86EB13D3-AD5E-4922-BF17-1B21B9E79348}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

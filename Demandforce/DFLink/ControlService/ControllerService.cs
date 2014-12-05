@@ -49,7 +49,7 @@ namespace Demandforce.DFLink.ConstrolService
         {
             string logSettingName = System.Reflection.Assembly.GetExecutingAssembly().Location;
             logSettingName = System.IO.Path.GetDirectoryName(logSettingName) + @"\log4net.Setting.xml";
-            LogInit.InitLog(logSettingName);
+            //LogInit.InitLog(logSettingName);
             var taskManager = this.container.Resolve<ITaskManager>();
             ((TaskManager)taskManager).Mode =
                 (RequestTaskMode)

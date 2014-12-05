@@ -36,7 +36,7 @@ namespace Demandforce.DFLink.ControlService
             this.container = container;
 
             // initialize the communication setting
-            AgentSetting.InitialSetting();
+            //AgentSetting.InitialSetting();
         }
 
         /// <summary>
@@ -51,11 +51,13 @@ namespace Demandforce.DFLink.ControlService
             this.container.RegisterType<ITaskFactory, TaskFactory>();
             this.container.RegisterType<IScheduleFactory, ScheduleFactory>();
 
+            //this.container.RegisterType<INetworkClient, ClientTcp>(
+            //    new InjectionConstructor(
+            //        AgentSetting.SocketIp,
+            //        AgentSetting.SocketPort,
+            //        AgentSetting.LicenseId));
             this.container.RegisterType<INetworkClient, ClientTcp>(
-                new InjectionConstructor(
-                    AgentSetting.SocketIp,
-                    AgentSetting.SocketPort,
-                    AgentSetting.LicenseId));
+                new InjectionConstructor());
         }
     }
 }

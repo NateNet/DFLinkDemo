@@ -13,6 +13,7 @@ namespace Demandforce.DFLink.Communication.Socket
     using System.Text;
     using System.Threading;
 
+    using Demandforce.DFLink.Common.Configuration;
     using Demandforce.DFLink.Logger;
 
     /// <summary>
@@ -21,6 +22,11 @@ namespace Demandforce.DFLink.Communication.Socket
     public class ClientTcp : INetworkClient
     {
         #region Fields
+
+        /// <summary>
+        ///     The setting.
+        /// </summary>
+        private readonly IServerSettings serverSetting = new ServerSettings(new XmlSettings());
 
         /// <summary>
         /// The class name.
@@ -40,7 +46,7 @@ namespace Demandforce.DFLink.Communication.Socket
         /// <summary>
         /// The log helper.
         /// </summary>
-        private readonly ILogger logHelper = LogHelper.GetLoggerHandle();
+        private readonly ILogger logHelper = new LogHelper();
 
         /// <summary>
         /// The remote IP.
@@ -74,27 +80,11 @@ namespace Demandforce.DFLink.Communication.Socket
         /// <summary>
         /// Initializes a new instance of the <see cref="ClientTcp"/> class.
         /// </summary>
-        /// <param name="remoteIp">
-        /// The remote IP.
-        /// </param>
-        /// <param name="remotePort">
-        /// The remote port.
-        /// </param>
-        /// <param name="license">
-        /// The license.
-        /// </param>
-        public ClientTcp(string remoteIp, int remotePort, string license)
+        public ClientTcp()
         {
-            this.remoteIp = remoteIp;
-            this.remotePort = remotePort;
-            this.license = license;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ClientTcp"/> class.
-        /// </summary>
-        public ClientTcp() : this(AgentSetting.SocketIp, AgentSetting.SocketPort, AgentSetting.LicenseId)
-        {
+            this.remoteIp = this.serverSetting.SocketIp;
+            this.remotePort = this.serverSetting.SocketPort;
+            this.license = this.serverSetting.LicenseId;
         }
 
         #endregion

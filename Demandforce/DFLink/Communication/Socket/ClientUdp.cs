@@ -13,9 +13,7 @@ namespace Demandforce.DFLink.Communication.Socket
     using System.Net.Sockets;
     using System.Text;
     using System.Timers;
-
-    using log4net;
-
+    using Demandforce.DFLink.Common.Configuration;
     using Logger;
 
     /// <summary>
@@ -24,6 +22,11 @@ namespace Demandforce.DFLink.Communication.Socket
     public class ClientUdp : INetworkClient
     {
         #region Fields
+
+        /// <summary>
+        ///     The setting.
+        /// </summary>
+        private readonly IServerSettings serverSetting = new ServerSettings(new XmlSettings());
 
         /// <summary>
         /// The class name.
@@ -103,8 +106,10 @@ namespace Demandforce.DFLink.Communication.Socket
         ///     Initializes a new instance of the <see cref="ClientUdp" /> class.
         /// </summary>
         public ClientUdp()
-            : this(AgentSetting.SocketIp, AgentSetting.SocketPort, AgentSetting.LicenseId)
         {
+            this.remoteIp = this.serverSetting.SocketIp;
+            this.remotePort = this.serverSetting.SocketPort;
+            this.license = this.serverSetting.LicenseId;
         }
 
         #endregion

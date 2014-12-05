@@ -154,7 +154,8 @@ namespace Demandforce.DFLink.Controller
         {
              // it is for test
              // var taskxml = XDocument.Load(@"F:\DFLinkReload\TaskXML.xml");
-             var taskxml = AgentTask.GetStartedInstance().GetTask();
+            // var taskxml = AgentTask.GetStartedInstance().GetTask();
+            var taskxml = WebAPIClientFactory.InstanceGetTask().GetTask();
              return taskxml;
         }
 

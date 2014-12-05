@@ -45,7 +45,7 @@ namespace Demandfore.DFLink.Common.Tests
             var url = "http://www.demandforce.com/_assets/images/logos/logo-intuit-df-657.png"; // TODO: Initialize to an appropriate value
             var fileName = AppDomain.CurrentDomain.BaseDirectory + "\\logo-intuit-df-657.png"; // TODO: Initialize to an appropriate value
             var expected = true; // TODO: Initialize to an appropriate value
-            var actual = HttpUtil.DownloadFile(url, fileName);
+            var actual = HttpUtils.DownloadFile(url, fileName);
             Assert.AreEqual(expected, actual);
         }
 
@@ -86,7 +86,7 @@ namespace Demandfore.DFLink.Common.Tests
             stringDict.Add("pass", string.Empty);
             stringDict.Add("license", license);
 
-            string actual = HttpUtil.PostFormData(url, timeOut, fileKeyName, filePathName, stringDict);
+            string actual = HttpUtils.PostFormData(url, timeOut, fileKeyName, filePathName, stringDict);
 
             Assert.IsTrue(actual.Contains("zip with size of " + size.ToString() + " bytes.  BusinessId ="));
         }
@@ -102,11 +102,11 @@ namespace Demandfore.DFLink.Common.Tests
             string url = @"http://172.18.3.100/task/get";
             string paramsList = @"{'LicenseKey':'xxxxx-xxxxxx'}";
             string expected = "<Tasks></Tasks>";
-            string actual = HttpUtil.PostJsonForXml(url, paramsList);
+            string actual = HttpUtils.PostJsonForXml(url, paramsList);
             Assert.AreEqual(expected, actual);
 
             paramsList = @"{'LicenseKey':'61D13359-C3A6-301C-8B17-9283A2188A9A'}";
-            actual = HttpUtil.PostJsonForXml(url, paramsList);
+            actual = HttpUtils.PostJsonForXml(url, paramsList);
             
             XmlDocument xmlDocument = new XmlDocument();
             bool b = true;
