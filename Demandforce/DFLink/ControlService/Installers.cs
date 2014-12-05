@@ -4,6 +4,8 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using Demandforce.DFLink.Controller.EventStorage;
+
 namespace Demandforce.DFLink.ControlService
 {
     using Demandforce.DFLink.Communication;
@@ -56,6 +58,7 @@ namespace Demandforce.DFLink.ControlService
                     AgentSetting.SocketIp,
                     AgentSetting.SocketPort,
                     AgentSetting.LicenseId));
+            this.container.RegisterType<ITaskFrom, TaskFromFile>();
         }
     }
 }

@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EventStorage\ITaskFrom.cs" />
+    <Compile Include="EventStorage\TaskFromFile.cs" />
     <Compile Include="Factory.cs" />
     <Compile Include="EventStorage\LocalEventStorage.cs" />
     <Compile Include="EventStorage\IEventStorage.cs" />
