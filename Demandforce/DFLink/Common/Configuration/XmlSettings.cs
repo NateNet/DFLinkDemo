@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="XmlSettings.cs" company="">
-//   
+// <copyright file="XmlSettings.cs" company="Demandforce">
+//   Copyright (c) Demandforce. All rights reserved.
 // </copyright>
 // <summary>
 //   TODO: Update summary.

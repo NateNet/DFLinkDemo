@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IServerSettings.cs" company="">
-//   
+// <copyright file="IServerSettings.cs" company="Demandforce">
+//   Copyright (c) Demandforce. All rights reserved.
 // </copyright>
 // <summary>
 //   TODO: Update summary.

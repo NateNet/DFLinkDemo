@@ -11,14 +11,11 @@ namespace Demandforce.DFLink.Logger.Tests
 {
     using System;
     using System.Collections.Generic;
-    using System.IO;
-    using System.Reflection;
     using System.Threading;
-    using Demandforce.DFLink.Logger.Listener;
+    using Demandforce.DFLink.Logger.Appender;
     using log4net.Core;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Newtonsoft.Json;
-
     using ILogger = Demandforce.DFLink.Logger.ILogger;
 
     /// <summary>
@@ -26,7 +23,8 @@ namespace Demandforce.DFLink.Logger.Tests
     ///     to contain all LogHelperTest Unit Tests
     /// </summary>
     [TestClass]
-    [DeploymentItem("log4net.Setting.xml")]
+
+    // [DeploymentItem("app.config")]
     public class LogHelperTest
     {
         #region Public Properties
@@ -42,19 +40,9 @@ namespace Demandforce.DFLink.Logger.Tests
         #region Properties
 
         /// <summary>
-        ///     Gets or sets the log level.
-        /// </summary>
-        private static Level LogLevel { get; set; }
-
-        /// <summary>
         ///     Gets or sets the logger name.
         /// </summary>
-        private static string LoggerName { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the the return pact.
-        /// </summary>
-        private static MessagePact TheReturnPact { get; set; }
+        private static string StringForSend { get; set; }
 
         #endregion
 
@@ -65,15 +53,6 @@ namespace Demandforce.DFLink.Logger.Tests
         #region Public Methods and Operators
 
         /// <summary>
-        ///     The my class cleanup.
-        /// </summary>
-        [ClassCleanup]
-        public static void MyClassCleanup()
-        {
-            AppenderListener.EventLogListen -= LogListener;
-        }
-
-        /// <summary>
         /// The my class initialize.
         /// </summary>
         /// <param name="testContext">
@@ -82,10 +61,8 @@ namespace Demandforce.DFLink.Logger.Tests
         [ClassInitialize]
         public static void MyClassInitialize(TestContext testContext)
         {
-            string logSettingName = Assembly.GetExecutingAssembly().Location;
-            logSettingName = Path.GetDirectoryName(logSettingName) + @"\log4net.Setting.xml";
-            LogInit.InitLog(logSettingName);
-            AppenderListener.EventLogListen += LogListener;
+            StringForSend = string.Empty;
+            WebAppender.PostLog = LogListener;
         }
 
         // Use TestInitialize to run code before running each test
@@ -100,7 +77,7 @@ namespace Demandforce.DFLink.Logger.Tests
         // }
 
         /// <summary>
-        /// The log write test.
+        ///     The log write test.
         /// </summary>
         [DataSource(@"Provider=SQLOLEDB;
             Data Source=172.18.3.100;
@@ -150,11 +127,9 @@ namespace Demandforce.DFLink.Logger.Tests
 
             Thread.Sleep(100);
 
-            Assert.AreEqual(logClass, LoggerName);
-            Assert.AreEqual(level.Name, logLevel);
-            Assert.AreEqual(taskId, TheReturnPact.TaskId);
-            Assert.AreEqual(message, TheReturnPact.MessageDetails);
-            Assert.AreEqual((MsgType)messageType, TheReturnPact.MessageType);
+            Assert.IsTrue(StringForSend.Contains(logLevel));
+            Assert.IsTrue(StringForSend.Contains(message));
+            Assert.IsTrue(StringForSend.Contains(@"""TaskId"":" + taskId));
         }
 
         /// <summary>
@@ -170,12 +145,9 @@ namespace Demandforce.DFLink.Logger.Tests
             LogHelper.GetLoggerHandle().ReportStatus(logClass, taskId, status, message);
             Thread.Sleep(100);
 
-            Assert.AreEqual(logClass, LoggerName);
-            Assert.AreEqual(Level.Info, LogLevel);
-            Assert.AreEqual(taskId, TheReturnPact.TaskId);
-            Assert.AreEqual(message, TheReturnPact.MessageDetails);
-            Assert.AreEqual(MsgType.MtStatus, TheReturnPact.MessageType);
-            Assert.AreEqual(status, TheReturnPact.Status);
+            Assert.IsTrue(StringForSend.Contains(message));
+            Assert.IsTrue(StringForSend.Contains(@"""TaskId"":" + taskId));
+            Assert.IsTrue(StringForSend.Contains(@"""Status"":5"));
         }
 
         /// <summary>
@@ -196,31 +168,13 @@ namespace Demandforce.DFLink.Logger.Tests
                 .ReportStatus(logClass, taskId, status, details, obj => { return JsonConvert.SerializeObject(obj); });
             Thread.Sleep(100);
 
-            Assert.AreEqual(logClass, LoggerName);
-            Assert.AreEqual(Level.Info, LogLevel);
-            Assert.AreEqual(taskId, TheReturnPact.TaskId);
-            Assert.AreEqual(JsonConvert.SerializeObject(details), TheReturnPact.MessageDetails);
-            Assert.AreEqual(MsgType.MtStatus, TheReturnPact.MessageType);
-            Assert.AreEqual(status, TheReturnPact.Status);
-        }
-
-        /// <summary>
-        ///     A test for Warn
-        /// </summary>
-        [TestMethod]
-        public void WarnTest()
-        {
-            int taskId = 9; // TODO: Initialize to an appropriate value
-            string logClass = this.GetType().AssemblyQualifiedName; // TODO: Initialize to an appropriate value
-            string message = "This is a debug test message"; // TODO: Initialize to an appropriate value
-            LogHelper.GetLoggerHandle().Warn(logClass, taskId, message);
-            Thread.Sleep(100);
-
-            Assert.AreEqual(logClass, LoggerName);
-            Assert.AreEqual(Level.Warn, LogLevel);
-            Assert.AreEqual(taskId, TheReturnPact.TaskId);
-            Assert.AreEqual(message, TheReturnPact.MessageDetails);
-            Assert.AreEqual(MsgType.MtLog, TheReturnPact.MessageType);
+            Assert.IsTrue(StringForSend.Contains("A report"));
+            Assert.IsTrue(StringForSend.Contains("DFLink.exe"));
+            Assert.IsTrue(StringForSend.Contains("3.4.192"));
+            Assert.IsTrue(StringForSend.Contains("d3123api.dll"));
+            Assert.IsTrue(StringForSend.Contains("3.0.12"));
+            Assert.IsTrue(StringForSend.Contains("d3cotapi.dll"));
+            Assert.IsTrue(StringForSend.Contains("3.0.35"));
         }
 
         #endregion
@@ -228,19 +182,22 @@ namespace Demandforce.DFLink.Logger.Tests
         #region Methods
 
         /// <summary>
-        /// It is a listener
+        /// The log listener.
         /// </summary>
-        /// <param name="sender">
-        /// a sender
+        /// <param name="url">
+        /// The url.
         /// </param>
-        /// <param name="e">
-        /// a packed message
+        /// <param name="parameter">
+        /// The parameter.
         /// </param>
-        private static void LogListener(object sender, LogEventArgs e)
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        private static string LogListener(string url, string parameter)
         {
-            LogLevel = e.LogEvent.Level;
-            LoggerName = e.LogEvent.LoggerName;
-            TheReturnPact = (MessagePact)e.LogEvent.MessageObject;
+            StringForSend = parameter;
+
+            return string.Empty;
         }
 
         #endregion

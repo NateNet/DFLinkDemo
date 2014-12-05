@@ -60,13 +60,11 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AgentLogTest.cs" />
-    <Compile Include="AgentTaskTest.cs" />
-    <Compile Include="AgentUploadFileTest.cs" />
-    <Compile Include="TestCallerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UpdateStatusTest.cs" />
-    <Compile Include="UploadFileTest.cs" />
+    <Compile Include="TestCall.cs" />
+    <Compile Include="WorkGetTaskTest.cs" />
+    <Compile Include="WorkUpdateStatusTest.cs" />
+    <Compile Include="WorkUploadFileTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
@@ -86,6 +84,7 @@
     <Folder Include="Test References\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

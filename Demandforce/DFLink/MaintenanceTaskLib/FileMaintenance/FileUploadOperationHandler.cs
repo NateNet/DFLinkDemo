@@ -12,16 +12,12 @@ namespace Demandforce.DFLink.MaintenanceTaskLib.FileMaintenance
     using System.IO;
 
     using Demandforce.DFLink.Communication;
-    using Microsoft.Practices.Unity;
 
     /// <summary>
     /// This is a handler to upload file operation.
     /// </summary>
     public class FileUploadOperationHandler : IOperationHandler<FileOperation>
     {
-        [Dependency]
-        public IAgentUploadFile AgentUploadFile { get; set; }
-
         /// <summary>
         /// The handle.
         /// </summary>
@@ -34,7 +30,8 @@ namespace Demandforce.DFLink.MaintenanceTaskLib.FileMaintenance
             // so it can post file to server
             using (var sr = new StreamReader(operation.FileFullName))
             {
-                AgentUploadFile.UploadFile(operation.Task.Id, operation.FileFullName);
+                WebAPIClientFactory.InstanceUploadFile()
+                    .UploadFile(operation.Task.Id, operation.FileFullName);
             }
 
             // The operation result 

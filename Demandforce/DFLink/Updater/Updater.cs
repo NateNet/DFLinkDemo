@@ -381,19 +381,18 @@ namespace Demandforce.DFLink.Updater
             string url = this.GetFullFileName(this.FileServerPath, updateFileName);
             bool isUpdated = false;
             string md5InLocal = string.Empty;
-            var objDownload = new Downloader();
 
             if (File.Exists(fullFileName))
             {
                 md5InLocal = MD5Maker.GetMD5ForFile(fullFileName);
                 if (md5InLocal != md5InServer)
                 {
-                    isUpdated = objDownload.Download(url, fullFileName);
+                    isUpdated = HttpUtils.DownloadFile(url, fullFileName);
                 }
             }
             else
             {
-                isUpdated = objDownload.Download(url, fullFileName);
+                isUpdated = HttpUtils.DownloadFile(url, fullFileName);
             }
 
             return isUpdated;
@@ -407,9 +406,8 @@ namespace Demandforce.DFLink.Updater
         {
             string url = this.GetFullFileName(this.FileServerPath, this.FileName);
             string fileName = this.GetFullFileName(this.FileLocalPath, this.FileName);
-            var objDownload = new Downloader();
 
-            return objDownload.Download(url, fileName);
+            return HttpUtils.DownloadFile(url, fileName);
         }
 
         /// <summary>
@@ -424,9 +422,8 @@ namespace Demandforce.DFLink.Updater
             string url = this.GetFullFileName(this.FileServerPath, InstructionFile);
             string fileName = this.GetFullFileName(this.FileLocalPath, InstructionFile);
             bool resultDownload = false;
-            var objDownload = new Downloader();
 
-            resultDownload = objDownload.Download(url, fileName);
+            resultDownload = HttpUtils.DownloadFile(url, fileName);
             if (resultDownload)
             {
                 try
