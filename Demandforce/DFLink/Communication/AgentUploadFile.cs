@@ -8,44 +8,24 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace Demandforce.DFLink.Communication
 {
+    using Demandforce.DFLink.Common.Configuration;
     using Demandforce.DFLink.Communication.Command;
+    using Demandforce.DFLink.Communication.WebAPI;
+
+    using Microsoft.Practices.Unity;
 
     /// <summary>
     ///     TODO: Update summary.
     /// </summary>
-    public class AgentUploadFile
+    public class AgentUploadFile : IAgentUploadFile
     {
-        #region Static Fields
-
         /// <summary>
-        ///     A instance
+        /// Gets or sets the server settings.
         /// </summary>
-        private static readonly AgentUploadFile Instance = new AgentUploadFile();
-
-        #endregion
-
-        #region Constructors and Destructors
-
-        /// <summary>
-        /// Prevents a default instance of the <see cref="AgentUploadFile"/> class from being created. 
-        ///     Prevents a default instance of the <see cref="AgentTask"/> class from being created
-        /// </summary>
-        private AgentUploadFile()
-        {
-        }
-
-        #endregion
+        [Dependency]
+        public IServerSettings ServerSettings { get; set; }
 
         #region Public Methods and Operators
-
-        /// <summary>
-        ///     Get a singleton
-        /// </summary>
-        /// <returns>a single object</returns>
-        public static AgentUploadFile GetStartedInstance()
-        {
-            return Instance;
-        }
 
         /// <summary>
         /// Get a task list as a string
@@ -60,8 +40,10 @@ namespace Demandforce.DFLink.Communication
         {
             var uploadFile = new UploadFile
                                  {
+                                     ServerSettings = this.ServerSettings,
+                                     Caller = new HttpCallerFactory().CreateCaller(),
                                      BusinessCredentials =
-                                         new BusinessInfo { LicenseKey = AgentSetting.LicenseId },
+                                         new BusinessInfo { LicenseKey = this.ServerSettings.LicenseId },
                                      TaskId = taskId
                                  };
             uploadFile.ReadFile(fileName);

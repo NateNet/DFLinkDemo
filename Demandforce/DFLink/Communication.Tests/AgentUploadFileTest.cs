@@ -13,6 +13,7 @@ namespace Demandforce.DFLink.Communication.Tests
     using System.IO;
     using System.Reflection;
 
+    using Demandforce.DFLink.Common.Configuration;
     using Demandforce.DFLink.Logger;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -52,7 +53,6 @@ namespace Demandforce.DFLink.Communication.Tests
             string logSettingName = Assembly.GetExecutingAssembly().Location;
             logSettingName = Path.GetDirectoryName(logSettingName) + @"\log4net.Setting.xml";
             LogInit.InitLog(logSettingName);
-            AgentSetting.InitialSetting();
         }
 
         // Use ClassCleanup to run code after all tests in a class have run
@@ -77,9 +77,9 @@ namespace Demandforce.DFLink.Communication.Tests
         [TestMethod]
         public void UploadFileTest()
         {
-            AgentUploadFile target = AgentUploadFile.GetStartedInstance(); // TODO: Initialize to an appropriate value
+            AgentUploadFile target = new AgentUploadFile();
             string settingFile = Assembly.GetExecutingAssembly().Location;
-            settingFile = Path.GetDirectoryName(settingFile) + @"\ServerSet.xml";
+            settingFile = Path.GetDirectoryName(settingFile) + @"\app.xml";
             target.UploadFile(4, settingFile);
         }
 

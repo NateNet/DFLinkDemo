@@ -13,6 +13,7 @@ namespace Demandforce.DFLink.Communication.Socket
     using System.Text;
     using System.Threading;
 
+    using Demandforce.DFLink.Common.Configuration;
     using Demandforce.DFLink.Logger;
 
     /// <summary>
@@ -93,8 +94,14 @@ namespace Demandforce.DFLink.Communication.Socket
         /// <summary>
         /// Initializes a new instance of the <see cref="ClientTcp"/> class.
         /// </summary>
-        public ClientTcp() : this(AgentSetting.SocketIp, AgentSetting.SocketPort, AgentSetting.LicenseId)
+        /// <param name="serverSettings">
+        /// The server Settings.
+        /// </param>
+        public ClientTcp(IServerSettings serverSettings)
         {
+            this.remoteIp = serverSettings.SocketIp;
+            this.remotePort = serverSettings.SocketPort;
+            this.license = serverSettings.LicenseId;
         }
 
         #endregion
@@ -105,6 +112,11 @@ namespace Demandforce.DFLink.Communication.Socket
         ///     Gets or sets the on get data.
         /// </summary>
         public Action<string> OnGetData { get; set; }
+
+        /// <summary>
+        /// Gets or sets the server settings.
+        /// </summary>
+        public IServerSettings ServerSettings { get; set; }
 
         #endregion
 

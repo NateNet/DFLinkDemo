@@ -13,6 +13,7 @@ namespace Demandforce.DFLink.Communication.Tests
     using System.IO;
     using System.Reflection;
 
+    using Demandforce.DFLink.Common.Configuration;
     using Demandforce.DFLink.Logger;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -52,7 +53,6 @@ namespace Demandforce.DFLink.Communication.Tests
             string logSettingName = Assembly.GetExecutingAssembly().Location;
             logSettingName = Path.GetDirectoryName(logSettingName) + @"\log4net.Setting.xml";
             LogInit.InitLog(logSettingName);
-            AgentSetting.InitialSetting();
 
             // AgentSetting.CallerFactory = new TestCallerFactory();
         }
@@ -79,10 +79,11 @@ namespace Demandforce.DFLink.Communication.Tests
         [TestMethod]
         public void GetLogTest()
         {
-            AgentLog target = AgentLog.GetStartedInstance(); // TODO: Initialize to an appropriate value
+            IServerSettings serverSettings = new ServerSettings(new XmlSettings());
+            AgentLog target = new AgentLog(); // TODO: Initialize to an appropriate value
             int taskId = 1; // TODO: Initialize to an appropriate value
             target.GetLog(taskId);
-            Assert.AreEqual(AgentSetting.AddressUrl + AgentSetting.CommandLogDownload, TestCallerFactory.UrlString);
+            Assert.AreEqual(serverSettings.AddressUrl + serverSettings.CommandLogDownload, TestCallerFactory.UrlString);
             Assert.AreEqual(
                 @"{""TaskId"":0,""BusinessCredentials"":{""LicenseKey"":""xxxxx-xxxxxx""}}", 
                 TestCallerFactory.JsonString);

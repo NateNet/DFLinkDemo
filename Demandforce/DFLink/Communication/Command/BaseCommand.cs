@@ -8,6 +8,9 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace Demandforce.DFLink.Communication.Command
 {
+    using Demandforce.DFLink.Common.Configuration;
+    using Demandforce.DFLink.Communication.WebAPI;
+
     /// <summary>
     ///     TODO: It is a base class for extended classes
     /// </summary>
@@ -28,6 +31,16 @@ namespace Demandforce.DFLink.Communication.Command
         ///     Gets or sets the business credential information
         /// </summary>
         public BusinessInfo BusinessCredentials { get; set; }
+
+        /// <summary>
+        /// Gets or sets the web caller.
+        /// </summary>
+        public ICaller Caller { get; set; }
+
+        /// <summary>
+        /// Gets or sets the server settings.
+        /// </summary>
+        public IServerSettings ServerSettings { get; set; }
 
         #endregion
 

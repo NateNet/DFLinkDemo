@@ -11,11 +11,17 @@ namespace Demandforce.DFLink.Controller.Task
     using System.IO;
     using System.Linq;
 
+    using Demandforce.DFLink.Common.Configuration;
+    using Microsoft.Practices.Unity;
+
     /// <summary>
     /// This class is to create different task instance
     /// </summary>
     public class TaskFactory : ITaskFactory
     {
+        [Dependency]
+        public ISettings Settings { get; set; }
+
         /// <summary>
         /// Create the different task instance according taskName
         /// </summary>
@@ -48,20 +54,7 @@ namespace Demandforce.DFLink.Controller.Task
         /// <returns>The type name with qualified assembly</returns>
         public string GetTypeNameFromConfiguration(string name)
         {
-            // Get task intance configuration using local file, will get from web service
-            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "app.config"); 
-            var fileMap = new ConfigurationFileMap(filePath);
-            Configuration configFile = ConfigurationManager.OpenMappedMachineConfiguration(fileMap);
-            var settings = configFile.AppSettings.Settings;        
-            if (settings != null)
-            {
-                foreach (var key in settings.AllKeys.Where(key => key == name))
-                {
-                    return settings[key].Value;
-                }
-            }
-
-            return string.Empty;
+            return this.Settings.Get("appSettings", name);
         }
     }
 }

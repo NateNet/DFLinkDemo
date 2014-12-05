@@ -51,7 +51,7 @@ namespace Demandforce.DFLink.Logger
             if (!HaveCallInit)
             {
                 HaveCallInit = true;
-                XmlConfigurator.ConfigureAndWatch(new FileInfo(logSettingName));
+                // XmlConfigurator.ConfigureAndWatch();
             }
         }
 

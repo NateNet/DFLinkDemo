@@ -8,8 +8,11 @@ using Demandforce.DFLink.Controller.EventStorage;
 
 namespace Demandforce.DFLink.ControlService
 {
+    using Demandforce.DFLink.Common.Configuration;
     using Demandforce.DFLink.Communication;
+    using Demandforce.DFLink.Communication.Command;
     using Demandforce.DFLink.Communication.Socket;
+    using Demandforce.DFLink.Communication.WebAPI;
     using Demandforce.DFLink.Controller;
     using Demandforce.DFLink.Controller.Schedule;
     using Demandforce.DFLink.Controller.Task;
@@ -38,7 +41,7 @@ namespace Demandforce.DFLink.ControlService
             this.container = container;
 
             // initialize the communication setting
-            AgentSetting.InitialSetting();
+            // AgentSetting.InitialSetting();
         }
 
         /// <summary>
@@ -53,11 +56,13 @@ namespace Demandforce.DFLink.ControlService
             this.container.RegisterType<ITaskFactory, TaskFactory>();
             this.container.RegisterType<IScheduleFactory, ScheduleFactory>();
 
+            this.container.RegisterType<ISettings, XmlSettings>();
+            this.container.RegisterType<IServerSettings, ServerSettings>();
+            this.container.RegisterType<IAgentTask, AgentTask>();
+            
+
             this.container.RegisterType<INetworkClient, ClientTcp>(
-                new InjectionConstructor(
-                    AgentSetting.SocketIp,
-                    AgentSetting.SocketPort,
-                    AgentSetting.LicenseId));
+                new InjectionConstructor(this.container.Resolve<IServerSettings>()));
             this.container.RegisterType<ITaskFrom, TaskFromFile>();
         }
     }

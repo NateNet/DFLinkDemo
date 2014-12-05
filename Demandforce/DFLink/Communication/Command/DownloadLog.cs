@@ -8,6 +8,8 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace Demandforce.DFLink.Communication.Command
 {
+    using Demandforce.DFLink.Common.Configuration;
+
     /// <summary>
     ///     TODO: It is a model for serialization
     /// </summary>
@@ -33,9 +35,7 @@ namespace Demandforce.DFLink.Communication.Command
         public override void Request(object idleParam)
         {
             string jsonStr = JsonPack<DownloadLog>.SerializeObject(this);
-            string result =
-                AgentSetting.CallerFactory.CreateCaller()
-                    .PostCommand(AgentSetting.AddressUrl + AgentSetting.CommandLogDownload, jsonStr);
+            string result = this.Caller.PostCommand(this.ServerSettings.AddressUrl + this.ServerSettings.CommandLogDownload, jsonStr);
             this.SetTheCallResult(result);
         }
 
