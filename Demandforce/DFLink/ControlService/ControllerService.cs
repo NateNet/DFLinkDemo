@@ -1,20 +1,20 @@
-﻿// -----------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="ControllerService.cs" company="Demandforce">
-// TODO: Update copyright text.
+//  Copyright (c) Demandforce. All rights reserved.  
 // </copyright>
-// -----------------------------------------------------------------------
-
+// <summary>
+//   The controller service.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 namespace Demandforce.DFLink.ConstrolService
 {
     using System;
     using System.Configuration;
     using System.ServiceProcess;
 
-
     using Demandforce.DFLink.Controller;
     using Demandforce.DFLink.Controller.Task;
     using Demandforce.DFLink.ControlService;
-    using Demandforce.DFLink.Logger;
 
     using Microsoft.Practices.Unity;
 
@@ -47,10 +47,6 @@ namespace Demandforce.DFLink.ConstrolService
         /// </param>
         protected override void OnStart(string[] args)
         {
-            // string logSettingName = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            // logSettingName = System.IO.Path.GetDirectoryName(logSettingName) + @"\log4net.Setting.xml";
-
-            LogInit.InitLog(string.Empty); // use default configuration file: appname.exe.config
             var taskManager = this.container.Resolve<ITaskManager>();
             ((TaskManager)taskManager).Mode =
                 (RequestTaskMode)

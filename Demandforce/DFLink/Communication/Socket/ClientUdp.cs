@@ -16,7 +16,6 @@ namespace Demandforce.DFLink.Communication.Socket
 
     using Demandforce.DFLink.Common.Configuration;
 
-    using log4net;
 
     using Logger;
 

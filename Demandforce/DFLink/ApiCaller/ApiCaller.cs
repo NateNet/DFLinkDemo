@@ -13,6 +13,7 @@ namespace Demandforce.DFLink.ApiCaller
     using System.Xml;
 
     using Demandforce.DFLink.Common;
+    using Demandforce.DFLink.Common.Configuration;
     using Demandforce.DFLink.Controller.Schedule;
     using Demandforce.DFLink.Controller.Task;
     using Demandforce.DFLink.Logger;    
@@ -23,6 +24,12 @@ namespace Demandforce.DFLink.ApiCaller
     public class ApiCaller : ITask, ITaskMaker
     {
         #region private variable
+
+        /// <summary>
+        /// The server setting.
+        /// </summary>
+        private readonly IServerSettings serverSetting = new ServerSettings(new XmlSettings());
+
         /// <summary>
         /// A interface of API named "Initialize" that extract out data from PMS to memory
         /// </summary>
@@ -205,7 +212,7 @@ namespace Demandforce.DFLink.ApiCaller
                 xmlParams.LoadXml(arguments);
                 XmlNode rootNode = xmlParams.DocumentElement;
               
-                license = Settings.Get("serverSettings", "LicenseId");
+                license = this.serverSetting.LicenseId;
 
                 tempNode = rootNode.SelectSingleNode("Id");
                 taskId = int.Parse(tempNode.InnerText);

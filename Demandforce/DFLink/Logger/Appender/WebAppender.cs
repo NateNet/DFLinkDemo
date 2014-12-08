@@ -66,7 +66,8 @@ namespace Demandforce.DFLink.Logger.Appender
                             };
                     string jsonLog = JsonUtils.SerializeObject(updateLog);
 
-                    ThreadPool.QueueUserWorkItem(p => PostLog(string.Empty, jsonLog));
+                    ThreadPool.QueueUserWorkItem(p => PostLog(
+                        this.serverSetting.AddressUrl + this.serverSetting.CommandLogUpload, jsonLog));
 
                     break;
                 case MsgType.MtStatus:
@@ -82,7 +83,8 @@ namespace Demandforce.DFLink.Logger.Appender
                             };
                     string jsonUpdate = JsonUtils.SerializeObject(updateStatus);
 
-                    ThreadPool.QueueUserWorkItem(p => PostLog(string.Empty, jsonUpdate));
+                    ThreadPool.QueueUserWorkItem(p => PostLog(
+                        this.serverSetting.AddressUrl + this.serverSetting.CommandLogStatusUpdate, jsonUpdate));
 
                     break;
             }

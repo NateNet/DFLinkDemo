@@ -74,7 +74,7 @@ namespace Demandforce.DFLink.Controller.Tests
             var target = new TaskManager(
                 mockTaskCreator.Object,
                 this.mockNetworkClient.Object,
-                this.mockExceptionPolicy.Object);
+                this.mockExceptionPolicy.Object,null);
 
             // this set is not complete, it ignores the content for TaskCreator.
             const string Taskxml =
@@ -102,7 +102,7 @@ namespace Demandforce.DFLink.Controller.Tests
             var target = new TaskManager(
                 mockTaskCreator.Object, 
                 this.mockNetworkClient.Object,
-                this.mockExceptionPolicy.Object);
+                this.mockExceptionPolicy.Object,null);
 
             // this set is not complete, it ignores the content for TaskCreator. execute 
             // create first
@@ -149,7 +149,7 @@ namespace Demandforce.DFLink.Controller.Tests
             var target = new TaskManager(
                 mockTaskCreator.Object, 
                 this.mockNetworkClient.Object,
-                this.mockExceptionPolicy.Object);
+                this.mockExceptionPolicy.Object,null);
 
             // create tasks first
             var taskxml = "<Tasks>" 
