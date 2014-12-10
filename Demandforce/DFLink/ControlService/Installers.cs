@@ -4,20 +4,17 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-using Demandforce.DFLink.Controller.EventStorage;
+
 
 namespace Demandforce.DFLink.ControlService
 {
     using Demandforce.DFLink.Common.Configuration;
-    using Demandforce.DFLink.Communication;
-    using Demandforce.DFLink.Communication.Command;
     using Demandforce.DFLink.Communication.Socket;
-    using Demandforce.DFLink.Communication.WebAPI;
     using Demandforce.DFLink.Controller;
+    using Demandforce.DFLink.Controller.EventStorage;
     using Demandforce.DFLink.Controller.Schedule;
     using Demandforce.DFLink.Controller.Task;
     using Demandforce.DFLink.ExceptionHandling.Logging.ExceptionHandleWrapper;
-
     using Microsoft.Practices.Unity;
 
     /// <summary>
@@ -58,7 +55,6 @@ namespace Demandforce.DFLink.ControlService
 
             this.container.RegisterType<ISettings, XmlSettings>();
             this.container.RegisterType<IServerSettings, ServerSettings>();
-            this.container.RegisterType<IAgentTask, AgentTask>();
             
 
             this.container.RegisterType<INetworkClient, ClientTcp>(
